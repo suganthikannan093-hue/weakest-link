@@ -1,0 +1,20 @@
+{
+  "servers": {
+    "weakest-link-catalog": {
+      "type": "stdio",
+      "command": "python3",
+      "args": [
+        "${workspaceFolder}/scripts/mcp_server.py",
+        "catalog"
+      ]
+    },
+    "weakest-link-mybag": {
+      "type": "stdio",
+      "command": "python3",
+      "args": [
+        "${workspaceFolder}/scripts/mcp_server.py",
+        "mybag"
+      ]
+    }
+  }
+}

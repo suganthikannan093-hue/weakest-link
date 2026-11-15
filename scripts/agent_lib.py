@@ -103,6 +103,12 @@ class McpClient:
             self.proc.wait(timeout=10)
         except Exception:
             self.proc.kill()
+            self.proc.wait()
+        for f in (self.proc.stdout, self.proc.stderr):
+            try:
+                f.close()
+            except Exception:
+                pass
 
     def __enter__(self):
         return self
@@ -376,7 +382,9 @@ def plan_trip(client, profile, venue_id, venue_mode, considering=None):
     if considering:
         r = client.query("reach", {"laptop": laptop, "venue": venue_id, "bag": bag + [considering], "mode": target})[0]
         ch = client.query("chains", {"laptop": laptop, "venue": venue_id, "bag": bag + [considering]})
+        rb = client.query("reach", {"laptop": laptop, "venue": venue_id, "bag": bag + [considering], "mode": venue_mode})[0]
         out["considering"] = {"item": considering, "fixes_venue": bool(r["ok"]) and not out["reach_target"]["ok"],
+                              "upgrades_venue": bool(rb["ok"]) and not out["reach_best"]["ok"],
                               "reach": r, "weakest_with_it": ch[0]["weakest_item"] if ch else None}
 
     # 3. one purchase across this venue and the usual ones (tie-break: what also works at 4K60)
@@ -446,6 +454,9 @@ def describe(client, plan):
     if c:
         if c["fixes_venue"]:
             lines.append(f"The {n(c['item'])} you asked about would fix {v}.")
+        elif rt["ok"] and c.get("upgrades_venue"):
+            lines.append(f"Your bag already works at {v} at {MODE_LABEL[plan['target_mode']]}; the {n(c['item'])} you asked "
+                         f"about would take it to {MODE_LABEL[plan['venue_mode']]}.")
         elif rt["ok"]:
             lines.append(f"You don't need the {n(c['item'])} for {v}; your bag already works at {MODE_LABEL[plan['target_mode']]}.")
         else:

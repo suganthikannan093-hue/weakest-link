@@ -154,6 +154,7 @@ def main(argv=None):
                 "weakest_now": plan["chains"][0]["weakest_item"] if plan["chains"] else None,
                 "best_mode_now": plan["chains"][0]["best_mode"] if plan["chains"] else None,
                 "considering_fixes_venue": plan.get("considering", {}).get("fixes_venue"),
+                "considering_upgrades_venue": plan.get("considering", {}).get("upgrades_venue"),
                 "buy": plan["buy"]["buy"] if plan["buy"] else None,
                 "buy_fixed_venues": plan["buy"]["fixed_venues"] if plan["buy"] else [],
                 "buy_ties": plan["buy_ties"],

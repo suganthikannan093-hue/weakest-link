@@ -1,0 +1,7 @@
+---
+description: Weakest Link "pack my bag" agent over the weakest-link MCP servers. Use when the user pastes a venue AV email or an adapter spec page, or asks what to pack or buy for a venue.
+alwaysApply: false
+---
+Follow `agent/skills/pack-my-bag/SKILL.md` and the rules in `agent/prompts/system.md`. Use the
+`weakest-link-mybag` MCP server: discover `:Recipe` nodes, pass recipe Cypher verbatim, verify every
+write, and never state a number that did not come from a query result.

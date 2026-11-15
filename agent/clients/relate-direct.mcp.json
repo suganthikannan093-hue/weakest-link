@@ -1,0 +1,25 @@
+{
+  "mcpServers": {
+    "weakest-link-catalog": {
+      "command": "relate",
+      "args": [
+        "serve",
+        "--database",
+        "/ABSOLUTE/PATH/TO/weakest-link/data/weakest-link.rl",
+        "--mcp",
+        "stdio",
+        "--read-only"
+      ]
+    },
+    "weakest-link-mybag": {
+      "command": "relate",
+      "args": [
+        "serve",
+        "--database",
+        "/ABSOLUTE/PATH/TO/weakest-link/data/work/my-bag.rl",
+        "--mcp",
+        "stdio"
+      ]
+    }
+  }
+}
