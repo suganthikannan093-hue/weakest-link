@@ -1,0 +1,25 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="base.css"><style>
+.screen{width:760px;height:430px;border:14px solid #1f2a44;border-radius:10px;background:#111a2e;position:relative;box-shadow:0 30px 80px rgba(0,0,0,.5);flex:none}
+.screen::after{content:"";position:absolute;left:50%;bottom:-70px;width:16px;height:56px;background:#1f2a44;transform:translateX(-50%)}
+.osd{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.s1{animation:in .5s ease .3s forwards, out .3s ease 3.4s forwards;opacity:0}
+.s2{animation:in .4s ease 3.7s forwards, out .3s ease 6.4s forwards;opacity:0}
+.s3{animation:in .2s ease 6.7s forwards;opacity:0}
+@keyframes out{to{opacity:0}}
+.big{font-size:56px;font-weight:800}
+.blur{filter:blur(2.5px)}
+.clock{font-size:26px;letter-spacing:.12em;text-transform:uppercase;color:#fbbf24;font-weight:700;margin:0 0 18px}
+.chain{display:flex;align-items:center;gap:14px;margin-top:40px;font-size:24px}
+.chain span.box{border:2px solid #26324c;border-radius:10px;padding:8px 14px;background:#111a2e}
+.chain span.box.bad{border-color:#fb7185;color:#fb7185;box-shadow:0 0 0 4px rgba(251,113,133,.15)}
+.chain i{color:#5b6475;font-style:normal}
+</style></head><body><div class="stage">
+<div class="screen"><div class="osd s1"><div class="muted" style="font-size:24px">Projector · HDMI 1</div><div class="big">Searching…</div></div>
+<div class="osd s2 blur"><div class="big">1920 × 1080</div><div class="muted" style="font-size:30px">30 Hz</div></div>
+<div class="osd s3" style="background:#000"><div class="big" style="color:#9aa6bd">No signal</div></div></div>
+<div style="max-width:780px">
+<p class="clock fade" style="animation-delay:.2s">⏱ 5 minutes to your talk</p>
+<h1 class="fade" style="animation-delay:.6s">The projector is 4K.<br>Your slides aren't.</h1>
+<p class="fade muted" style="animation-delay:7.4s">The laptop is fine. One link in your bag isn't.</p>
+<div class="chain fade" style="animation-delay:8.4s"><span class="box">Laptop</span><i>→</i><span class="box bad">Hub · HDMI 1.4</span><i>→</i><span class="box">Cable</span><i>→</i><span class="box">Projector</span></div>
+</div></div></body></html>

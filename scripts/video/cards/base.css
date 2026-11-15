@@ -1,0 +1,7 @@
+html,body{margin:0;height:100%;background:#0b1120;color:#e6ebf5;font:28px/1.4 ui-sans-serif,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;overflow:hidden}
+.stage{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:90px;padding:0 90px}
+.fade{opacity:0;animation:in .7s ease forwards}
+@keyframes in{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.muted{color:#9aa6bd}.weak{color:#fb7185}.ok{color:#4ade80}.accent{color:#5cb3ff}
+h1{font-size:64px;line-height:1.1;margin:0 0 24px;letter-spacing:-.01em}
+.mono{font-family:ui-monospace,"DejaVu Sans Mono",Menlo,monospace}
