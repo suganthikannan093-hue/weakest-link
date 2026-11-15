@@ -99,6 +99,13 @@
       <p>Each capacity comes from the standard the item follows (HDMI, DisplayPort, USB PD) or from the maker's spec page.
         Each one carries a source link and a confidence level. Limits are conservative (8-bit colour, no compression), so a "no" can sometimes
         work in practice, but a "yes" should not fail.</p>
+      <h3 id="agent-h">Ask the agent</h3>
+      <p>The same graph is served over MCP by <code>relate serve --mcp</code>, so an assistant in Claude Desktop, Cursor or
+        VS Code can use it. Paste a venue's AV email or an adapter's spec page. The agent writes the venue or item into
+        your own copy of the graph, with its source and a confidence level, then runs these same queries. It tells you
+        what to pack, which link is the weakest, and the one thing worth buying. The repo has ready-made client configs and
+        an offline demo (<code>python3 scripts/agent_demo.py</code>) that needs no AI model and no API key. See
+        <a href="https://github.com/suganthikannan093-hue/weakest-link/blob/main/agent/README.md">agent/README.md</a>.</p>
       <p class="hint">Data: CC BY 4.0. Code: MIT. Nothing leaves your browser.</p>
     </section>
   </main>

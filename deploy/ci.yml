@@ -1,0 +1,33 @@
+# To enable: copy this file to .github/workflows/ci.yml (needs a push with the `workflow` scope).
+# Runs every test, including the offline MCP agent demo, with no API keys and no network beyond installs.
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - name: Install the Relate CLI
+        run: |
+          curl -sSfL https://relatedb.ai/install.sh | bash
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+      - run: npm ci
+      - name: Query, agent/MCP and WASM parity tests
+        run: npm test
+      - name: Offline agent demo (MCP end to end)
+        run: python3 scripts/agent_demo.py --no-color
+      - name: Browser tests
+        run: |
+          npx playwright install --with-deps chromium
+          npm run test:e2e

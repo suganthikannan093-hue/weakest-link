@@ -11,7 +11,10 @@
     "preview": "vite preview",
     "build:data": "python3 scripts/build_store.py",
     "test": "python3 -m unittest -v && node tests/wasm_parity.mjs",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "agent:demo": "python3 scripts/agent_demo.py",
+    "agent:init": "python3 scripts/mcp_server.py init",
+    "agent:docs": "python3 scripts/build_agent_docs.py"
   },
   "dependencies": {
     "@relate/relate-wasm": "1.0.1"

@@ -4,8 +4,8 @@ Find out before you leave whether your laptop will reach that projector at 4K60.
 see which adapter, cable or charger in your bag is the weakest link, and the one purchase that fixes
 the most venues.
 
-> Status: milestones 1 and 2 done (graph, cited dataset, queries, tests, browser UI). The "pack my
-> bag" agent is next, see [PLAN.md](PLAN.md).
+> Status: milestones 1–3 done (graph, cited dataset, queries, browser UI, and the "pack my bag" agent
+> over Relate MCP). See [PLAN.md](PLAN.md).
 
 ![The weakest link highlighted in a laptop-to-TV chain](docs/screenshots/desktop-connect-weakest-link.png)
 
@@ -44,7 +44,8 @@ question, with watts, answers "will this charger and cable fast-charge my laptop
 - **Relate features used:** quantified path patterns with inline predicates, `SHORTEST 1`,
   `reduce()` over relationships for the bottleneck, `all()` over path nodes, `EXISTS {}` and
   `CALL () {}` subqueries, pattern comprehensions, aggregation, indexes, `--fetch-params` JSON import,
-  and `relate serve --mcp` (`get_schema`, `read_cypher`) for the agent.
+  and `relate serve --mcp` for the agent: `get_schema` and `read_cypher` on the read-only catalog,
+  plus `write_cypher` on a writable copy that ingests venues and items from emails and spec pages.
 
 ## Setup and run
 
@@ -65,7 +66,7 @@ python3 scripts/wl.py best_fix --laptop mba-m2 --bag adp-apple-av-a1621 --venues
 python3 scripts/wl.py power  --laptop mbp14-m3 --bag chg-apple-140w,cable-usbc-usb2-60w
 python3 scripts/wl.py list   # every laptop, item and venue id
 
-# tests: 22 query tests on the .rl store, then CLI vs WASM parity
+# tests: 43 Python tests (22 queries on the .rl store, 21 agent/MCP flow), then CLI vs WASM parity
 python3 -m unittest -v
 npm install && node tests/wasm_parity.mjs
 
@@ -129,6 +130,43 @@ To deploy to GitHub Pages, copy [`deploy/github-pages.yml`](deploy/github-pages.
 hand (it is `workflow_dispatch` only). The Vite build uses relative paths (`base: './'`), so it works
 under `/weakest-link/`.
 
+## Ask the agent
+
+A "pack my bag" agent works over Relate's own MCP server, and no paid API is needed. Paste a venue's AV
+email or an adapter's spec page into Claude Desktop, Cursor, VS Code or Claude Code. The agent writes
+the venue or item into a writable copy of the graph, with its source and a confidence level, then runs
+`reach`, `chains`, `best_fix` and `power`. It says what to pack, which link is the weakest, and the one
+item to buy.
+
+- Two MCP servers via `scripts/mcp_server.py`: `catalog`, which is `relate serve --mcp stdio
+  --read-only` on the committed store, and `mybag`, a writable copy in `data/work/` that adds
+  `write_cypher`.
+- The vetted queries and the two single-statement ingest recipes are stored in the graph as
+  `:Recipe` nodes, so the model discovers them with `read_cypher` and fills in parameters instead of
+  writing Cypher.
+- Ready-made configs: `.cursor/mcp.json`, `.vscode/mcp.json`, `.mcp.json` (Claude Code) and
+  `agent/clients/claude_desktop_config.json`. Prompts are in `agent/prompts/`, and a self-contained
+  skill is in `agent/skills/pack-my-bag/`.
+
+```bash
+python3 scripts/agent_demo.py            # offline, deterministic: ingest an email + a spec page, query, recommend
+python3 scripts/agent_demo.py --pace 2   # slower, for filming
+python3 scripts/agent_demo.py --json     # for CI
+python3 -m unittest tests.test_agent_mcp # 21 MCP flow tests
+```
+
+```
+[2] Read the venue's email and write it into the graph
+    extracted: Riverside Library, Room 2 | … projector | best picture 1080p60 | inputs HDMI (HDMI-1.4, low), VGA (VGA-1200p, medium) | leaves out: cable-hdmi-standard
+    -> my-bag.write_cypher  recipe ingest_venue, $v = {id: 'riverside-library-room-2', …}
+[6] Answer
+    At Riverside Library, Room 2 your current bag only reaches 720p at 60 Hz (the display can do 1080p (Full HD) at 60 Hz).
+    The weakest link is Standard HDMI cable (Category 1, 720p/1080i) at 1.782 Gbps (HDMI-Standard-cable, medium confidence, …).
+    Buy one thing: USB-C to HDMI cable, 4K60 (HDMI 2.0 class). It makes 1080p (Full HD) at 60 Hz work at 2 more venues …
+```
+
+Setup for each client, the safety model and the limits are in [agent/README.md](agent/README.md).
+
 ## Where the data lives
 
 - `data/weakest-link.rl`: the persistent Relate store (single file). Inspect it with
@@ -143,4 +181,5 @@ under `/weakest-link/`.
 - Code: MIT ([LICENSE](LICENSE)). Dataset (`data/`): CC BY 4.0 ([data/LICENSE](data/LICENSE)).
 - Relate (`relate` CLI, `@relate/relate-wasm`) is Apache-2.0 and is used as a dependency.
 - AI-assisted development: an AI coding agent helped write the build script, queries, web UI,
-  tests and docs. Every spec value was checked against the cited source pages.
+  agent, tests and docs. The agent itself needs no AI service: it runs in your own MCP host, or offline
+  in the demo. Every spec value was checked against the cited source pages.

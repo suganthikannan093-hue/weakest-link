@@ -61,5 +61,11 @@ second cable. The availability predicates (`item IN have`) and the bandwidth pre
 ## Ownership is a query parameter, not data
 
 What the user owns (`$bag`) is passed in on each query. The store holds the shared, cited catalog and
-the venues, so one committed store serves every user. The agent milestone adds per-user state
-(saved bags, venues ingested from email) in a separate writable store.
+the venues, so one committed store serves every user. Per-user state lives in a separate writable
+store (`data/work/my-bag.rl`, a git-ignored copy) that the agent writes through MCP:
+
+- Venues and items ingested from emails or spec pages get `ingested: true`, `class: 'ingested'`, a
+  `confidence`, and a `CITES` link to a `Source` (`kind: email | manufacturer | …`, `supports` = the
+  quoted sentences). Their `VIDEO`/`POWER` edges carry the same `source`, `source_url` and `confidence`.
+- `:Recipe {name, kind, description, example_params, cypher, file}` holds the vetted read queries and
+  write statements, so an MCP host can discover them with `read_cypher`.
