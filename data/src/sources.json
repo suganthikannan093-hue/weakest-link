@@ -1,0 +1,178 @@
+[
+  {
+    "id": "hdmi-cables",
+    "publisher": "HDMI Licensing Administrator",
+    "kind": "spec-body",
+    "title": "HDMI Cables - Different Cable Types",
+    "url": "https://www.hdmi.org/resource/cables",
+    "supports": "Standard cable tested for 720p/1080i; High Speed up to 10.2 Gbps (1080p, 4K30); Premium High Speed certified 18 Gbps (4K60); Ultra High Speed 48 Gbps (4K120/8K60)."
+  },
+  {
+    "id": "hdmi-premium",
+    "publisher": "HDMI Licensing Administrator",
+    "kind": "spec-body",
+    "title": "Premium High Speed HDMI Cable certification",
+    "url": "https://www.hdmi.org/spec/premiumcable",
+    "supports": "Premium High Speed cables are tested to the full 18 Gbps for 4K@60."
+  },
+  {
+    "id": "hdmi-uhs",
+    "publisher": "HDMI Licensing Administrator",
+    "kind": "spec-body",
+    "title": "Ultra High Speed HDMI Cable",
+    "url": "https://www.hdmi.org/spec21sub/ultrahighspeedcable",
+    "supports": "Ultra High Speed cables support up to 48 Gbps."
+  },
+  {
+    "id": "hdmi-14b",
+    "publisher": "HDMI Licensing Administrator",
+    "kind": "spec-body",
+    "title": "HDMI Specification 1.4b",
+    "url": "https://www.hdmi.org/spec/hdmi1_4b",
+    "supports": "HDMI 1.4b adds 4K support (4K at up to 30 Hz)."
+  },
+  {
+    "id": "hdmi-21",
+    "publisher": "HDMI Licensing Administrator",
+    "kind": "spec-body",
+    "title": "HDMI Specification 2.1",
+    "url": "https://www.hdmi.org/spec/hdmi2_1",
+    "supports": "HDMI 2.1 up to 48 Gbps (FRL)."
+  },
+  {
+    "id": "wiki-hdmi",
+    "publisher": "Wikipedia",
+    "kind": "reference",
+    "title": "HDMI - main specifications and refresh-frequency limits tables",
+    "url": "https://en.wikipedia.org/wiki/HDMI",
+    "supports": "TMDS 8b/10b coding: HDMI 1.4 max 10.2 Gbps raw = 8.16 Gbps data; HDMI 2.0 18 Gbps raw = 14.4 Gbps data; HDMI 2.1 FRL 48 Gbps raw with 16b/18b = 42.67 Gbps data; CTA-861 timings (1080p60 148.5 MHz, 4K30 297 MHz, 4K60 594 MHz)."
+  },
+  {
+    "id": "wiki-dp",
+    "publisher": "Wikipedia",
+    "kind": "reference",
+    "title": "DisplayPort - link rates, DP++ dual-mode, cables",
+    "url": "https://en.wikipedia.org/wiki/DisplayPort",
+    "supports": "HBR2 4 lanes 21.6 Gbps raw = 17.28 Gbps data; HBR3 32.4 Gbps raw = 25.92 Gbps data; UHBR10 40 Gbps raw (128b/132b) = 38.69 Gbps data; DP++ passive adapters need a dual-mode source; DP8K cables certified for UHBR10."
+  },
+  {
+    "id": "vesa-altmode",
+    "publisher": "VESA",
+    "kind": "spec-body",
+    "title": "DisplayPort Alt Mode over USB Type-C (USB DevDays 2019)",
+    "url": "https://www.vesa.org/wp-content/uploads/2019/10/USB-DevDays-2019-VESA-DP-Alt-Mode-over-USB-Type-C.pdf",
+    "supports": "DP Alt Mode uses up to 4 high-speed lanes of a full-featured USB Type-C cable at DP 1.4 HBR3 (8.1 Gbps/lane); 2-lane mode leaves the other pairs for USB 3."
+  },
+  {
+    "id": "wiki-cvt",
+    "publisher": "Wikipedia",
+    "kind": "reference",
+    "title": "Coordinated Video Timings (CVT reduced blanking)",
+    "url": "https://en.wikipedia.org/wiki/Coordinated_Video_Timings",
+    "supports": "CVT-RB pixel clocks, e.g. 2560x1440@60 = 241.5 MHz; 1920x1200@60 = 154 MHz."
+  },
+  {
+    "id": "wiki-usbc",
+    "publisher": "Wikipedia",
+    "kind": "reference",
+    "title": "USB-C - cable types, alternate modes, power",
+    "url": "https://en.wikipedia.org/wiki/USB-C",
+    "supports": "USB 2.0-only Type-C cables have no SuperSpeed pairs, so cannot carry DisplayPort Alt Mode; full-featured cables can; 3 A cables = 60 W, 5 A e-marked = 100 W (SPR), EPR cables = 240 W."
+  },
+  {
+    "id": "wiki-thunderbolt",
+    "publisher": "Wikipedia",
+    "kind": "reference",
+    "title": "Thunderbolt (interface)",
+    "url": "https://en.wikipedia.org/wiki/Thunderbolt_(interface)",
+    "supports": "Thunderbolt 3/4 over USB-C carries DisplayPort and USB PD up to 100 W on copper cables."
+  },
+  {
+    "id": "usbif-cable",
+    "publisher": "USB-IF",
+    "kind": "spec-body",
+    "title": "USB-IF Cables and Connectors",
+    "url": "https://usb.org/cable_connector",
+    "supports": "Certified USB Type-C cable power ratings (60 W / 240 W logos) and data ratings."
+  },
+  {
+    "id": "usbif-pd",
+    "publisher": "USB-IF",
+    "kind": "spec-body",
+    "title": "USB Charger (USB Power Delivery)",
+    "url": "https://usb.org/usb-charger-pd",
+    "supports": "USB PD up to 100 W (SPR, 20 V 5 A) and up to 240 W with PD 3.1 EPR (48 V 5 A)."
+  },
+  {
+    "id": "wiki-vga",
+    "publisher": "Wikipedia",
+    "kind": "reference",
+    "title": "VGA connector",
+    "url": "https://en.wikipedia.org/wiki/VGA_connector",
+    "supports": "Analog VGA commonly carries up to 1920x1200@60; quality depends on cable and converter."
+  },
+  {
+    "id": "apple-mba-m2",
+    "publisher": "Apple",
+    "kind": "manufacturer",
+    "title": "MacBook Air (M2, 2022) - Tech Specs",
+    "url": "https://support.apple.com/en-us/111867",
+    "supports": "Two Thunderbolt/USB 4 ports with charging and DisplayPort; one external display up to 6K60; MagSafe 3; ships with 30 W or 35 W adapter; fast-charge with 70 W adapter."
+  },
+  {
+    "id": "apple-mbp14-m3",
+    "publisher": "Apple",
+    "kind": "manufacturer",
+    "title": "MacBook Pro (14-inch, M3, Nov 2023) - Tech Specs",
+    "url": "https://support.apple.com/en-us/117735",
+    "supports": "Two Thunderbolt/USB 4 ports (charging, DisplayPort); HDMI output up to 4K at 120 Hz (M3); one external display up to 6K60; 70 W adapter in box; fast-charge with 96 W."
+  },
+  {
+    "id": "apple-av",
+    "publisher": "Apple",
+    "kind": "manufacturer",
+    "title": "About the Apple USB-C Digital AV Multiport Adapter",
+    "url": "https://support.apple.com/en-us/119850",
+    "supports": "Model A2119: 3840x2160@60 with MacBook Air 2020+ and 14-inch MacBook Pro 2021+; model A1621: 3840x2160@30 and up to 1080p60."
+  },
+  {
+    "id": "apple-power",
+    "publisher": "Apple",
+    "kind": "manufacturer",
+    "title": "Use a power adapter with your Mac",
+    "url": "https://support.apple.com/en-us/109509",
+    "supports": "Recommended adapters: MacBook Air 2022+ 30/35/67/70 W; 14-inch MacBook Pro 2021+ 67/70/96 W; any USB PD adapter can charge a USB-C Mac."
+  },
+  {
+    "id": "apple-fastcharge",
+    "publisher": "Apple",
+    "kind": "manufacturer",
+    "title": "Fast charge your MacBook Air or MacBook Pro",
+    "url": "https://support.apple.com/en-us/102378",
+    "supports": "MacBook Air 2022+ fast charges with 67/70/96/140 W adapters + MagSafe 3 or USB-C charge cable; 14-inch MacBook Pro fast charges with 96/140 W adapters (or a display delivering 94 W)."
+  },
+  {
+    "id": "apple-magsafe-cable",
+    "publisher": "Apple",
+    "kind": "manufacturer",
+    "title": "USB-C to MagSafe 3 Cable (2 m)",
+    "url": "https://www.apple.com/shop/product/MW613AM/A/usb-c-to-magsafe-3-cable-2-m-midnight",
+    "supports": "Apple USB-C to MagSafe 3 cable, used with the 140 W adapter for 16-inch MacBook Pro fast charging (see apple-fastcharge)."
+  },
+  {
+    "id": "lenovo-x1c11",
+    "publisher": "Lenovo PSREF",
+    "kind": "manufacturer",
+    "title": "ThinkPad X1 Carbon Gen 11 - PSREF specifications",
+    "url": "https://psref.lenovo.com/syspool/sys/pdf/thinkpad/thinkpad_x1_carbon_gen_11/thinkpad_x1_carbon_gen_11_spec.pdf",
+    "supports": "2x Thunderbolt 4 / USB4 (PD 3.0, DisplayPort 1.4a); 1x HDMI 2.1 up to 4K/60Hz; 45 W or 65 W USB-C adapters; Rapid Charge with 65 W."
+  },
+  {
+    "id": "class-assumption",
+    "publisher": "Weakest Link project",
+    "kind": "assumption",
+    "title": "Generic product class (see docs/DATA.md)",
+    "url": "https://github.com/suganthikannan093-hue/weakest-link/blob/main/docs/DATA.md",
+    "supports": "A generic class whose limit is set by the standard it claims (e.g. an 'HDMI 2.0 4K60 adapter'); individual products can be worse."
+  }
+]

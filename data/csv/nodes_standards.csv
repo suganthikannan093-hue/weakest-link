@@ -1,0 +1,14 @@
+id,family,raw_gbps,data_gbps,encoding,source,confidence,note,watts
+HDMI-Standard-cable,HDMI,2.2275,1.782,TMDS 8b/10b,hdmi-cables,medium,"Certified only for 720p/1080i (74.25 MHz). Many work beyond that, but it is not certified.",
+HDMI-1.4,HDMI,10.2,8.16,TMDS 8b/10b,wiki-hdmi,high,"340 MHz TMDS: 1080p60, 1440p60, 4K30.",
+HDMI-2.0,HDMI,18.0,14.4,TMDS 8b/10b,wiki-hdmi,high,600 MHz TMDS: 4K60 8-bit RGB.,
+HDMI-2.1-FRL,HDMI,48.0,42.67,FRL 16b/18b,hdmi-21,high,4 lanes x 12 Gbps.,
+DP-1.2-HBR2,DP,21.6,17.28,8b/10b,wiki-dp,high,4 lanes x 5.4 Gbps.,
+DP-1.4-HBR3,DP,32.4,25.92,8b/10b,wiki-dp,high,4 lanes x 8.1 Gbps.,
+DP-2.1-UHBR10,DP,40.0,38.69,128b/132b,wiki-dp,high,4 lanes x 10 Gbps; DP8K cable certification level.,
+DP-Alt-4L-HBR3,DP,32.4,25.92,8b/10b,vesa-altmode,high,DisplayPort Alt Mode over USB-C using all 4 high-speed lanes.,
+DP-Alt-2L-HBR3,DP,16.2,12.96,8b/10b,vesa-altmode,high,"2-lane Alt Mode (other 2 lanes kept for USB 3 data), typical of hubs.",
+VGA-1200p,VGA,,3.7,analog,wiki-vga,medium,"Analog. Modelled as the digital rate of 1920x1200@60 CVT-RB (154 MHz x 24 bit), the usual limit of USB-C/HDMI-to-VGA converters.",
+USB-PD-3A,USB-PD,,,,wiki-usbc,high,Non-e-marked Type-C cable: 3 A x 20 V.,60
+USB-PD-5A,USB-PD,,,,wiki-usbc,high,"5 A e-marked cable, SPR 20 V.",100
+USB-PD-EPR,USB-PD,,,,usbif-pd,high,"PD 3.1 EPR, 48 V x 5 A, e-marked EPR cable.",240

@@ -1,0 +1,6 @@
+id,width,height,hz,pixel_clock_mhz,timing,rank,source,confidence,gbps,source_url
+720p60,1280,720,60,74.25,CTA-861,1,wiki-hdmi,high,1.782,https://en.wikipedia.org/wiki/HDMI
+1080p60,1920,1080,60,148.5,CTA-861,2,wiki-hdmi,high,3.564,https://en.wikipedia.org/wiki/HDMI
+1440p60,2560,1440,60,241.5,CVT-RB,3,wiki-cvt,high,5.796,https://en.wikipedia.org/wiki/Coordinated_Video_Timings
+4K30,3840,2160,30,297.0,CTA-861,4,wiki-hdmi,high,7.128,https://en.wikipedia.org/wiki/HDMI
+4K60,3840,2160,60,594.0,CTA-861,5,wiki-hdmi,high,14.256,https://en.wikipedia.org/wiki/HDMI

@@ -1,0 +1,15 @@
+[
+  {"id": "HDMI-Standard-cable", "family": "HDMI", "raw_gbps": 2.2275, "data_gbps": 1.782,  "encoding": "TMDS 8b/10b", "source": "hdmi-cables", "confidence": "medium", "note": "Certified only for 720p/1080i (74.25 MHz). Many work beyond that, but it is not certified."},
+  {"id": "HDMI-1.4",     "family": "HDMI", "raw_gbps": 10.2,  "data_gbps": 8.16,  "encoding": "TMDS 8b/10b", "source": "wiki-hdmi", "confidence": "high", "note": "340 MHz TMDS: 1080p60, 1440p60, 4K30."},
+  {"id": "HDMI-2.0",     "family": "HDMI", "raw_gbps": 18.0,  "data_gbps": 14.4,  "encoding": "TMDS 8b/10b", "source": "wiki-hdmi", "confidence": "high", "note": "600 MHz TMDS: 4K60 8-bit RGB."},
+  {"id": "HDMI-2.1-FRL", "family": "HDMI", "raw_gbps": 48.0,  "data_gbps": 42.67, "encoding": "FRL 16b/18b", "source": "hdmi-21",   "confidence": "high", "note": "4 lanes x 12 Gbps."},
+  {"id": "DP-1.2-HBR2",  "family": "DP",   "raw_gbps": 21.6,  "data_gbps": 17.28, "encoding": "8b/10b",      "source": "wiki-dp",   "confidence": "high", "note": "4 lanes x 5.4 Gbps."},
+  {"id": "DP-1.4-HBR3",  "family": "DP",   "raw_gbps": 32.4,  "data_gbps": 25.92, "encoding": "8b/10b",      "source": "wiki-dp",   "confidence": "high", "note": "4 lanes x 8.1 Gbps."},
+  {"id": "DP-2.1-UHBR10","family": "DP",   "raw_gbps": 40.0,  "data_gbps": 38.69, "encoding": "128b/132b",   "source": "wiki-dp",   "confidence": "high", "note": "4 lanes x 10 Gbps; DP8K cable certification level."},
+  {"id": "DP-Alt-4L-HBR3","family": "DP",  "raw_gbps": 32.4,  "data_gbps": 25.92, "encoding": "8b/10b",      "source": "vesa-altmode", "confidence": "high", "note": "DisplayPort Alt Mode over USB-C using all 4 high-speed lanes."},
+  {"id": "DP-Alt-2L-HBR3","family": "DP",  "raw_gbps": 16.2,  "data_gbps": 12.96, "encoding": "8b/10b",      "source": "vesa-altmode", "confidence": "high", "note": "2-lane Alt Mode (other 2 lanes kept for USB 3 data), typical of hubs."},
+  {"id": "VGA-1200p",    "family": "VGA",  "raw_gbps": null,  "data_gbps": 3.7,   "encoding": "analog",      "source": "wiki-vga",  "confidence": "medium", "note": "Analog. Modelled as the digital rate of 1920x1200@60 CVT-RB (154 MHz x 24 bit), the usual limit of USB-C/HDMI-to-VGA converters."},
+  {"id": "USB-PD-3A",    "family": "USB-PD", "watts": 60,  "source": "wiki-usbc", "confidence": "high", "note": "Non-e-marked Type-C cable: 3 A x 20 V."},
+  {"id": "USB-PD-5A",    "family": "USB-PD", "watts": 100, "source": "wiki-usbc", "confidence": "high", "note": "5 A e-marked cable, SPR 20 V."},
+  {"id": "USB-PD-EPR",   "family": "USB-PD", "watts": 240, "source": "usbif-pd",  "confidence": "high", "note": "PD 3.1 EPR, 48 V x 5 A, e-marked EPR cable."}
+]

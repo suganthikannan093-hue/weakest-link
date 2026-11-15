@@ -1,0 +1,15 @@
+{
+  "name": "weakest-link",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Will my laptop reach that projector at 4K60? Adapter/cable/charger chains as a Relate graph.",
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "build:data": "python3 scripts/build_store.py",
+    "test": "python3 -m unittest -v && node tests/wasm_parity.mjs"
+  },
+  "dependencies": {
+    "@relate/relate-wasm": "1.0.1"
+  }
+}

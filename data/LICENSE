@@ -1,0 +1,11 @@
+The Weakest Link dataset (data/src, data/csv, data/build, data/weakest-link.rl)
+Copyright (c) 2026 Suganthi S
+
+Licensed under the Creative Commons Attribution 4.0 International License (CC BY 4.0).
+https://creativecommons.org/licenses/by/4.0/
+
+You may share and adapt the data for any purpose, provided you give appropriate credit
+("Weakest Link dataset by Suganthi S, CC BY 4.0"), link to the license, and indicate changes.
+
+Facts about products and standards are attributed to the sources listed in data/src/sources.json.
+Product names are trademarks of their owners and are used only to identify the products.

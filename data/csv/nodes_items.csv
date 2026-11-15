@@ -1,0 +1,47 @@
+id,kind,class,maker,name,pd_recommended_w,pd_fast_w,pd_source,purchasable,license
+mba-m2,laptop,product,Apple,"MacBook Air 13-inch (M2, 2022)",30,67,apple-fastcharge,False,CC-BY-4.0
+mbp14-m3,laptop,product,Apple,"MacBook Pro 14-inch (M3, Nov 2023)",67,94,apple-fastcharge,False,CC-BY-4.0
+x1c-g11,laptop,product,Lenovo,ThinkPad X1 Carbon Gen 11,45,65,lenovo-x1c11,False,CC-BY-4.0
+gen-laptop-usbc,laptop,generic,,"Generic thin laptop, USB-C only (DP Alt Mode + USB PD 65 W)",65,,class-assumption,False,CC-BY-4.0
+gen-laptop-budget,laptop,generic,,Generic budget laptop: HDMI 1.4b + data-only USB-C (barrel-jack charging),,,class-assumption,False,CC-BY-4.0
+adp-usbc-hdmi-4k30,adapter,generic,,"USB-C to HDMI adapter, 4K30 (HDMI 1.4 class)",,,,True,CC-BY-4.0
+adp-usbc-hdmi-4k60,adapter,generic,,"USB-C to HDMI adapter, 4K60 (HDMI 2.0 class)",,,,True,CC-BY-4.0
+adp-usbc-hdmi21,adapter,generic,,USB-C to HDMI 2.1 adapter (8K60/4K120 class),,,,True,CC-BY-4.0
+adp-apple-av-a2119,adapter,product,Apple,Apple USB-C Digital AV Multiport Adapter (model A2119),,,,True,CC-BY-4.0
+adp-apple-av-a1621,adapter,product,Apple,Apple USB-C Digital AV Multiport Adapter (older model A1621),,,,False,CC-BY-4.0
+adp-usbc-dp,adapter,generic,,USB-C to DisplayPort 1.4 adapter (female DP),,,,True,CC-BY-4.0
+adp-usbc-vga,adapter,generic,,USB-C to VGA adapter (up to 1920x1200@60),,,,True,CC-BY-4.0
+adp-dp-hdmi-passive,adapter,generic,,Passive DP++ to HDMI adapter (4K30),,,,True,CC-BY-4.0
+adp-dp-hdmi-active,adapter,generic,,Active DisplayPort to HDMI 2.0 adapter (4K60),,,,True,CC-BY-4.0
+adp-hdmi-vga,adapter,generic,,HDMI to VGA converter (up to 1920x1200@60),,,,True,CC-BY-4.0
+hub-usbc-4k30,adapter,generic,,USB-C multiport hub with HDMI 4K30 (typical 7-in-1),,,,True,CC-BY-4.0
+cable-usbc-usb2-60w,cable,generic,,"USB-C to USB-C charge cable, USB 2.0, 60 W",,,,True,CC-BY-4.0
+cable-usbc-usb2-240w,cable,generic,,"USB-C to USB-C 240 W EPR charge cable, USB 2.0 data",,,,True,CC-BY-4.0
+cable-usbc-10g-100w,cable,generic,,"USB-C to USB-C full-featured 10 Gbps, 100 W (5 A e-marked)",,,,True,CC-BY-4.0
+cable-tb4,cable,generic,,"Thunderbolt 4 cable (40 Gbps, 100 W)",,,,True,CC-BY-4.0
+cable-hdmi-standard,cable,generic,,"Standard HDMI cable (Category 1, 720p/1080i)",,,,False,CC-BY-4.0
+cable-hdmi-high-speed,cable,generic,,High Speed HDMI cable (10.2 Gbps),,,,True,CC-BY-4.0
+cable-hdmi-premium,cable,generic,,Premium High Speed HDMI cable (18 Gbps),,,,True,CC-BY-4.0
+cable-hdmi-ultra,cable,generic,,Ultra High Speed HDMI cable (48 Gbps),,,,True,CC-BY-4.0
+cable-dp-hbr2,cable,generic,,DisplayPort cable rated HBR2 (DP 1.2 class),,,,True,CC-BY-4.0
+cable-dp8k,cable,generic,,VESA-certified DP8K DisplayPort cable,,,,True,CC-BY-4.0
+cable-usbc-hdmi-4k60,cable,generic,,"USB-C to HDMI cable, 4K60 (HDMI 2.0 class)",,,,True,CC-BY-4.0
+cable-usbc-dp14,cable,generic,,USB-C to DisplayPort 1.4 cable,,,,True,CC-BY-4.0
+cable-vga,cable,generic,,VGA cable (analog),,,,True,CC-BY-4.0
+cable-usbc-magsafe3,cable,product,Apple,Apple USB-C to MagSafe 3 cable (2 m),,,,True,CC-BY-4.0
+chg-apple-30w,charger,product,Apple,Apple 30W USB-C Power Adapter,,,,True,CC-BY-4.0
+chg-apple-35w-dual,charger,product,Apple,Apple 35W Dual USB-C Port Power Adapter,,,,True,CC-BY-4.0
+chg-apple-70w,charger,product,Apple,Apple 70W USB-C Power Adapter,,,,True,CC-BY-4.0
+chg-apple-96w,charger,product,Apple,Apple 96W USB-C Power Adapter,,,,True,CC-BY-4.0
+chg-apple-140w,charger,product,Apple,Apple 140W USB-C Power Adapter (USB PD 3.1 EPR),,,,True,CC-BY-4.0
+chg-gen-20w,charger,generic,,Generic 20 W USB-C PD phone charger,,,,True,CC-BY-4.0
+chg-gen-65w,charger,generic,,Generic 65 W USB-C PD charger (GaN),,,,True,CC-BY-4.0
+chg-gen-100w,charger,generic,,Generic 100 W USB-C PD charger (GaN),,,,True,CC-BY-4.0
+proj-1080p,display,generic,,1080p projector with HDMI 1.4 and VGA inputs,,,,False,CC-BY-4.0
+proj-xga-vga,display,generic,,"Older XGA classroom projector, VGA input only",,,,False,CC-BY-4.0
+tv-4k-hdmi20,display,generic,,4K TV with HDMI 2.0 inputs,,,,False,CC-BY-4.0
+tv-4k-hdmi21,display,generic,,4K TV with HDMI 2.1 input,,,,False,CC-BY-4.0
+disp-4k-hdmi14,display,generic,,4K meeting-room display with HDMI 1.4 inputs only,,,,False,CC-BY-4.0
+mon-4k-multi,display,generic,,"4K monitor with DP 1.4, HDMI 2.0 and USB-C (DP Alt Mode) inputs",,,,False,CC-BY-4.0
+mon-1440p,display,generic,,1440p monitor with DP 1.2 and HDMI 1.4 inputs,,,,False,CC-BY-4.0
+mon-portable-1080p,display,generic,,Portable 1080p USB-C monitor (DP Alt Mode),,,,False,CC-BY-4.0

@@ -1,0 +1,8 @@
+[
+  {"id": "meetup-hall", "name": "Community meetup hall", "description": "4K TV (HDMI 2.0) on a stand; organiser leaves a Premium High Speed HDMI cable at the lectern.", "provides": ["tv-4k-hdmi20", "cable-hdmi-premium"]},
+  {"id": "college-seminar", "name": "College seminar room", "description": "Ceiling XGA projector, VGA input only, with a VGA cable at the desk.", "provides": ["proj-xga-vga", "cable-vga"]},
+  {"id": "hotel-ballroom", "name": "Hotel ballroom", "description": "1080p projector with HDMI and VGA inputs; the AV desk supplies a long High Speed HDMI cable and a VGA cable.", "provides": ["proj-1080p", "cable-hdmi-high-speed", "cable-vga"]},
+  {"id": "coworking-room", "name": "Co-working meeting room", "description": "4K wall display whose inputs are HDMI 1.4; a High Speed HDMI cable hangs off the table box.", "provides": ["disp-4k-hdmi14", "cable-hdmi-high-speed"]},
+  {"id": "conference-booth", "name": "Conference demo booth", "description": "4K monitor with DP, HDMI and USB-C inputs. No cables provided: bring your own.", "provides": ["mon-4k-multi"]},
+  {"id": "studio-tv", "name": "Podcast studio", "description": "4K HDMI 2.1 TV, but the cable taped to the floor is an old Standard HDMI cable.", "provides": ["tv-4k-hdmi21", "cable-hdmi-standard"]}
+]

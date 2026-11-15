@@ -1,0 +1,56 @@
+from,to,item,from_item,to_item,source,source_url,confidence,note,standard,gbps
+mba-m2:gpu,mba-m2:tb1,mba-m2,mba-m2,mba-m2,apple-mba-m2,https://support.apple.com/en-us/111867,medium,"Apple documents DisplayPort over USB-C and one external display up to 6K60, not the lane rate. HBR3 x4 assumed.",DP-Alt-4L-HBR3,25.92
+mba-m2:gpu,mba-m2:tb2,mba-m2,mba-m2,mba-m2,apple-mba-m2,https://support.apple.com/en-us/111867,medium,,DP-Alt-4L-HBR3,25.92
+mbp14-m3:gpu,mbp14-m3:tb1,mbp14-m3,mbp14-m3,mbp14-m3,apple-mbp14-m3,https://support.apple.com/en-us/117735,medium,DisplayPort over Thunderbolt; up to 6K60 documented. HBR3 x4 assumed.,DP-Alt-4L-HBR3,25.92
+mbp14-m3:gpu,mbp14-m3:tb2,mbp14-m3,mbp14-m3,mbp14-m3,apple-mbp14-m3,https://support.apple.com/en-us/117735,medium,,DP-Alt-4L-HBR3,25.92
+mbp14-m3:gpu,mbp14-m3:hdmi,mbp14-m3,mbp14-m3,mbp14-m3,apple-mbp14-m3,https://support.apple.com/en-us/117735,high,"Apple documents up to 4K at 120 Hz. Modelled conservatively as HDMI 2.0 class, which already covers every mode in this dataset.",HDMI-2.0,14.4
+x1c-g11:gpu,x1c-g11:tb1,x1c-g11,x1c-g11,x1c-g11,lenovo-x1c11,https://psref.lenovo.com/syspool/sys/pdf/thinkpad/thinkpad_x1_carbon_gen_11/thinkpad_x1_carbon_gen_11_spec.pdf,high,PSREF: Thunderbolt 4 with DisplayPort 1.4a.,DP-Alt-4L-HBR3,25.92
+x1c-g11:gpu,x1c-g11:tb2,x1c-g11,x1c-g11,x1c-g11,lenovo-x1c11,https://psref.lenovo.com/syspool/sys/pdf/thinkpad/thinkpad_x1_carbon_gen_11/thinkpad_x1_carbon_gen_11_spec.pdf,high,,DP-Alt-4L-HBR3,25.92
+x1c-g11:gpu,x1c-g11:hdmi,x1c-g11,x1c-g11,x1c-g11,lenovo-x1c11,https://psref.lenovo.com/syspool/sys/pdf/thinkpad/thinkpad_x1_carbon_gen_11/thinkpad_x1_carbon_gen_11_spec.pdf,high,"PSREF: HDMI 2.1 port, up to 4K/60Hz, so modelled at the 4K60 (HDMI 2.0) rate.",HDMI-2.0,14.4
+gen-laptop-usbc:gpu,gen-laptop-usbc:usbc1,gen-laptop-usbc,gen-laptop-usbc,gen-laptop-usbc,class-assumption,https://github.com/suganthikannan093-hue/weakest-link/blob/main/docs/DATA.md,medium,,DP-Alt-4L-HBR3,25.92
+gen-laptop-usbc:gpu,gen-laptop-usbc:usbc2,gen-laptop-usbc,gen-laptop-usbc,gen-laptop-usbc,class-assumption,https://github.com/suganthikannan093-hue/weakest-link/blob/main/docs/DATA.md,medium,,DP-Alt-4L-HBR3,25.92
+gen-laptop-budget:gpu,gen-laptop-budget:hdmi,gen-laptop-budget,gen-laptop-budget,gen-laptop-budget,class-assumption,https://github.com/suganthikannan093-hue/weakest-link/blob/main/docs/DATA.md,medium,,HDMI-1.4,8.16
+adp-usbc-hdmi-4k30:in,adp-usbc-hdmi-4k30:out,adp-usbc-hdmi-4k30,adp-usbc-hdmi-4k30,adp-usbc-hdmi-4k30,class-assumption,https://github.com/suganthikannan093-hue/weakest-link/blob/main/docs/DATA.md,high,,HDMI-1.4,8.16
+adp-usbc-hdmi-4k60:in,adp-usbc-hdmi-4k60:out,adp-usbc-hdmi-4k60,adp-usbc-hdmi-4k60,adp-usbc-hdmi-4k60,class-assumption,https://github.com/suganthikannan093-hue/weakest-link/blob/main/docs/DATA.md,high,,HDMI-2.0,14.4
+adp-usbc-hdmi21:in,adp-usbc-hdmi21:out,adp-usbc-hdmi21,adp-usbc-hdmi21,adp-usbc-hdmi21,vesa-altmode,https://www.vesa.org/wp-content/uploads/2019/10/USB-DevDays-2019-VESA-DP-Alt-Mode-over-USB-Type-C.pdf,high,"Uncompressed throughput is capped by its DP Alt Mode input (HBR3 x4), not by the HDMI 2.1 side.",DP-Alt-4L-HBR3,25.92
+adp-apple-av-a2119:in,adp-apple-av-a2119:out,adp-apple-av-a2119,adp-apple-av-a2119,adp-apple-av-a2119,apple-av,https://support.apple.com/en-us/119850,high,3840x2160@60 with MacBook Air 2020+ and 14-inch MacBook Pro 2021+.,HDMI-2.0,14.4
+adp-apple-av-a1621:in,adp-apple-av-a1621:out,adp-apple-av-a1621,adp-apple-av-a1621,adp-apple-av-a1621,apple-av,https://support.apple.com/en-us/119850,high,"3840x2160@30, up to 1080p60. Looks identical to A2119.",HDMI-1.4,8.16
+adp-usbc-dp:in,adp-usbc-dp:out,adp-usbc-dp,adp-usbc-dp,adp-usbc-dp,vesa-altmode,https://www.vesa.org/wp-content/uploads/2019/10/USB-DevDays-2019-VESA-DP-Alt-Mode-over-USB-Type-C.pdf,high,"Its DP output is not dual-mode (DP++), so passive DP-to-HDMI adapters will not work on it.",DP-Alt-4L-HBR3,25.92
+adp-usbc-vga:in,adp-usbc-vga:out,adp-usbc-vga,adp-usbc-vga,adp-usbc-vga,wiki-vga,https://en.wikipedia.org/wiki/VGA_connector,medium,,VGA-1200p,3.7
+adp-dp-hdmi-passive:in,adp-dp-hdmi-passive:out,adp-dp-hdmi-passive,adp-dp-hdmi-passive,adp-dp-hdmi-passive,wiki-dp,https://en.wikipedia.org/wiki/DisplayPort,medium,Only works on a dual-mode (DP++) source port.,HDMI-1.4,8.16
+adp-dp-hdmi-active:in,adp-dp-hdmi-active:out,adp-dp-hdmi-active,adp-dp-hdmi-active,adp-dp-hdmi-active,wiki-dp,https://en.wikipedia.org/wiki/DisplayPort,high,,HDMI-2.0,14.4
+adp-hdmi-vga:in,adp-hdmi-vga:out,adp-hdmi-vga,adp-hdmi-vga,adp-hdmi-vga,wiki-vga,https://en.wikipedia.org/wiki/VGA_connector,medium,,VGA-1200p,3.7
+hub-usbc-4k30:in,hub-usbc-4k30:out,hub-usbc-4k30,hub-usbc-4k30,hub-usbc-4k30,class-assumption,https://github.com/suganthikannan093-hue/weakest-link/blob/main/docs/DATA.md,medium,Many hubs keep 2 lanes for USB 3 and expose HDMI 1.4 (4K30).,HDMI-1.4,8.16
+cable-usbc-10g-100w:a,cable-usbc-10g-100w:b,cable-usbc-10g-100w,cable-usbc-10g-100w,cable-usbc-10g-100w,vesa-altmode,https://www.vesa.org/wp-content/uploads/2019/10/USB-DevDays-2019-VESA-DP-Alt-Mode-over-USB-Type-C.pdf,high,,DP-Alt-4L-HBR3,25.92
+cable-usbc-10g-100w:b,cable-usbc-10g-100w:a,cable-usbc-10g-100w,cable-usbc-10g-100w,cable-usbc-10g-100w,vesa-altmode,https://www.vesa.org/wp-content/uploads/2019/10/USB-DevDays-2019-VESA-DP-Alt-Mode-over-USB-Type-C.pdf,high,,DP-Alt-4L-HBR3,25.92
+cable-tb4:a,cable-tb4:b,cable-tb4,cable-tb4,cable-tb4,wiki-thunderbolt,https://en.wikipedia.org/wiki/Thunderbolt_(interface),high,,DP-Alt-4L-HBR3,25.92
+cable-tb4:b,cable-tb4:a,cable-tb4,cable-tb4,cable-tb4,wiki-thunderbolt,https://en.wikipedia.org/wiki/Thunderbolt_(interface),high,,DP-Alt-4L-HBR3,25.92
+cable-hdmi-standard:a,cable-hdmi-standard:b,cable-hdmi-standard,cable-hdmi-standard,cable-hdmi-standard,hdmi-cables,https://www.hdmi.org/resource/cables,medium,,HDMI-Standard-cable,1.782
+cable-hdmi-standard:b,cable-hdmi-standard:a,cable-hdmi-standard,cable-hdmi-standard,cable-hdmi-standard,hdmi-cables,https://www.hdmi.org/resource/cables,medium,,HDMI-Standard-cable,1.782
+cable-hdmi-high-speed:a,cable-hdmi-high-speed:b,cable-hdmi-high-speed,cable-hdmi-high-speed,cable-hdmi-high-speed,hdmi-cables,https://www.hdmi.org/resource/cables,high,"Certified to 10.2 Gbps (4K30). Many also pass 4K60, but that is not certified.",HDMI-1.4,8.16
+cable-hdmi-high-speed:b,cable-hdmi-high-speed:a,cable-hdmi-high-speed,cable-hdmi-high-speed,cable-hdmi-high-speed,hdmi-cables,https://www.hdmi.org/resource/cables,high,"Certified to 10.2 Gbps (4K30). Many also pass 4K60, but that is not certified.",HDMI-1.4,8.16
+cable-hdmi-premium:a,cable-hdmi-premium:b,cable-hdmi-premium,cable-hdmi-premium,cable-hdmi-premium,hdmi-premium,https://www.hdmi.org/spec/premiumcable,high,,HDMI-2.0,14.4
+cable-hdmi-premium:b,cable-hdmi-premium:a,cable-hdmi-premium,cable-hdmi-premium,cable-hdmi-premium,hdmi-premium,https://www.hdmi.org/spec/premiumcable,high,,HDMI-2.0,14.4
+cable-hdmi-ultra:a,cable-hdmi-ultra:b,cable-hdmi-ultra,cable-hdmi-ultra,cable-hdmi-ultra,hdmi-uhs,https://www.hdmi.org/spec21sub/ultrahighspeedcable,high,,HDMI-2.1-FRL,42.67
+cable-hdmi-ultra:b,cable-hdmi-ultra:a,cable-hdmi-ultra,cable-hdmi-ultra,cable-hdmi-ultra,hdmi-uhs,https://www.hdmi.org/spec21sub/ultrahighspeedcable,high,,HDMI-2.1-FRL,42.67
+cable-dp-hbr2:a,cable-dp-hbr2:b,cable-dp-hbr2,cable-dp-hbr2,cable-dp-hbr2,wiki-dp,https://en.wikipedia.org/wiki/DisplayPort,medium,,DP-1.2-HBR2,17.28
+cable-dp-hbr2:b,cable-dp-hbr2:a,cable-dp-hbr2,cable-dp-hbr2,cable-dp-hbr2,wiki-dp,https://en.wikipedia.org/wiki/DisplayPort,medium,,DP-1.2-HBR2,17.28
+cable-dp8k:a,cable-dp8k:b,cable-dp8k,cable-dp8k,cable-dp8k,wiki-dp,https://en.wikipedia.org/wiki/DisplayPort,high,,DP-2.1-UHBR10,38.69
+cable-dp8k:b,cable-dp8k:a,cable-dp8k,cable-dp8k,cable-dp8k,wiki-dp,https://en.wikipedia.org/wiki/DisplayPort,high,,DP-2.1-UHBR10,38.69
+cable-usbc-hdmi-4k60:c,cable-usbc-hdmi-4k60:h,cable-usbc-hdmi-4k60,cable-usbc-hdmi-4k60,cable-usbc-hdmi-4k60,class-assumption,https://github.com/suganthikannan093-hue/weakest-link/blob/main/docs/DATA.md,high,,HDMI-2.0,14.4
+cable-usbc-dp14:c,cable-usbc-dp14:d,cable-usbc-dp14,cable-usbc-dp14,cable-usbc-dp14,vesa-altmode,https://www.vesa.org/wp-content/uploads/2019/10/USB-DevDays-2019-VESA-DP-Alt-Mode-over-USB-Type-C.pdf,high,,DP-Alt-4L-HBR3,25.92
+cable-vga:a,cable-vga:b,cable-vga,cable-vga,cable-vga,wiki-vga,https://en.wikipedia.org/wiki/VGA_connector,low,Analog quality depends on length and shielding.,VGA-1200p,3.7
+cable-vga:b,cable-vga:a,cable-vga,cable-vga,cable-vga,wiki-vga,https://en.wikipedia.org/wiki/VGA_connector,low,Analog quality depends on length and shielding.,VGA-1200p,3.7
+proj-1080p:hdmi,proj-1080p:panel,proj-1080p,proj-1080p,proj-1080p,class-assumption,https://github.com/suganthikannan093-hue/weakest-link/blob/main/docs/DATA.md,medium,,HDMI-1.4,8.16
+proj-1080p:vga,proj-1080p:panel,proj-1080p,proj-1080p,proj-1080p,wiki-vga,https://en.wikipedia.org/wiki/VGA_connector,medium,,VGA-1200p,3.7
+proj-xga-vga:vga,proj-xga-vga:panel,proj-xga-vga,proj-xga-vga,proj-xga-vga,wiki-vga,https://en.wikipedia.org/wiki/VGA_connector,low,1024x768 native panel. 720p60 input with scaling is assumed.,VGA-1200p,3.7
+tv-4k-hdmi20:hdmi1,tv-4k-hdmi20:panel,tv-4k-hdmi20,tv-4k-hdmi20,tv-4k-hdmi20,class-assumption,https://github.com/suganthikannan093-hue/weakest-link/blob/main/docs/DATA.md,high,,HDMI-2.0,14.4
+tv-4k-hdmi20:hdmi2,tv-4k-hdmi20:panel,tv-4k-hdmi20,tv-4k-hdmi20,tv-4k-hdmi20,class-assumption,https://github.com/suganthikannan093-hue/weakest-link/blob/main/docs/DATA.md,high,,HDMI-2.0,14.4
+tv-4k-hdmi21:hdmi,tv-4k-hdmi21:panel,tv-4k-hdmi21,tv-4k-hdmi21,tv-4k-hdmi21,class-assumption,https://github.com/suganthikannan093-hue/weakest-link/blob/main/docs/DATA.md,high,,HDMI-2.1-FRL,42.67
+disp-4k-hdmi14:hdmi,disp-4k-hdmi14:panel,disp-4k-hdmi14,disp-4k-hdmi14,disp-4k-hdmi14,class-assumption,https://github.com/suganthikannan093-hue/weakest-link/blob/main/docs/DATA.md,medium,"The panel is 4K60, but the input tops out at 4K30.",HDMI-1.4,8.16
+mon-4k-multi:dp,mon-4k-multi:panel,mon-4k-multi,mon-4k-multi,mon-4k-multi,class-assumption,https://github.com/suganthikannan093-hue/weakest-link/blob/main/docs/DATA.md,high,,DP-1.4-HBR3,25.92
+mon-4k-multi:hdmi,mon-4k-multi:panel,mon-4k-multi,mon-4k-multi,mon-4k-multi,class-assumption,https://github.com/suganthikannan093-hue/weakest-link/blob/main/docs/DATA.md,high,,HDMI-2.0,14.4
+mon-4k-multi:usbc,mon-4k-multi:panel,mon-4k-multi,mon-4k-multi,mon-4k-multi,class-assumption,https://github.com/suganthikannan093-hue/weakest-link/blob/main/docs/DATA.md,high,,DP-Alt-4L-HBR3,25.92
+mon-1440p:dp,mon-1440p:panel,mon-1440p,mon-1440p,mon-1440p,class-assumption,https://github.com/suganthikannan093-hue/weakest-link/blob/main/docs/DATA.md,high,,DP-1.2-HBR2,17.28
+mon-1440p:hdmi,mon-1440p:panel,mon-1440p,mon-1440p,mon-1440p,class-assumption,https://github.com/suganthikannan093-hue/weakest-link/blob/main/docs/DATA.md,high,,HDMI-1.4,8.16
+mon-portable-1080p:usbc,mon-portable-1080p:panel,mon-portable-1080p,mon-portable-1080p,mon-portable-1080p,class-assumption,https://github.com/suganthikannan093-hue/weakest-link/blob/main/docs/DATA.md,low,The lane count is not usually published. Only 1080p matters here.,DP-Alt-2L-HBR3,12.96

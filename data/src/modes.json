@@ -1,0 +1,7 @@
+[
+  {"id": "720p60",  "width": 1280, "height": 720,  "hz": 60, "pixel_clock_mhz": 74.25, "timing": "CTA-861", "rank": 1, "source": "wiki-hdmi", "confidence": "high"},
+  {"id": "1080p60", "width": 1920, "height": 1080, "hz": 60, "pixel_clock_mhz": 148.5, "timing": "CTA-861", "rank": 2, "source": "wiki-hdmi", "confidence": "high"},
+  {"id": "1440p60", "width": 2560, "height": 1440, "hz": 60, "pixel_clock_mhz": 241.5, "timing": "CVT-RB",  "rank": 3, "source": "wiki-cvt",  "confidence": "high"},
+  {"id": "4K30",    "width": 3840, "height": 2160, "hz": 30, "pixel_clock_mhz": 297.0, "timing": "CTA-861", "rank": 4, "source": "wiki-hdmi", "confidence": "high"},
+  {"id": "4K60",    "width": 3840, "height": 2160, "hz": 60, "pixel_clock_mhz": 594.0, "timing": "CTA-861", "rank": 5, "source": "wiki-hdmi", "confidence": "high"}
+]

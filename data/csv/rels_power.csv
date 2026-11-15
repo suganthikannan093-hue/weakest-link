@@ -1,0 +1,28 @@
+from,to,item,from_item,to_item,source,source_url,confidence,note,standard,watts
+mba-m2:tb1,mba-m2:battery,mba-m2,mba-m2,mba-m2,apple-mba-m2,https://support.apple.com/en-us/111867,high,,,
+mba-m2:tb2,mba-m2:battery,mba-m2,mba-m2,mba-m2,apple-mba-m2,https://support.apple.com/en-us/111867,high,,,
+mba-m2:magsafe,mba-m2:battery,mba-m2,mba-m2,mba-m2,apple-mba-m2,https://support.apple.com/en-us/111867,high,,,
+mbp14-m3:tb1,mbp14-m3:battery,mbp14-m3,mbp14-m3,mbp14-m3,apple-mbp14-m3,https://support.apple.com/en-us/117735,high,,,
+mbp14-m3:tb2,mbp14-m3:battery,mbp14-m3,mbp14-m3,mbp14-m3,apple-mbp14-m3,https://support.apple.com/en-us/117735,high,,,
+mbp14-m3:magsafe,mbp14-m3:battery,mbp14-m3,mbp14-m3,mbp14-m3,apple-mbp14-m3,https://support.apple.com/en-us/117735,high,,,
+x1c-g11:tb1,x1c-g11:battery,x1c-g11,x1c-g11,x1c-g11,lenovo-x1c11,https://psref.lenovo.com/syspool/sys/pdf/thinkpad/thinkpad_x1_carbon_gen_11/thinkpad_x1_carbon_gen_11_spec.pdf,high,,,
+x1c-g11:tb2,x1c-g11:battery,x1c-g11,x1c-g11,x1c-g11,lenovo-x1c11,https://psref.lenovo.com/syspool/sys/pdf/thinkpad/thinkpad_x1_carbon_gen_11/thinkpad_x1_carbon_gen_11_spec.pdf,high,,,
+gen-laptop-usbc:usbc1,gen-laptop-usbc:battery,gen-laptop-usbc,gen-laptop-usbc,gen-laptop-usbc,class-assumption,https://github.com/suganthikannan093-hue/weakest-link/blob/main/docs/DATA.md,medium,,,
+gen-laptop-usbc:usbc2,gen-laptop-usbc:battery,gen-laptop-usbc,gen-laptop-usbc,gen-laptop-usbc,class-assumption,https://github.com/suganthikannan093-hue/weakest-link/blob/main/docs/DATA.md,medium,,,
+cable-usbc-usb2-60w:a,cable-usbc-usb2-60w:b,cable-usbc-usb2-60w,cable-usbc-usb2-60w,cable-usbc-usb2-60w,wiki-usbc,https://en.wikipedia.org/wiki/USB-C,high,"No SuperSpeed pairs, so no DisplayPort Alt Mode.",USB-PD-3A,60
+cable-usbc-usb2-60w:b,cable-usbc-usb2-60w:a,cable-usbc-usb2-60w,cable-usbc-usb2-60w,cable-usbc-usb2-60w,wiki-usbc,https://en.wikipedia.org/wiki/USB-C,high,"No SuperSpeed pairs, so no DisplayPort Alt Mode.",USB-PD-3A,60
+cable-usbc-usb2-240w:a,cable-usbc-usb2-240w:b,cable-usbc-usb2-240w,cable-usbc-usb2-240w,cable-usbc-usb2-240w,usbif-pd,https://usb.org/usb-charger-pd,high,240 W but USB 2.0 only: no video.,USB-PD-EPR,240
+cable-usbc-usb2-240w:b,cable-usbc-usb2-240w:a,cable-usbc-usb2-240w,cable-usbc-usb2-240w,cable-usbc-usb2-240w,usbif-pd,https://usb.org/usb-charger-pd,high,240 W but USB 2.0 only: no video.,USB-PD-EPR,240
+cable-usbc-10g-100w:a,cable-usbc-10g-100w:b,cable-usbc-10g-100w,cable-usbc-10g-100w,cable-usbc-10g-100w,wiki-usbc,https://en.wikipedia.org/wiki/USB-C,high,,USB-PD-5A,100
+cable-usbc-10g-100w:b,cable-usbc-10g-100w:a,cable-usbc-10g-100w,cable-usbc-10g-100w,cable-usbc-10g-100w,wiki-usbc,https://en.wikipedia.org/wiki/USB-C,high,,USB-PD-5A,100
+cable-tb4:a,cable-tb4:b,cable-tb4,cable-tb4,cable-tb4,wiki-thunderbolt,https://en.wikipedia.org/wiki/Thunderbolt_(interface),high,,USB-PD-5A,100
+cable-tb4:b,cable-tb4:a,cable-tb4,cable-tb4,cable-tb4,wiki-thunderbolt,https://en.wikipedia.org/wiki/Thunderbolt_(interface),high,,USB-PD-5A,100
+cable-usbc-magsafe3:c,cable-usbc-magsafe3:m,cable-usbc-magsafe3,cable-usbc-magsafe3,cable-usbc-magsafe3,apple-fastcharge,https://support.apple.com/en-us/102378,high,Apple pairs it with the 140 W adapter for 16-inch MacBook Pro fast charging.,,140
+chg-apple-30w:psu,chg-apple-30w:out,chg-apple-30w,chg-apple-30w,chg-apple-30w,apple-power,https://support.apple.com/en-us/109509,high,,,30
+chg-apple-35w-dual:psu,chg-apple-35w-dual:out,chg-apple-35w-dual,chg-apple-35w-dual,chg-apple-35w-dual,apple-power,https://support.apple.com/en-us/109509,high,35 W shared across both ports; modelled as one port in use.,,35
+chg-apple-70w:psu,chg-apple-70w:out,chg-apple-70w,chg-apple-70w,chg-apple-70w,apple-power,https://support.apple.com/en-us/109509,high,,,70
+chg-apple-96w:psu,chg-apple-96w:out,chg-apple-96w,chg-apple-96w,chg-apple-96w,apple-power,https://support.apple.com/en-us/109509,high,,,96
+chg-apple-140w:psu,chg-apple-140w:out,chg-apple-140w,chg-apple-140w,chg-apple-140w,apple-fastcharge,https://support.apple.com/en-us/102378,high,Above 100 W needs an EPR (240 W) cable or MagSafe 3.,,140
+chg-gen-20w:psu,chg-gen-20w:out,chg-gen-20w,chg-gen-20w,chg-gen-20w,class-assumption,https://github.com/suganthikannan093-hue/weakest-link/blob/main/docs/DATA.md,high,,,20
+chg-gen-65w:psu,chg-gen-65w:out,chg-gen-65w,chg-gen-65w,chg-gen-65w,class-assumption,https://github.com/suganthikannan093-hue/weakest-link/blob/main/docs/DATA.md,high,,,65
+chg-gen-100w:psu,chg-gen-100w:out,chg-gen-100w,chg-gen-100w,chg-gen-100w,class-assumption,https://github.com/suganthikannan093-hue/weakest-link/blob/main/docs/DATA.md,high,,,100
