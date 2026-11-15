@@ -69,6 +69,13 @@ async function point(page, loc, { click = true, pause = 250 } = {}) {
 }
 const smoothTo = (page, sel, block = 'start') => page.evaluate(([s, b]) => document.querySelector(s)?.scrollIntoView({ behavior: 'smooth', block: b }), [sel, block]);
 
+async function ensureApp(page) {
+  if (page.url().startsWith(URL)) return;
+  await page.goto(URL);
+  await page.evaluate(() => localStorage.setItem('wl-intro-seen', '1'));
+  await ready(page, URL);
+}
+
 async function ready(page, url) {
   await page.goto(url);
   await page.waitForSelector('body[data-ready="true"]');
@@ -109,6 +116,7 @@ const SCENES = {
     await r.stop(target('ui'));
   },
   async diagram(page) {
+    await ensureApp(page);
     await smoothTo(page, '#results', 'start');
     const r = startRec('diagram');
     await sleep(800);
@@ -121,6 +129,7 @@ const SCENES = {
     await r.stop(target('diagram'));
   },
   async fix(page) {
+    await ensureApp(page);
     await page.evaluate(() => window.scrollTo(0, 0));
     await sleep(300);
     const r = startRec('fix');
@@ -134,6 +143,7 @@ const SCENES = {
     await r.stop(target('fix'));
   },
   async charge(page) {
+    await ensureApp(page);
     await page.evaluate(() => window.scrollTo(0, 0));
     await sleep(300);
     const r = startRec('charge');
@@ -162,7 +172,7 @@ async function terminalScene() {
   const sh = `unset NO_COLOR FORCE_COLOR; cd ${ROOT}; clear; sleep 0.6; printf '\\033[1;32mweakest-link\\033[0m $ ';
     s='${cmd}'; for i in $(seq 0 $((\${#s}-1))); do printf '%s' "\${s:$i:1}"; sleep 0.04; done; echo; ${cmd}; sleep 60`;
   const term = spawn('xfce4-terminal', ['--disable-server', '--hide-menubar', '--hide-toolbar', '--hide-scrollbar',
-    `--geometry=150x42+0+${TOP}`, '--font=DejaVu Sans Mono 16', '--color-bg=#0b1120', '--color-text=#e6ebf5', '--title=weakest-link',
+    `--geometry=120x34+0+${TOP}`, '--font=DejaVu Sans Mono 20', '--color-bg=#0b1120', '--color-text=#e6ebf5', '--title=weakest-link',
     '-x', 'bash', '-c', sh], { stdio: 'ignore', env: { ...process.env, DISPLAY } });
   live.add(term);
   await sleep(700);

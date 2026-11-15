@@ -1,0 +1,84 @@
+{
+  "file": "docs/submission/weakest-link-demo-draft.mp4",
+  "status": "DRAFT for the owner's review. Not uploaded anywhere.",
+  "duration_seconds": 100.4,
+  "duration_limit_seconds": 105.0,
+  "within_limit": true,
+  "size_bytes": 8289516,
+  "sha256": "64886879afc95bdd80f5903ded62924a448b7631db7f3062cedb24e56db8380e",
+  "video": {
+    "codec": "h264",
+    "width": 1920,
+    "height": 1080,
+    "fps": "30/1"
+  },
+  "audio": {
+    "codec": "aac",
+    "sample_rate": 48000,
+    "channels": 2
+  },
+  "loudness": {
+    "integrated_lufs": -16.1,
+    "loudness_range_lu": 4.8,
+    "true_peak_dbtp": -1.3,
+    "target_lufs": -16,
+    "measured_with": "ffmpeg ebur128=peak=true"
+  },
+  "narration": {
+    "model": "tts-1-hd",
+    "voice": "nova",
+    "speed": 1.0,
+    "engine": "OpenAI TTS",
+    "speech_seconds": 87.48
+  },
+  "captions": {
+    "burned_in": true,
+    "srt": "docs/submission/weakest-link-demo-draft.srt",
+    "cues": 30
+  },
+  "capture": "Xvfb 1920x1200 + ffmpeg x11grab: Chromium (Playwright) on the local vite preview build at 1.25x, and xfce4-terminal running scripts/agent_demo.py --pace 1.6",
+  "scenes": [
+    {
+      "id": "hook",
+      "start": 0.0,
+      "end": 12.164,
+      "speech_seconds": 10.464
+    },
+    {
+      "id": "ui",
+      "start": 12.164,
+      "end": 25.448,
+      "speech_seconds": 11.784
+    },
+    {
+      "id": "diagram",
+      "start": 25.448,
+      "end": 40.364,
+      "speech_seconds": 13.416
+    },
+    {
+      "id": "fix",
+      "start": 40.364,
+      "end": 53.0,
+      "speech_seconds": 11.136
+    },
+    {
+      "id": "charge",
+      "start": 53.0,
+      "end": 63.38,
+      "speech_seconds": 8.88
+    },
+    {
+      "id": "agent",
+      "start": 63.38,
+      "end": 83.276,
+      "speech_seconds": 16.896
+    },
+    {
+      "id": "close",
+      "start": 83.276,
+      "end": 100.28,
+      "speech_seconds": 14.904
+    }
+  ]
+}
