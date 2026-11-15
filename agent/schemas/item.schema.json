@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "weakest-link/item.schema.json",
+  "title": "Adapter, hub, cable or charger extracted from a spec page (param $it of ingest_item)",
+  "type": "object",
+  "required": ["id", "name", "kind", "confidence", "source", "ports"],
+  "properties": {
+    "id": {"type": "string", "pattern": "^my-[a-z0-9-]+$", "description": "Ingested ids start with my- so they never clash with the catalog"},
+    "name": {"type": "string"},
+    "kind": {"enum": ["adapter", "cable", "charger"]},
+    "maker": {"type": "string"},
+    "purchasable": {"type": "boolean", "default": true},
+    "confidence": {"enum": ["high", "medium", "low"], "description": "high only for the maker's own spec page that states the standard"},
+    "source": {
+      "type": "object",
+      "required": ["id", "kind"],
+      "properties": {
+        "id": {"type": "string"},
+        "kind": {"enum": ["manufacturer", "retailer", "review", "user"]},
+        "publisher": {"type": "string"},
+        "title": {"type": "string"},
+        "url": {"type": ["string", "null"]},
+        "supports": {"type": "string"}
+      }
+    },
+    "ports": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "connector", "gender"],
+        "properties": {
+          "name": {"type": "string"},
+          "connector": {"enum": ["USB-C", "HDMI", "DP", "VGA", "MagSafe3"]},
+          "gender": {"enum": ["plug", "receptacle"]},
+          "dual_mode": {"type": "boolean"},
+          "requires_dual_mode": {"type": "boolean"}
+        }
+      }
+    },
+    "endpoints": {
+      "type": "array",
+      "items": {"type": "object", "required": ["name", "role"], "properties": {"name": {"type": "string"}, "role": {"enum": ["power-source"]}}}
+    },
+    "video": {"type": "array", "items": {"$ref": "#/$defs/link"}},
+    "power": {"type": "array", "items": {"$ref": "#/$defs/link"}}
+  },
+  "$defs": {
+    "link": {
+      "type": "object",
+      "required": ["from", "to", "standard"],
+      "properties": {
+        "from": {"type": "string"},
+        "to": {"type": "string"},
+        "standard": {"type": "string", "description": "A Standard.id from the graph, e.g. HDMI-2.0 or USB-PD-5A"},
+        "gbps": {"type": "number"},
+        "watts": {"type": "number"},
+        "note": {"type": "string"},
+        "both_ways": {"type": "boolean", "description": "true for passive cables"}
+      }
+    }
+  }
+}

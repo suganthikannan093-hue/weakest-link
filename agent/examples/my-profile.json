@@ -1,0 +1,6 @@
+{
+  "laptop": "mba-m2",
+  "bag": ["adp-apple-av-a1621", "hub-usbc-4k30", "chg-apple-70w", "cable-usbc-usb2-60w"],
+  "usual_venues": ["meetup-hall", "coworking-room", "studio-tv"],
+  "target_mode": "1080p60"
+}

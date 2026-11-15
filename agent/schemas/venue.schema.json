@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "weakest-link/venue.schema.json",
+  "title": "Venue extracted from an email, booking page or tech rider (param $v of ingest_venue)",
+  "type": "object",
+  "required": ["id", "name", "confidence", "source", "display"],
+  "properties": {
+    "id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$", "description": "Slug, e.g. riverside-library-room-2"},
+    "name": {"type": "string"},
+    "description": {"type": "string"},
+    "confidence": {"enum": ["high", "medium", "low"], "description": "A venue email is at most medium. Use low when you had to infer"},
+    "source": {
+      "type": "object",
+      "required": ["id", "kind"],
+      "properties": {
+        "id": {"type": "string"},
+        "kind": {"enum": ["email", "web", "pdf", "phone", "user"]},
+        "publisher": {"type": "string"},
+        "title": {"type": "string"},
+        "url": {"type": ["string", "null"]},
+        "supports": {"type": "string", "description": "The exact sentences you relied on"}
+      }
+    },
+    "display": {
+      "type": "object",
+      "required": ["name", "max_mode", "inputs"],
+      "properties": {
+        "name": {"type": "string"},
+        "max_mode": {"enum": ["720p60", "1080p60", "1440p60", "4K30", "4K60"]},
+        "inputs": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["connector", "standard"],
+            "properties": {
+              "connector": {"enum": ["HDMI", "DP", "USB-C", "VGA"]},
+              "standard": {"enum": ["HDMI-1.4", "HDMI-2.0", "HDMI-2.1-FRL", "DP-1.2-HBR2", "DP-1.4-HBR3", "DP-Alt-4L-HBR3", "VGA-1200p"]},
+              "confidence": {"enum": ["high", "medium", "low"]},
+              "note": {"type": "string"}
+            }
+          }
+        }
+      }
+    },
+    "provides": {
+      "type": "array",
+      "description": "Catalog Item ids the venue leaves out (cables), e.g. cable-hdmi-standard when the cable's grade is unknown",
+      "items": {"type": "string"}
+    }
+  }
+}
