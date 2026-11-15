@@ -1,14 +1,14 @@
 // Q2 bottleneck analysis: every physically valid chain from $laptop to the venue display using
 // $bag + venue items, widest first. For each chain: the weakest link (lowest-capacity edge),
 // its standard, citation and confidence, and the best mode the chain can carry.
-// Params: $laptop, $venue, $bag
+// Params: $laptop, $venue, $bag, $strict (true = ignore low-confidence links)
 MATCH (v:Venue {id: $venue})
 MATCH (:Item {id: $laptop})-[:HAS_ENDPOINT]->(src:Endpoint {role: 'video-source'})
 MATCH (v)-[:PROVIDES]->(d:Item {kind: 'display'})-[:HAS_ENDPOINT]->(sink:Endpoint {role: 'video-sink'})
 WITH v, d, src, sink, [(v)-[:PROVIDES]->(i:Item) | i.id] + $bag + [$laptop] AS have
-MATCH p = (src)-[:VIDEO]->()
+MATCH p = (src)-[f:VIDEO WHERE NOT $strict OR f.confidence <> 'low']->()
   (()-[mt:MATES WHERE mt.from_item IN have AND mt.to_item IN have]->()
-     -[vv:VIDEO WHERE vv.item IN have]->()){1,6}
+     -[vv:VIDEO WHERE vv.item IN have AND (NOT $strict OR vv.confidence <> 'low')]->()){1,6}
   (sink)
 // a physical item can only be used once in a chain
 WHERE all(k IN range(0, size(nodes(p)) - 2) WHERE NOT nodes(p)[k] IN nodes(p)[k + 1..])

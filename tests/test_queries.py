@@ -155,5 +155,51 @@ class Power(unittest.TestCase):
         self.assertEqual(run_query("power", {"laptop": "gen-laptop-budget", "bag": ["chg-gen-65w", "cable-usbc-10g-100w"]}), [])
 
 
+
+class ChargeFix(unittest.TestCase):
+    def test_thin_cable_owner_is_told_to_buy_a_cable(self):
+        rows = run_query("charge_fix", {"laptop": "mbp14-m3", "bag": ["chg-apple-140w", "cable-usbc-usb2-60w"]})
+        top = rows[0]
+        self.assertEqual(len(top["buy"]), 1)
+        self.assertTrue(top["buy"][0].startswith("cable-"))
+        self.assertEqual((top["verdict"], top["verdict_now"], top["capacity_now_w"]), ("fast-charge", "below-recommended", 60))
+
+    def test_empty_bag_gets_a_charger_and_cable_pair(self):
+        top = run_query("charge_fix", {"laptop": "iphone-15", "bag": []})[0]
+        self.assertEqual(len(top["buy"]), 2)
+        self.assertEqual(top["verdict"], "fast-charge")
+        self.assertIsNone(top["capacity_now_w"])
+
+    def test_nothing_to_buy_when_already_fast(self):
+        self.assertEqual(run_query("charge_fix", {"laptop": "mbp14-m3", "bag": ["chg-apple-96w", "cable-usbc-magsafe3"]}), [])
+
+    def test_barrel_jack_laptop_gets_no_suggestion(self):
+        self.assertEqual(run_query("charge_fix", {"laptop": "ideapad1-15amn7", "bag": []}), [])
+
+
+class StrictMode(unittest.TestCase):
+    def test_strict_ignores_low_confidence_phone_video(self):
+        p = {"laptop": "iphone-15", "venue": "meetup-hall", "bag": ["adp-apple-av-a2119"], "mode": "1080p60"}
+        self.assertTrue(reach(**{k: p[k] for k in ("venue", "bag", "mode")}, laptop="iphone-15")["ok"])
+        self.assertFalse(run_query("reach", dict(p, strict=True))[0]["ok"])
+
+    def test_strict_keeps_medium_and_high_links(self):
+        r = run_query("reach", {"laptop": "mba-m2", "venue": "meetup-hall", "bag": ["adp-apple-av-a2119"], "mode": "4K60", "strict": True})[0]
+        self.assertTrue(r["ok"])
+        self.assertTrue(all(h["confidence"] != "low" for h in r["hops"]))
+
+    def test_strict_drops_the_low_confidence_venue_cable(self):
+        # the VGA cable is low confidence, so strict mode cannot use the college seminar room's only input
+        self.assertTrue(reach("gen-laptop-budget", "college-seminar", ["adp-hdmi-vga"], "720p60")["ok"])
+        self.assertFalse(run_query("reach", {"laptop": "gen-laptop-budget", "venue": "college-seminar", "bag": ["adp-hdmi-vga"], "mode": "720p60", "strict": True})[0]["ok"])
+
+    def test_every_query_accepts_strict(self):
+        base = {"laptop": "mba-m2", "bag": ["chg-apple-70w"], "venue": "meetup-hall", "mode": "1080p60", "venues": ["meetup-hall"]}
+        need = {"reach": ("laptop", "venue", "bag", "mode"), "chains": ("laptop", "venue", "bag"),
+                "best_fix": ("laptop", "bag", "venues", "mode"), "power": ("laptop", "bag"), "charge_fix": ("laptop", "bag")}
+        for q, keys in need.items():
+            run_query(q, dict({k: base[k] for k in keys}, strict=True))
+
+
 if __name__ == "__main__":
     unittest.main()

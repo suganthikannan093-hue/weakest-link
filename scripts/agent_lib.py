@@ -95,6 +95,8 @@ class McpClient:
         return self.call("write_cypher", {"statement": statement, "parameters": params or {}})
 
     def query(self, name, params):
+        params = dict(params)
+        params.setdefault("strict", False)  # every recipe takes $strict
         return self.read((QUERIES / f"{name}.cypher").read_text(encoding="utf-8"), params)
 
     def close(self):
@@ -371,29 +373,31 @@ def plan_trip(client, profile, venue_id, venue_mode, considering=None):
     laptop, bag = profile["laptop"], list(profile["bag"])
     target = profile.get("target_mode", "1080p60")
     venues = [venue_id] + [v for v in profile.get("usual_venues", []) if v != venue_id]
-    out = {"laptop": laptop, "venue": venue_id, "venue_mode": venue_mode, "target_mode": target}
+    strict = bool(profile.get("strict", False))
+    out = {"laptop": laptop, "venue": venue_id, "venue_mode": venue_mode, "target_mode": target, "strict": strict}
+    q = lambda name, params: client.query(name, dict(params, strict=strict))
 
     # 1. the new venue, at the best mode its display can show and at the target mode
-    out["reach_best"] = client.query("reach", {"laptop": laptop, "venue": venue_id, "bag": bag, "mode": venue_mode})[0]
-    out["reach_target"] = client.query("reach", {"laptop": laptop, "venue": venue_id, "bag": bag, "mode": target})[0]
-    out["chains"] = client.query("chains", {"laptop": laptop, "venue": venue_id, "bag": bag})
+    out["reach_best"] = q("reach", {"laptop": laptop, "venue": venue_id, "bag": bag, "mode": venue_mode})[0]
+    out["reach_target"] = q("reach", {"laptop": laptop, "venue": venue_id, "bag": bag, "mode": target})[0]
+    out["chains"] = q("chains", {"laptop": laptop, "venue": venue_id, "bag": bag})
 
     # 2. is the item the user is considering any help here?
     if considering:
-        r = client.query("reach", {"laptop": laptop, "venue": venue_id, "bag": bag + [considering], "mode": target})[0]
-        ch = client.query("chains", {"laptop": laptop, "venue": venue_id, "bag": bag + [considering]})
-        rb = client.query("reach", {"laptop": laptop, "venue": venue_id, "bag": bag + [considering], "mode": venue_mode})[0]
+        r = q("reach", {"laptop": laptop, "venue": venue_id, "bag": bag + [considering], "mode": target})[0]
+        ch = q("chains", {"laptop": laptop, "venue": venue_id, "bag": bag + [considering]})
+        rb = q("reach", {"laptop": laptop, "venue": venue_id, "bag": bag + [considering], "mode": venue_mode})[0]
         out["considering"] = {"item": considering, "fixes_venue": bool(r["ok"]) and not out["reach_target"]["ok"],
                               "upgrades_venue": bool(rb["ok"]) and not out["reach_best"]["ok"],
                               "reach": r, "weakest_with_it": ch[0]["weakest_item"] if ch else None}
 
     # 3. one purchase across this venue and the usual ones (tie-break: what also works at 4K60)
-    fixes = client.query("best_fix", {"laptop": laptop, "bag": bag, "venues": venues, "mode": target})
+    fixes = q("best_fix", {"laptop": laptop, "bag": bag, "venues": venues, "mode": target})
     out["best_fix"] = fixes
     if fixes:
         top = [f for f in fixes if f["venues_fixed"] == fixes[0]["venues_fixed"]]
         hi = {f["buy"]: f["venues_fixed"] for f in
-              client.query("best_fix", {"laptop": laptop, "bag": bag, "venues": venues, "mode": "4K60"})}
+              q("best_fix", {"laptop": laptop, "bag": bag, "venues": venues, "mode": "4K60"})}
         top.sort(key=lambda f: (-hi.get(f["buy"], 0), f["buy"]))
         out["buy"] = dict(top[0], also_4k60=hi.get(top[0]["buy"], 0))
         out["buy_ties"] = [f["buy"] for f in top[1:]]
@@ -405,11 +409,16 @@ def plan_trip(client, profile, venue_id, venue_mode, considering=None):
     final_bag = bag + ([out["buy"]["buy"]] if out["buy"] else [])
     per_venue = {}
     for v in venues:
-        r = client.query("reach", {"laptop": laptop, "venue": v, "bag": final_bag, "mode": target})[0]
+        r = q("reach", {"laptop": laptop, "venue": v, "bag": final_bag, "mode": target})[0]
         per_venue[v] = r
     out["after"] = per_venue
-    power = client.query("power", {"laptop": laptop, "bag": final_bag})
+    power = q("power", {"laptop": laptop, "bag": final_bag})
     out["power"] = power
+    # 5. charging: if the bag does not fast-charge, the one purchase that charges best
+    out["charge_fix"] = None
+    if not power or power[0]["verdict"] not in ("fast-charge",):
+        cf = q("charge_fix", {"laptop": laptop, "bag": final_bag})
+        out["charge_fix"] = cf[0] if cf else None
     used = set()
     for r in per_venue.values():
         used.update(i for i in (r["chain"] or []) if i in final_bag)
@@ -461,8 +470,10 @@ def describe(client, plan):
             lines.append(f"You don't need the {n(c['item'])} for {v}; your bag already works at {MODE_LABEL[plan['target_mode']]}.")
         else:
             w = c.get("weakest_with_it")
-            lines.append(f"The {n(c['item'])} you asked about would not help at {v}: even with it, the weakest link "
-                         f"is still {n(w) if w else 'missing'}." if w != c["item"] else
+            lines.append((f"The {n(c['item'])} you asked about would not help at {v}: even with it, the weakest link "
+                          f"is still {n(w)}." if w else
+                          f"The {n(c['item'])} you asked about would not help at {v}: even with it, nothing in your bag "
+                          f"reaches the display.") if w != c["item"] else
                          f"The {n(c['item'])} you asked about would itself be the weakest link at {v}.")
     b = plan["buy"]
     if b:
@@ -484,10 +495,18 @@ def describe(client, plan):
     lines.append("Pack: " + ", ".join(n(i) for i in plan["pack"]) + ".")
     if plan["leave"]:
         lines.append("Leave at home: " + ", ".join(n(i) for i in plan["leave"]) + ".")
+    verdicts = {"fast-charge": "fast-charges", "full-speed": "charges at full speed",
+                "below-recommended": "charges below the recommended wattage", "unknown": "charges"}
     if plan["power"]:
         p = plan["power"][0]
-        verdict = {"fast-charge": "fast-charges", "full-speed": "charges at full speed",
-                   "below-recommended": "charges below the recommended wattage", "unknown": "charges"}[p["verdict"]]
         lines.append(f"Charging: {n(p['charger'])} + {', '.join(n(i) for i in p['chain'][1:-1]) or 'no cable'} "
-                     f"{verdict} ({p['capacity_w']} W; weakest link {n(p['weakest_item'])}).")
+                     f"{verdicts[p['verdict']]} ({p['capacity_w']} W; weakest link {n(p['weakest_item'])}).")
+    else:
+        lines.append("Charging: nothing in your bag can charge this laptop.")
+    cf = plan.get("charge_fix")
+    if cf:
+        lines.append(f"For charging, buy {' + '.join(cf['names'])}: it {verdicts[cf['verdict']]} at up to {cf['capacity_w']} W"
+                     + (f" (today {cf['capacity_now_w']} W)." if cf.get("capacity_now_w") is not None else "."))
+    if plan.get("strict"):
+        lines.append("Strict mode: links whose source only confirms the feature (low confidence) were ignored.")
     return lines

@@ -54,16 +54,29 @@ class AgentMcpTest(unittest.TestCase):
 
     def test_mybag_server_tools_and_recipes(self):
         self.assertEqual(sorted(self.mine.tools()), ["get_schema", "read_cypher", "write_cypher"])
-        self.assertEqual(sorted(self.rec), ["best_fix", "chains", "ingest_item", "ingest_venue", "power", "reach"])
-        for name in ("reach", "chains", "best_fix", "power"):
+        self.assertEqual(sorted(self.rec), ["best_fix", "chains", "charge_fix", "ingest_item", "ingest_venue", "power", "reach"])
+        for name in ("reach", "chains", "best_fix", "power", "charge_fix"):
             self.assertEqual(self.rec[name], (ROOT / "queries" / f"{name}.cypher").read_text())
 
     def test_read_recipes_pass_mcp_read_cypher(self):
         # Relate's MCP read_cypher rejects CALL subqueries; every read recipe must be accepted
         p = {"laptop": "mba-m2", "bag": ["adp-apple-av-a1621"], "venue": "meetup-hall", "mode": "4K30",
              "venues": ["meetup-hall", "studio-tv"]}
-        for name in ("reach", "chains", "best_fix", "power"):
-            self.cat.read(self.rec[name], p)
+        for name in ("reach", "chains", "best_fix", "power", "charge_fix"):
+            for strict in (False, True):
+                self.cat.read(self.rec[name], dict(p, strict=strict))
+
+    def test_strict_recipe_parameter_drops_low_confidence_links(self):
+        p = {"laptop": "iphone-15", "venue": "meetup-hall", "bag": ["adp-apple-av-a2119"], "mode": "1080p60"}
+        self.assertTrue(self.cat.read(self.rec["reach"], dict(p, strict=False))[0]["ok"])
+        self.assertFalse(self.cat.read(self.rec["reach"], dict(p, strict=True))[0]["ok"])
+
+    def test_plan_suggests_a_charging_purchase(self):
+        prof = {"laptop": "mba-m2", "bag": ["chg-apple-70w", "cable-usbc-usb2-60w"], "usual_venues": ["meetup-hall"]}
+        plan = A.plan_trip(self.cat, prof, "meetup-hall", "4K60")
+        self.assertEqual(plan["power"][0]["verdict"], "full-speed")
+        self.assertEqual(plan["charge_fix"]["verdict"], "fast-charge")
+        self.assertTrue(any(l.startswith("For charging, buy") for l in A.describe(self.cat, plan)))
 
     def test_get_schema_sees_ingested_labels(self):
         schema = self.mine.call("get_schema", {"sample_size": -1})

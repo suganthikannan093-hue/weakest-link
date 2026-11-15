@@ -1,6 +1,7 @@
 // Q1 reachability: can $laptop drive the display at venue $venue at $mode, using only
 // items in $bag plus what the venue provides? Returns the shortest working chain and its bottleneck.
-// Params: $laptop (Item.id), $venue (Venue.id), $bag (list of Item.id), $mode (Mode.id)
+// Params: $laptop (Item.id), $venue (Venue.id), $bag (list of Item.id), $mode (Mode.id),
+//         $strict (true = ignore links whose source only confirms the feature, confidence 'low')
 MATCH (m:Mode {id: $mode}), (v:Venue {id: $venue})
 MATCH (:Item {id: $laptop})-[:HAS_ENDPOINT]->(src:Endpoint {role: 'video-source'})
 MATCH (v)-[:PROVIDES]->(d:Item {kind: 'display'})-[:HAS_ENDPOINT]->(sink:Endpoint {role: 'video-sink'})
@@ -8,9 +9,9 @@ WITH m, v, d, src, sink,
      [(v)-[:PROVIDES]->(i:Item) | i.id] + $bag + [$laptop] AS have,
      EXISTS { (sink)-[:SUPPORTS_MODE]->(m) } AS panel_ok
 OPTIONAL MATCH p = SHORTEST 1
-  (src)-[f:VIDEO WHERE f.gbps >= m.gbps]->()
+  (src)-[f:VIDEO WHERE f.gbps >= m.gbps AND (NOT $strict OR f.confidence <> 'low')]->()
   (()-[mt:MATES WHERE mt.from_item IN have AND mt.to_item IN have]->()
-     -[vv:VIDEO WHERE vv.item IN have AND vv.gbps >= m.gbps]->()){1,6}
+     -[vv:VIDEO WHERE vv.item IN have AND vv.gbps >= m.gbps AND (NOT $strict OR vv.confidence <> 'low')]->()){1,6}
   (sink)
 WITH m, v, d, panel_ok, p, [r IN relationships(p) WHERE type(r) = 'VIDEO'] AS links
 WITH m, v, d, panel_ok, p, links,

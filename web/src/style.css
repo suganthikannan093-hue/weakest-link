@@ -175,3 +175,15 @@ select, input[type=search], input[type=text] { width: 100%; font: inherit; paddi
 }
 
 #custom-inputs { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); }
+
+/* first-run intro, strict mode, loading and charging fix */
+.intro { margin: 20px 0 0; padding: 18px 20px; background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: var(--radius); box-shadow: var(--shadow); }
+.intro h2 { margin: 0 0 8px; font-size: 1.15rem; }
+.intro-steps { margin: 0 0 8px; padding-left: 1.3em; }
+.intro p { margin: 0 0 10px; }
+.strict-toggle { font-weight: 600; }
+.strict-note { margin: 0 0 12px; padding: 8px 12px; border-radius: 10px; background: var(--warn-bg); color: var(--warn); font-size: .9rem; }
+.loading { color: var(--muted); padding: 24px 0; }
+.charge-fix { margin-top: 14px; }
+.charge-fix .eyebrow.sub { margin-top: 12px; }
+.charge-fix .hint { margin: 10px 0 0; }

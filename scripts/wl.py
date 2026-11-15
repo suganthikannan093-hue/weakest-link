@@ -37,12 +37,14 @@ def run_cypher(cypher, params=None, store=STORE):
 
 
 def run_query(name, params=None, store=STORE):
+    params = dict(params or {})
+    params.setdefault("strict", False)  # every query takes $strict; default: use low-confidence links too
     return run_cypher((QUERIES / f"{name}.cypher").read_text(encoding="utf-8"), params, store)
 
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("query", choices=["reach", "chains", "best_fix", "power", "list"])
+    ap.add_argument("query", choices=["reach", "chains", "best_fix", "power", "charge_fix", "list"])
     ap.add_argument("--laptop")
     ap.add_argument("--venue")
     ap.add_argument("--venues", help="comma-separated venue ids, or 'all'")

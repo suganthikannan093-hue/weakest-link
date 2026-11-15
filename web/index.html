@@ -24,6 +24,17 @@
   </header>
 
   <main class="wrap" id="app" aria-busy="true">
+    <noscript><p class="card intro">Weakest Link runs a graph database in your browser, so it needs JavaScript and WebAssembly.</p></noscript>
+    <section class="intro card" id="intro" aria-labelledby="intro-h" hidden>
+      <h2 id="intro-h">Giving a talk somewhere new? Check your dongles first.</h2>
+      <ol class="intro-steps">
+        <li><strong>Pick your device</strong> (laptop, phone or tablet).</li>
+        <li><strong>Tick what is in your bag</strong>: adapters, hubs, cables, chargers.</li>
+        <li><strong>Pick the venue and the picture you want</strong>, for example 4K at 60 Hz.</li>
+      </ol>
+      <p>You get a yes or no, the <strong>weakest link</strong> in the chain with its source, and the one thing worth buying. Or start from an example below.</p>
+      <button type="button" class="btn small" id="intro-close">Got it</button>
+    </section>
     <section class="examples" aria-labelledby="examples-h">
       <h2 id="examples-h" class="eyebrow">Try an example</h2>
       <div class="example-list" id="examples"></div>
@@ -72,6 +83,11 @@
           <div class="segmented" id="modes"></div>
         </fieldset>
 
+        <div class="field">
+          <label class="check strict-toggle"><input type="checkbox" id="strict" /> Strict mode</label>
+          <p class="hint" id="strict-hint">Ignore links whose source only confirms the feature, not its speed (low confidence). Use it when you can't risk a wrong "yes".</p>
+        </div>
+
         <button type="button" class="btn ghost" id="share">Copy link to this setup</button>
       </section>
 
@@ -83,7 +99,7 @@
           <button role="tab" id="tab-fix" aria-controls="panel-fix" aria-selected="false" tabindex="-1">Best purchase</button>
           <button role="tab" id="tab-power" aria-controls="panel-power" aria-selected="false" tabindex="-1">Charging</button>
         </div>
-        <div role="tabpanel" id="panel-connect" aria-labelledby="tab-connect" aria-live="polite"></div>
+        <div role="tabpanel" id="panel-connect" aria-labelledby="tab-connect" aria-live="polite"><p class="loading" id="loading">Loading the graph engine and 100 cited items…</p></div>
         <div role="tabpanel" id="panel-fix" aria-labelledby="tab-fix" aria-live="polite" hidden></div>
         <div role="tabpanel" id="panel-power" aria-labelledby="tab-power" aria-live="polite" hidden></div>
       </section>

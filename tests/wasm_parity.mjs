@@ -31,7 +31,13 @@ const scenarios = [
   ['reach', { laptop: 'ipad-10', venue: 'conference-booth', bag: ['cable-usbc-dp14'], mode: '4K60' }],
   ['best_fix', { laptop: 'iphone-15', bag: [], mode: '1080p60', venues: ['meeting-room', 'school-classroom', 'hot-desk', 'meetup-hall'] }],
   ['power', { laptop: 'mba-m2', bag: ['mon-lg-27up850', 'cable-usbc-10g-100w', 'dock-caldigit-ts4'] }],
+  ['charge_fix', { laptop: 'mbp14-m3', bag: ['chg-apple-140w', 'cable-usbc-usb2-60w'] }],
+  ['charge_fix', { laptop: 'iphone-15', bag: [] }],
+  ['reach', { laptop: 'iphone-15', venue: 'meetup-hall', bag: ['adp-apple-av-a2119'], mode: '1080p60', strict: true }],
+  ['chains', { laptop: 'gen-laptop-budget', venue: 'college-seminar', bag: ['adp-hdmi-vga'], strict: true }],
 ];
+// every query takes $strict; default false like the UI and the CLI wrapper
+for (const s of scenarios) if (!('strict' in s[1])) s[1].strict = false;
 
 const canon = (rows) => JSON.stringify(rows.map((r) => Object.fromEntries(Object.entries(r).sort())));
 let failed = 0;

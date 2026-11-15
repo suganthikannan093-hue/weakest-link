@@ -26,23 +26,29 @@ DEFAULT_STORE = ROOT / "data" / "work" / "my-bag.rl"
 QUERIES = ROOT / "queries"
 AGENT_CYPHER = ROOT / "agent" / "cypher"
 
+# Every read recipe takes $strict (required by Relate: pass false for the default). true ignores
+# links whose source only confirms a feature, not its rate (confidence 'low').
 RECIPES = [
     # name, kind, file, description, example params
     ("reach", "read", QUERIES / "reach.cypher",
      "Can the laptop drive the venue's display at a mode with the bag plus what the venue provides? "
      "Returns ok, the shortest working chain, its weakest link and every hop's source and confidence.",
-     {"laptop": "mba-m2", "venue": "meetup-hall", "bag": ["adp-apple-av-a1621"], "mode": "4K60"}),
+     {"laptop": "mba-m2", "venue": "meetup-hall", "bag": ["adp-apple-av-a1621"], "mode": "4K60", "strict": False}),
     ("chains", "read", QUERIES / "chains.cypher",
      "Every distinct chain from the laptop to the venue's display, widest first, with the weakest link, "
      "its standard, confidence and source, and the best mode the chain carries.",
-     {"laptop": "mba-m2", "venue": "meetup-hall", "bag": ["adp-apple-av-a1621"]}),
+     {"laptop": "mba-m2", "venue": "meetup-hall", "bag": ["adp-apple-av-a1621"], "strict": False}),
     ("best_fix", "read", QUERIES / "best_fix.cypher",
      "The single purchasable item that makes the mode work at the most failing venues in $venues.",
-     {"laptop": "mba-m2", "bag": ["adp-apple-av-a1621"], "venues": ["meetup-hall", "studio-tv"], "mode": "4K60"}),
+     {"laptop": "mba-m2", "bag": ["adp-apple-av-a1621"], "venues": ["meetup-hall", "studio-tv"], "mode": "4K60", "strict": False}),
     ("power", "read", QUERIES / "power.cypher",
      "For each charger in the bag, the best charger-cable-laptop chain in watts and a verdict "
      "(fast-charge, full-speed, below-recommended, unknown).",
-     {"laptop": "mba-m2", "bag": ["chg-apple-70w", "cable-usbc-usb2-60w"]}),
+     {"laptop": "mba-m2", "bag": ["chg-apple-70w", "cable-usbc-usb2-60w"], "strict": False}),
+    ("charge_fix", "read", QUERIES / "charge_fix.cypher",
+     "The one purchase (a cable, a charger, a charger + cable pair if the bag has no power source, or a dock) "
+     "that gets the most power into the laptop's battery, ranked by the verdict it reaches, then the cheapest kind.",
+     {"laptop": "mba-m2", "bag": ["chg-apple-70w", "cable-usbc-usb2-60w"], "strict": False}),
     ("ingest_venue", "write", AGENT_CYPHER / "ingest_venue.cypher",
      "Write a venue (from an email or web page) as Venue + display Item + ports + cited VIDEO edges. "
      "Idempotent per venue id. Param $v follows agent/schemas/venue.schema.json.",

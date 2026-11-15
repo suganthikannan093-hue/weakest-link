@@ -183,3 +183,55 @@ test('no source link in the UI points at the repo', async ({ page }) => {
   expect(hrefs.length).toBeGreaterThan(3);
   for (const h of hrefs) expect(h).not.toContain('github.com');
 });
+
+test('strict mode ignores a low-confidence link and says so', async ({ page }) => {
+  const errors = await open(page, '#l=gen-laptop-budget&b=adp-hdmi-vga&v=college-seminar&m=720p60&t=connect');
+  await expect(verdict(page)).toHaveAttribute('data-verdict', 'ok');
+  await page.getByRole('checkbox', { name: 'Strict mode' }).check();
+  await expect(page.locator('#panel-connect .strict-note').first()).toContainText('Strict mode is on');
+  await expect(verdict(page)).not.toHaveAttribute('data-verdict', 'ok');
+  await expect(page.locator('#panel-connect')).toContainText('Without strict mode this would work');
+  await expect(page).toHaveURL(/[#&]s=1/);
+  await page.reload();
+  await expect(page.locator('body')).toHaveAttribute('data-ready', 'true');
+  await expect(page.getByRole('checkbox', { name: 'Strict mode' })).toBeChecked();
+  expect(errors).toEqual([]);
+});
+
+test('charging: best purchase when the bag cannot fast-charge', async ({ page }, info) => {
+  const errors = await open(page, '#l=iphone-15&b=&v=meetup-hall&m=1080p60&t=power');
+  const fix = page.locator('#panel-power .charge-fix');
+  await expect(fix).toContainText('Best purchase for charging');
+  await expect(fix.locator('.fix-main').first()).toContainText('+');
+  await fix.getByRole('button', { name: 'Add to bag' }).first().click();
+  await expect(page.locator('#panel-power .power-card').first()).toBeVisible();
+  // thin cable on a big charger: the cable to buy fixes it
+  await page.goto('/#l=mbp14-m3&b=chg-apple-140w,cable-usbc-usb2-60w&v=meetup-hall&m=4K60&t=power');
+  await page.reload();
+  await expect(page.locator('body')).toHaveAttribute('data-ready', 'true');
+  await expect(page.locator('#panel-power .charge-fix')).toContainText('fast-charges');
+  if (info.project.name === 'desktop') await page.screenshot({ path: `${SHOTS}/desktop-charging-fix.png`, fullPage: true });
+  await page.locator('#panel-power .charge-fix').getByRole('button', { name: 'Add to bag' }).first().click();
+  await expect(page.locator('#panel-power .verdict').first()).toContainText('Fast-charges');
+  await expect(page.locator('#panel-power .charge-fix')).toHaveCount(0);
+  expect(errors).toEqual([]);
+});
+
+test('first visit shows a short intro that stays dismissed', async ({ page }) => {
+  await open(page);
+  const intro = page.locator('#intro');
+  await expect(intro).toBeVisible();
+  await intro.getByRole('button', { name: 'Got it' }).click();
+  await expect(intro).toBeHidden();
+  await page.goto('/');
+  await expect(page.locator('body')).toHaveAttribute('data-ready', 'true');
+  await expect(intro).toBeHidden();
+});
+
+test('empty states: an empty bag and no venues get a clear next step', async ({ page }) => {
+  await open(page, '#l=mba-m2&b=&v=meetup-hall&m=4K60&t=connect');
+  await expect(page.locator('#panel-connect')).toContainText('Your bag is empty');
+  await page.getByRole('tab', { name: /Best purchase/ }).click();
+  for (const box of await page.locator('#panel-fix .venue-pick input[type=checkbox]').all()) await box.uncheck();
+  await expect(verdict(page, 'fix')).toContainText('Pick at least one venue');
+});

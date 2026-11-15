@@ -57,6 +57,7 @@ def main(argv=None):
     ap.add_argument("--venue-json", help="a venue already extracted (for example by an LLM) instead of --email")
     ap.add_argument("--spec", default=str(EX / "spec-page-examplelabs-usbc-hdmi.html"))
     ap.add_argument("--profile", default=str(EX / "my-profile.json"))
+    ap.add_argument("--strict", action="store_true", help="ignore low-confidence links in every query")
     ap.add_argument("--store", help="writable store path (default: a fresh temp copy, deleted afterwards)")
     ap.add_argument("--pace", type=float, default=0.0, help="seconds to pause between steps")
     ap.add_argument("--json", action="store_true", help="print only a JSON summary")
@@ -70,6 +71,8 @@ def main(argv=None):
         tmpdir = tempfile.mkdtemp(prefix="weakest-link-demo-")
         store = os.path.join(tmpdir, "my-bag.rl")
     profile = json.loads(Path(a.profile).read_text(encoding="utf-8"))
+    if a.strict:
+        profile["strict"] = True
     summary = {"profile": profile}
     t0 = time.perf_counter()
     try:
@@ -141,13 +144,13 @@ def main(argv=None):
             summary["catalog_untouched"] = n_cat == 0 and refused
 
             out.step(5, f"Ask: what do I pack for {venue['name']}, and what one thing should I buy?")
-            for q in ("reach", "chains", "best_fix", "power"):
-                out.tool("my-bag", "read_cypher", f"recipe {q}")
+            for q in ("reach", "chains", "best_fix", "power", "charge_fix"):
+                out.tool("my-bag", "read_cypher", f"recipe {q}" + (" (strict)" if profile.get("strict") else ""))
             plan = A.plan_trip(mine, profile, venue["id"], d["max_mode"], considering=item["id"])
             lines = A.describe(mine, plan)
             out.step(6, "Answer")
             for ln in lines:
-                out.say(ln, "1" if ln.startswith(("Buy", "Pack")) else None)
+                out.say(ln, "1" if ln.startswith(("Buy", "Pack", "For charging")) else None)
             summary["plan"] = {
                 "reach_best_ok": plan["reach_best"]["ok"],
                 "reach_target_ok": plan["reach_target"]["ok"],
@@ -161,6 +164,8 @@ def main(argv=None):
                 "after_ok": {v: r["ok"] for v, r in plan["after"].items()},
                 "pack": plan["pack"], "leave": plan["leave"],
                 "charging": plan["power"][0]["verdict"] if plan["power"] else None,
+                "charge_fix": plan["charge_fix"]["buy"] if plan.get("charge_fix") else None,
+                "strict": plan["strict"],
             }
             summary["answer"] = lines
         summary["seconds"] = round(time.perf_counter() - t0, 2)

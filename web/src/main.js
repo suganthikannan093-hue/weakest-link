@@ -1,5 +1,5 @@
 import './style.css';
-import { loadEngine, catalog, query, run, setCustomDisplay, QUERIES } from './engine.js';
+import { loadEngine, catalog, query as rawQuery, run, setCustomDisplay, QUERIES } from './engine.js';
 
 // ---------- constants & helpers ----------
 const MODE_LABEL = { '720p60': '720p · 60 Hz', '1080p60': '1080p · 60 Hz', '1440p60': '1440p · 60 Hz', '4K30': '4K · 30 Hz', '4K60': '4K · 60 Hz' };
@@ -8,6 +8,7 @@ const STD_LABEL = {
   'HDMI-Standard-cable': 'Standard HDMI (720p/1080i)', 'HDMI-1.4': 'HDMI 1.4', 'HDMI-2.0': 'HDMI 2.0', 'HDMI-2.1-FRL': 'HDMI 2.1',
   'DP-1.2-HBR2': 'DisplayPort 1.2', 'DP-1.4-HBR3': 'DisplayPort 1.4', 'DP-2.1-UHBR10': 'DisplayPort UHBR10',
   'DP-Alt-4L-HBR3': 'USB-C DisplayPort, 4 lanes', 'DP-Alt-2L-HBR3': 'USB-C DisplayPort, 2 lanes', 'VGA-1200p': 'VGA (analog)',
+  'DP-Alt-4L-HBR2': 'USB-C DisplayPort 1.2, 4 lanes', 'DP-Alt-2L-HBR2': 'USB-C DisplayPort 1.2, 2 lanes', 'DP-2.1-UHBR13.5': 'DisplayPort UHBR13.5',
   'USB-PD-3A': 'USB PD 3 A', 'USB-PD-5A': 'USB PD 5 A', 'USB-PD-EPR': 'USB PD 240 W EPR',
 };
 const CONF_LABEL = { high: 'High confidence', medium: 'Medium confidence', low: 'Low confidence', user: 'You entered this' };
@@ -45,6 +46,8 @@ const fmt = (n, d = 2) => (n == null ? '–' : Number(n).toLocaleString('en', { 
 const icon = (kind, cls = 'icon') => `<svg class="${cls}" viewBox="0 0 24 24" aria-hidden="true">${ICON[kind] || ICON.adapter}</svg>`;
 
 let CAT = null;
+// every query honours the strict-mode toggle
+const query = (name, params) => rawQuery(name, { ...params, strict: state.strict });
 let ITEM = new Map();
 let VENUE = new Map();
 let MODE = new Map();
@@ -52,6 +55,7 @@ let MODE = new Map();
 const state = {
   laptop: 'mba-m2', bag: new Set(EXAMPLES[0].state.bag), venue: 'meetup-hall', mode: '4K60', tab: 'connect',
   venues: null, // null = all venues (for best purchase)
+  strict: false, // ignore low-confidence links
   custom: { name: 'Venue projector', inputs: ['hdmi14', 'vga'], max: '1080p60', cable: '' },
 };
 
@@ -69,6 +73,7 @@ function readHash() {
   if (p.has('v')) state.venue = p.get('v');
   if (p.has('m')) state.mode = p.get('m');
   if (p.has('t')) state.tab = p.get('t');
+  if (p.has('s')) state.strict = p.get('s') === '1';
   if (p.has('vs')) state.venues = new Set(p.get('vs').split(',').filter(Boolean));
   if (p.has('c')) {
     try { Object.assign(state.custom, JSON.parse(p.get('c'))); } catch { /* ignore */ }
@@ -78,6 +83,7 @@ function writeHash() {
   const p = new URLSearchParams();
   p.set('l', state.laptop); p.set('b', [...state.bag].join(',')); p.set('v', state.venue); p.set('m', state.mode); p.set('t', state.tab);
   if (state.venues) p.set('vs', [...state.venues].join(','));
+  if (state.strict) p.set('s', '1');
   if (state.venue === 'custom') p.set('c', JSON.stringify(state.custom));
   history.replaceState(null, '', '#' + p.toString());
 }
@@ -111,6 +117,7 @@ function renderControls() {
   $('#custom-cable').innerHTML = '<option value="">None</option>' + CAT.items.filter((i) => i.kind === 'cable')
     .map((i) => `<option value="${i.id}">${esc(i.name)}</option>`).join('');
   $('#custom-cable').value = state.custom.cable;
+  $('#strict').checked = state.strict;
 
   renderBag();
   renderSetupInfo();
@@ -140,7 +147,7 @@ function renderSetupInfo() {
     $('#venue-desc').innerHTML = `${esc(v.description)}<br><span class="provides">At the venue: ${v.provides.map((id) => esc(shortName(id))).join(' · ')}</span>`;
   }
   const venueName = state.venue === 'custom' ? state.custom.name : VENUE.get(state.venue)?.name;
-  $('#setup-summary span').textContent = `${shortName(state.laptop)} · ${state.bag.size} in bag · ${venueName} · ${MODE_LABEL[state.mode]}`;
+  $('#setup-summary span').textContent = `${shortName(state.laptop)} · ${state.bag.size} in bag · ${venueName} · ${MODE_LABEL[state.mode]}${state.strict ? ' · strict' : ''}`;
 }
 
 function applyCustom() {
@@ -203,6 +210,8 @@ function verdictCard(kind, title, body) {
     <div><p class="v-title">${title}</p>${body ? `<p class="v-body">${body}</p>` : ''}</div></div>`;
 }
 
+const strictNote = () => (state.strict ? '<p class="strict-note">Strict mode is on: low-confidence links are ignored.</p>' : '');
+
 const listNames = (ids) => ids.map((id) => `<strong>${esc(shortName(id))}</strong>`).join(' → ');
 
 // ---------- Connect tab ----------
@@ -250,7 +259,12 @@ function renderConnect() {
     verdict = verdictCard('bad', `No. Nothing in your bag connects your ${deviceWord()} to this display.`,
       `Your ${esc(lap)} has ${esc(ITEM.get(state.laptop).connectors.filter((x) => x !== 'MagSafe3').join(' and '))}; the ${esc(display)} takes
        ${esc(dispConn.join(' or ') || 'nothing we know')}.${venueItems.length > 1 ? ` The venue provides ${venueItems.filter((i) => i !== displayId).map((i) => esc(shortName(i))).join(', ')}.` : ''}
-       ${bag.some((id) => id.startsWith('cable-usbc-usb2')) ? ' USB 2.0 charge cables carry no video.' : ''}`);
+       ${bag.some((id) => id.startsWith('cable-usbc-usb2')) ? ' USB 2.0 charge cables carry no video.' : ''}
+       ${!bag.length ? ' <strong>Your bag is empty.</strong> Tick the adapters and cables you own, or try an example above.' : ''}`);
+  }
+  if (state.strict && reach && !reach.ok) {
+    const loose = rawQuery('reach', { ...p1, strict: false }).rows[0];
+    if (loose?.ok) verdict += `<p class="strict-note">Without strict mode this would work, but only through a low-confidence link (${esc(loose.hops.filter((h) => h.confidence === 'low').map((h) => shortName(h.item)).join(', '))}). Check that link's source before you rely on it.</p>`;
   }
 
   if (reach && !reach.ok && reach.panel_ok) {
@@ -273,7 +287,7 @@ function renderConnect() {
       ${others.slice(0, 8).map((ch) => `<li>${listNames(ch.chain)} <span class="tag ${ch.best_mode && MODE.get(ch.best_mode).rank >= mode.rank ? 'ok' : 'warn'}">${esc(MODE_LABEL[ch.best_mode] || 'no picture')}</span>
         <span class="hint">weakest: ${esc(shortName(ch.weakest_item))}, ${fmt(ch.bottleneck_gbps)} Gbps</span></li>`).join('')}</ul></details>` : '';
 
-  $('#panel-connect').innerHTML = verdict + diagram + fixHtml + othersHtml + cypherDetails(runs);
+  $('#panel-connect').innerHTML = strictNote() + verdict + diagram + fixHtml + othersHtml + cypherDetails(runs);
 }
 
 // ---------- Best purchase tab ----------
@@ -291,7 +305,7 @@ function renderFix() {
   const failing = today.filter((t) => !t.ok);
 
   let body;
-  if (!selected.length) body = '<p class="hint">Pick at least one venue.</p>';
+  if (!selected.length) body = verdictCard('warn', 'Pick at least one venue above.', 'The best purchase is the one item that makes the most of your venues work.');
   else if (!failing.length) body = verdictCard('ok', `Nothing to buy. All ${selected.length} venues already work at ${MODE_PHRASE[state.mode]}.`, '');
   else if (!f.rows.length) {
     body = verdictCard('bad', `No single purchase helps at ${MODE_PHRASE[state.mode]}.`,
@@ -318,26 +332,52 @@ function renderFix() {
       ${all.map((v) => `<label class="check"><input type="checkbox" value="${v.id}" ${selected.includes(v.id) ? 'checked' : ''} /> ${esc(v.name)}
         <span class="tag ${today.find((t) => t.id === v.id)?.ok ? 'ok' : 'bad'}">${today.find((t) => t.id === v.id) ? (today.find((t) => t.id === v.id).ok ? 'works' : 'fails') : ''}</span></label>`).join('')}
     </div></fieldset>
-    ${body}
+    ${strictNote()}${body}
     ${selected.length ? cypherDetails([{ name: 'best_fix', params, ms: f.ms }]) : ''}`;
 }
 
 // ---------- Charging tab ----------
+const VERDICT_PHRASE = { 'fast-charge': 'fast-charges', 'full-speed': 'charges at full speed', 'below-recommended': 'charges, but below the recommended wattage', unknown: 'charges' };
+
+function chargeFixCard(lap, bag, runs) {
+  const params = { laptop: state.laptop, bag };
+  const f = query('charge_fix', params);
+  runs.push({ name: 'charge_fix', params, ms: f.ms });
+  if (!f.rows.length) return '';
+  const [top] = f.rows;
+  const rankOf = { 'fast-charge': 3, 'full-speed': 2, unknown: 1, 'below-recommended': 1 };
+  const isDock = (r) => r.buy.length === 1 && ITEM.get(r.buy[0])?.kind === 'adapter';
+  // a cheaper option one verdict level down, if the top pick is a dock or a two-item kit
+  const alt = (isDock(top) || top.buy.length > 1)
+    ? f.rows.find((r) => !isDock(r) && (r.buy.length < top.buy.length || isDock(top)) && rankOf[r.verdict] < rankOf[top.verdict] && rankOf[r.verdict] >= 2)
+    : null;
+  const same = f.rows.filter((r) => r !== top && r.verdict === top.verdict && r.buy.length === top.buy.length && !isDock(r)).slice(0, 3);
+  const line = (r) => `<p class="fix-main">${icon(ITEM.get(r.buy[0])?.kind)}<span><strong>${r.names.map(esc).join(' + ')}</strong>
+      <span class="hint"> ${VERDICT_PHRASE[r.verdict]} at up to ${fmt(r.capacity_w)} W${r.capacity_now_w != null ? ` (today ${fmt(r.capacity_now_w)} W)` : ''}</span></span>
+      <button type="button" class="btn small" data-add="${esc(r.buy.join(','))}">Add to bag</button></p>`;
+  return `<div class="fix charge-fix"><p class="eyebrow">Best purchase for charging</p>${line(top)}
+    ${alt ? `<p class="eyebrow sub">Smaller purchase</p>${line(alt)}` : ''}
+    ${same.length ? `<p class="hint">Also works: ${same.map((r) => esc(r.names.map((n) => n).join(' + '))).join('; ')}.</p>` : ''}</div>`;
+}
+
 function renderPower() {
   const lap = ITEM.get(state.laptop);
   const bag = [...state.bag];
   const chargers = bag.filter((id) => ITEM.get(id)?.power_source);
   const params = { laptop: state.laptop, bag };
   const p = query('power', params);
+  const runs = [{ name: 'power', params, ms: p.ms }];
   let body = '';
-  if (!chargers.length) {
-    body = verdictCard('warn', 'Add a charger to your bag to check charging.', `Pick one below (a dock or USB-C monitor with its own power supply also counts). You will also need a cable that fits between it and the ${deviceWord()}.`)
-      + `<div class="chips">${CAT.items.filter((i) => i.kind === 'charger').map((i) => `<button type="button" class="chip as-btn" data-add="${i.id}">${icon('charger', 'icon sm')}<span>${esc(i.name)}</span></button>`).join('')}</div>`;
-  } else if (!lap.charges) {
-    body = verdictCard('bad', `Your ${esc(shortName(state.laptop))} doesn't charge over USB-C.`, 'It charges from its own barrel-jack adapter. Its USB-C port is data only.');
+  if (!lap.charges) {
+    body = verdictCard('bad', `Your ${esc(shortName(state.laptop))} doesn't charge over USB-C.`, 'It charges from its own barrel-jack adapter. Its USB-C port is data only, so bring that adapter.');
+  } else if (!chargers.length) {
+    body = verdictCard('warn', 'Nothing in your bag can charge it yet.', `Add a charger and a cable that fits your ${deviceWord()} (a dock or USB-C monitor with its own power supply also counts). Here is what we would buy:`)
+      + chargeFixCard(lap, bag, runs)
+      + `<details class="others"><summary>Or pick a charger you own</summary><div class="chips">${CAT.items.filter((i) => i.kind === 'charger').map((i) => `<button type="button" class="chip as-btn" data-add="${i.id}">${icon('charger', 'icon sm')}<span>${esc(i.name)}</span></button>`).join('')}</div></details>`;
   } else if (!p.rows.length) {
     body = verdictCard('bad', `No way to plug your charger into your ${deviceWord()}.`,
-      `None of the cables in your bag fits between ${chargers.map((c) => esc(shortName(c))).join(' / ')} and your ${deviceWord()}. You need a USB-C to USB-C cable${lap.connectors.includes('MagSafe3') ? ' or a USB-C to MagSafe 3 cable' : ''}.`);
+      `None of the cables in your bag fits between ${chargers.map((c) => esc(shortName(c))).join(' / ')} and your ${deviceWord()}. You need a USB-C to USB-C cable${lap.connectors.includes('MagSafe3') ? ' or a USB-C to MagSafe 3 cable' : ''}.`)
+      + chargeFixCard(lap, bag, runs);
   } else {
     body = p.rows.map((r) => {
       const v = {
@@ -353,8 +393,9 @@ function renderPower() {
     const charging = new Set(p.rows.map((r) => r.charger));
     const unplugged = chargers.filter((c) => !charging.has(c));
     if (unplugged.length) body += `<p class="hint">No cable in your bag fits ${unplugged.map((c) => esc(shortName(c))).join(', ')} to this ${deviceWord()}.</p>`;
+    if (p.rows[0].verdict !== 'fast-charge') body += chargeFixCard(lap, bag, runs);
   }
-  $('#panel-power').innerHTML = body + cypherDetails([{ name: 'power', params, ms: p.ms }]);
+  $('#panel-power').innerHTML = strictNote() + body + cypherDetails(runs);
 }
 
 // ---------- orchestration ----------
@@ -408,6 +449,12 @@ function wire() {
     renderResults();
   });
   $('#bag-search').addEventListener('input', renderBag);
+  $('#strict').addEventListener('change', (e) => { state.strict = e.target.checked; renderResults(); });
+  $('#intro-close').addEventListener('click', () => {
+    $('#intro').hidden = true;
+    try { localStorage.setItem('wl-intro-seen', '1'); } catch { /* private mode */ }
+    $('#laptop').focus();
+  });
   $('#bag-clear').addEventListener('click', () => { state.bag.clear(); renderBag(); renderResults(); });
   const onCustom = () => {
     state.custom.name = $('#custom-name').value.trim() || 'My display';
@@ -432,10 +479,11 @@ function wire() {
   $('#results').addEventListener('click', (e) => {
     const add = e.target.closest('[data-add]');
     if (!add) return;
-    state.bag.add(add.dataset.add);
+    const ids = add.dataset.add.split(',');
+    ids.forEach((id) => state.bag.add(id));
     renderBag();
     renderResults();
-    $('#engine-status').textContent = `Added ${shortName(add.dataset.add)} to your bag.`;
+    $('#engine-status').textContent = `Added ${ids.map(shortName).join(' and ')} to your bag.`;
   });
   $('#panel-fix').addEventListener('change', (e) => {
     if (e.target.type !== 'checkbox') return;
@@ -458,8 +506,10 @@ async function main() {
     ITEM = new Map(CAT.items.map((i) => [i.id, i]));
     VENUE = new Map(CAT.venues.map((v) => [v.id, v]));
     MODE = new Map(CAT.modes.map((m) => [m.id, m]));
+    const firstVisit = !location.hash && !(() => { try { return localStorage.getItem('wl-intro-seen'); } catch { return null; } })();
     readHash();
     sanitizeState();
+    $('#intro').hidden = !firstVisit;
     if (state.venue === 'custom') applyCustom();
     renderControls();
     wire();
@@ -469,7 +519,12 @@ async function main() {
     document.body.dataset.ready = 'true';
   } catch (e) {
     console.error(e);
-    $('#engine-status').textContent = `Could not start the graph engine: ${e.message}`;
+    $('#engine-status').textContent = 'The graph engine did not start.';
+    $('#panel-connect').innerHTML = verdictCard('bad', 'The graph engine could not start in this browser.',
+      `${esc(e.message)}. Weakest Link runs Relate as WebAssembly, so it needs a recent Chrome, Edge, Firefox or Safari with JavaScript on.
+       You can also run every query from the command line: see the README.`)
+      + '<p><button type="button" class="btn small" onclick="location.reload()">Try again</button></p>';
+    $('#app').setAttribute('aria-busy', 'false');
     document.body.dataset.ready = 'error';
   }
 }

@@ -9,8 +9,9 @@ import reachQ from '../../queries/reach.cypher?raw';
 import chainsQ from '../../queries/chains.cypher?raw';
 import bestFixQ from '../../queries/best_fix.cypher?raw';
 import powerQ from '../../queries/power.cypher?raw';
+import chargeFixQ from '../../queries/charge_fix.cypher?raw';
 
-export const QUERIES = { reach: reachQ, chains: chainsQ, best_fix: bestFixQ, power: powerQ };
+export const QUERIES = { reach: reachQ, chains: chainsQ, best_fix: bestFixQ, power: powerQ, charge_fix: chargeFixQ };
 
 let db = null;
 
@@ -40,7 +41,7 @@ export function run(cypher, params = {}) {
 
 export function query(name, params) {
   const t0 = performance.now();
-  const rows = run(QUERIES[name], params);
+  const rows = run(QUERIES[name], { strict: false, ...params });
   return { rows, ms: performance.now() - t0 };
 }
 

@@ -20,14 +20,16 @@ Example `parameters`:
   "bag": [
     "adp-apple-av-a1621"
   ],
-  "mode": "4K60"
+  "mode": "4K60",
+  "strict": false
 }
 ```
 
 ```cypher
 // Q1 reachability: can $laptop drive the display at venue $venue at $mode, using only
 // items in $bag plus what the venue provides? Returns the shortest working chain and its bottleneck.
-// Params: $laptop (Item.id), $venue (Venue.id), $bag (list of Item.id), $mode (Mode.id)
+// Params: $laptop (Item.id), $venue (Venue.id), $bag (list of Item.id), $mode (Mode.id),
+//         $strict (true = ignore links whose source only confirms the feature, confidence 'low')
 MATCH (m:Mode {id: $mode}), (v:Venue {id: $venue})
 MATCH (:Item {id: $laptop})-[:HAS_ENDPOINT]->(src:Endpoint {role: 'video-source'})
 MATCH (v)-[:PROVIDES]->(d:Item {kind: 'display'})-[:HAS_ENDPOINT]->(sink:Endpoint {role: 'video-sink'})
@@ -35,9 +37,9 @@ WITH m, v, d, src, sink,
      [(v)-[:PROVIDES]->(i:Item) | i.id] + $bag + [$laptop] AS have,
      EXISTS { (sink)-[:SUPPORTS_MODE]->(m) } AS panel_ok
 OPTIONAL MATCH p = SHORTEST 1
-  (src)-[f:VIDEO WHERE f.gbps >= m.gbps]->()
+  (src)-[f:VIDEO WHERE f.gbps >= m.gbps AND (NOT $strict OR f.confidence <> 'low')]->()
   (()-[mt:MATES WHERE mt.from_item IN have AND mt.to_item IN have]->()
-     -[vv:VIDEO WHERE vv.item IN have AND vv.gbps >= m.gbps]->()){1,6}
+     -[vv:VIDEO WHERE vv.item IN have AND vv.gbps >= m.gbps AND (NOT $strict OR vv.confidence <> 'low')]->()){1,6}
   (sink)
 WITH m, v, d, panel_ok, p, [r IN relationships(p) WHERE type(r) = 'VIDEO'] AS links
 WITH m, v, d, panel_ok, p, links,
@@ -66,7 +68,8 @@ Example `parameters`:
   "venue": "meetup-hall",
   "bag": [
     "adp-apple-av-a1621"
-  ]
+  ],
+  "strict": false
 }
 ```
 
@@ -74,14 +77,14 @@ Example `parameters`:
 // Q2 bottleneck analysis: every physically valid chain from $laptop to the venue display using
 // $bag + venue items, widest first. For each chain: the weakest link (lowest-capacity edge),
 // its standard, citation and confidence, and the best mode the chain can carry.
-// Params: $laptop, $venue, $bag
+// Params: $laptop, $venue, $bag, $strict (true = ignore low-confidence links)
 MATCH (v:Venue {id: $venue})
 MATCH (:Item {id: $laptop})-[:HAS_ENDPOINT]->(src:Endpoint {role: 'video-source'})
 MATCH (v)-[:PROVIDES]->(d:Item {kind: 'display'})-[:HAS_ENDPOINT]->(sink:Endpoint {role: 'video-sink'})
 WITH v, d, src, sink, [(v)-[:PROVIDES]->(i:Item) | i.id] + $bag + [$laptop] AS have
-MATCH p = (src)-[:VIDEO]->()
+MATCH p = (src)-[f:VIDEO WHERE NOT $strict OR f.confidence <> 'low']->()
   (()-[mt:MATES WHERE mt.from_item IN have AND mt.to_item IN have]->()
-     -[vv:VIDEO WHERE vv.item IN have]->()){1,6}
+     -[vv:VIDEO WHERE vv.item IN have AND (NOT $strict OR vv.confidence <> 'low')]->()){1,6}
   (sink)
 // a physical item can only be used once in a chain
 WHERE all(k IN range(0, size(nodes(p)) - 2) WHERE NOT nodes(p)[k] IN nodes(p)[k + 1..])
@@ -122,14 +125,15 @@ Example `parameters`:
     "meetup-hall",
     "studio-tv"
   ],
-  "mode": "4K60"
+  "mode": "4K60",
+  "strict": false
 }
 ```
 
 ```cypher
 // Q3 best single purchase: across the venues in $venues, which ONE purchasable item, added to
 // $bag, makes $mode work at the most venues that fail today?
-// Params: $laptop, $bag, $venues (list of Venue.id), $mode
+// Params: $laptop, $bag, $venues (list of Venue.id), $mode, $strict (true = ignore low-confidence links)
 // Written without CALL subqueries so that Relate's MCP read_cypher tool accepts it: each
 // OPTIONAL MATCH ... SHORTEST 1 runs once per incoming row.
 MATCH (m:Mode {id: $mode})
@@ -140,9 +144,9 @@ WITH m, src, v, sink,
      [(v)-[:PROVIDES]->(i:Item) | i.id] + $bag + [$laptop] AS have,
      EXISTS { (sink)-[:SUPPORTS_MODE]->(m) } AS panel_ok
 OPTIONAL MATCH p = SHORTEST 1
-  (src)-[f:VIDEO WHERE f.gbps >= m.gbps]->()
+  (src)-[f:VIDEO WHERE f.gbps >= m.gbps AND (NOT $strict OR f.confidence <> 'low')]->()
   (()-[mt:MATES WHERE mt.from_item IN have AND mt.to_item IN have]->()
-     -[vv:VIDEO WHERE vv.item IN have AND vv.gbps >= m.gbps]->()){1,6}
+     -[vv:VIDEO WHERE vv.item IN have AND vv.gbps >= m.gbps AND (NOT $strict OR vv.confidence <> 'low')]->()){1,6}
   (sink)
 WITH m, src, v, sink, have, panel_ok AND p IS NOT NULL AS ok_now
 WITH m, src, collect(CASE WHEN ok_now THEN null ELSE {venue: v.id, sink: sink, have: have, panel_ok: EXISTS { (sink)-[:SUPPORTS_MODE]->(m) }} END) AS failing,
@@ -151,9 +155,9 @@ UNWIND failing AS fv
 MATCH (c:Item {purchasable: true}) WHERE NOT c.id IN fv.have
 WITH m, src, failing, ok_venues, fv, c, fv.sink AS sink, fv.have + [c.id] AS have2
 OPTIONAL MATCH p = SHORTEST 1
-  (src)-[f:VIDEO WHERE f.gbps >= m.gbps]->()
+  (src)-[f:VIDEO WHERE f.gbps >= m.gbps AND (NOT $strict OR f.confidence <> 'low')]->()
   (()-[mt:MATES WHERE mt.from_item IN have2 AND mt.to_item IN have2]->()
-     -[vv:VIDEO WHERE vv.item IN have2 AND vv.gbps >= m.gbps]->()){1,6}
+     -[vv:VIDEO WHERE vv.item IN have2 AND vv.gbps >= m.gbps AND (NOT $strict OR vv.confidence <> 'low')]->()){1,6}
   (sink)
 WITH failing, ok_venues, c, fv, p IS NOT NULL AND fv.panel_ok AS fixed
 WITH failing, ok_venues, c, collect(CASE WHEN fixed THEN fv.venue END) AS fixed_venues
@@ -176,7 +180,8 @@ Example `parameters`:
   "bag": [
     "chg-apple-70w",
     "cable-usbc-usb2-60w"
-  ]
+  ],
+  "strict": false
 }
 ```
 
@@ -185,14 +190,14 @@ Example `parameters`:
 // using cables in $bag, the delivered wattage (min over the chain), the weakest link, and a verdict
 // against the laptop's documented recommended / fast-charge wattage. capacity_w is what the chain
 // can carry; the laptop itself draws only what it needs.
-// Params: $laptop, $bag
+// Params: $laptop, $bag, $strict (true = ignore low-confidence links)
 MATCH (lap:Item {id: $laptop})-[:HAS_ENDPOINT]->(bat:Endpoint {role: 'power-sink'})
 MATCH (chg:Item)-[:HAS_ENDPOINT]->(psu:Endpoint {role: 'power-source'})
 WHERE chg.id IN $bag
 WITH lap, bat, chg, psu, $bag + [$laptop] AS have
-MATCH p = (psu)-[:POWER]->()
+MATCH p = (psu)-[p0:POWER WHERE NOT $strict OR p0.confidence <> 'low']->()
   (()-[mt:MATES WHERE mt.from_item IN have AND mt.to_item IN have]->()
-     -[pw:POWER WHERE pw.item IN have]->()){1,4}
+     -[pw:POWER WHERE pw.item IN have AND (NOT $strict OR pw.confidence <> 'low')]->()){1,4}
   (bat)
 WHERE all(k IN range(0, size(nodes(p)) - 2) WHERE NOT nodes(p)[k] IN nodes(p)[k + 1..])
 WITH lap, chg, [r IN relationships(p) WHERE type(r) = 'POWER'] AS links,
@@ -215,6 +220,87 @@ RETURN chg.id AS charger, best.chain AS chain, best.watts AS capacity_w,
        END AS verdict,
        best.hops AS hops, best.joints AS joints
 ORDER BY capacity_w DESC
+```
+
+## `charge_fix` (read)
+
+The one purchase (a cable, a charger, a charger + cable pair if the bag has no power source, or a dock) that gets the most power into the laptop's battery, ranked by the verdict it reaches, then the cheapest kind.
+
+Example `parameters`:
+
+```json
+{
+  "laptop": "mba-m2",
+  "bag": [
+    "chg-apple-70w",
+    "cable-usbc-usb2-60w"
+  ],
+  "strict": false
+}
+```
+
+```cypher
+// Q5 best purchase for charging: which ONE purchasable item (or, if the bag has no power source
+// at all, which charger + cable pair) gets the most power into $laptop's battery? Ranked by the
+// verdict it reaches (fast-charge > full-speed > below-recommended), then a cable, a charger, a
+// charger + cable pair, and a dock last, then the smallest wattage that does the job (usually the
+// cheapest). Only purchases that beat what the bag delivers today are returned.
+// Params: $laptop, $bag, $strict (true = ignore low-confidence links)
+// Written without CALL subqueries so that Relate's MCP read_cypher tool accepts it.
+MATCH (lap:Item {id: $laptop})-[:HAS_ENDPOINT]->(bat:Endpoint {role: 'power-sink'})
+WITH lap, bat, $bag + [$laptop] AS have
+OPTIONAL MATCH p = (psu:Endpoint {role: 'power-source'})-[p0:POWER WHERE NOT $strict OR p0.confidence <> 'low']->()
+  (()-[mt:MATES WHERE mt.from_item IN have AND mt.to_item IN have]->()
+     -[pw:POWER WHERE pw.item IN have AND (NOT $strict OR pw.confidence <> 'low')]->()){1,4}
+  (bat)
+WHERE psu.item IN have AND all(k IN range(0, size(nodes(p)) - 2) WHERE NOT nodes(p)[k] IN nodes(p)[k + 1..])
+WITH lap, bat, have, p,
+     reduce(lo = 1.0e9, r IN [x IN relationships(p) WHERE type(x) = 'POWER'] | CASE WHEN r.watts IS NOT NULL AND r.watts < lo THEN r.watts ELSE lo END) AS w
+WITH lap, bat, have, max(CASE WHEN p IS NULL THEN null ELSE w END) AS now_w
+OPTIONAL MATCH (src:Item)-[:HAS_ENDPOINT]->(:Endpoint {role: 'power-source'}) WHERE src.id IN have
+WITH lap, bat, have, now_w, count(src) > 0 AS has_source
+MATCH (c:Item {purchasable: true}) WHERE NOT c.id IN have AND c.kind IN ['cable', 'charger', 'adapter']
+WITH lap, bat, have, now_w, has_source, collect(c) AS cands
+UNWIND cands AS c1
+UNWIND [null] + [x IN cands WHERE NOT has_source AND c1.kind = 'charger' AND x.kind = 'cable'] AS c2
+WITH lap, bat, have, now_w, c1, c2, [c1.id] + CASE WHEN c2 IS NULL THEN [] ELSE [c2.id] END AS buy
+WITH lap, bat, now_w, c1, c2, buy, have + buy AS have2
+OPTIONAL MATCH p = (psu:Endpoint {role: 'power-source'})-[p0:POWER WHERE NOT $strict OR p0.confidence <> 'low']->()
+  (()-[mt:MATES WHERE mt.from_item IN have2 AND mt.to_item IN have2]->()
+     -[pw:POWER WHERE pw.item IN have2 AND (NOT $strict OR pw.confidence <> 'low')]->()){1,4}
+  (bat)
+WHERE psu.item IN have2 AND all(k IN range(0, size(nodes(p)) - 2) WHERE NOT nodes(p)[k] IN nodes(p)[k + 1..])
+WITH lap, now_w, c1, c2, buy, p,
+     reduce(lo = 1.0e9, r IN [x IN relationships(p) WHERE type(x) = 'POWER'] | CASE WHEN r.watts IS NOT NULL AND r.watts < lo THEN r.watts ELSE lo END) AS w
+WITH lap, now_w, c1, c2, buy, max(CASE WHEN p IS NULL THEN null ELSE w END) AS new_w
+WHERE new_w IS NOT NULL AND (now_w IS NULL OR new_w > now_w)
+WITH lap, now_w, c1, c2, buy, new_w,
+     CASE WHEN lap.pd_fast_w IS NOT NULL AND new_w >= lap.pd_fast_w THEN 'fast-charge'
+          WHEN lap.pd_recommended_w IS NOT NULL AND new_w >= lap.pd_recommended_w THEN 'full-speed'
+          WHEN lap.pd_recommended_w IS NULL THEN 'unknown'
+          ELSE 'below-recommended' END AS verdict,
+     CASE WHEN now_w IS NULL THEN 'none'
+          WHEN lap.pd_fast_w IS NOT NULL AND now_w >= lap.pd_fast_w THEN 'fast-charge'
+          WHEN lap.pd_recommended_w IS NOT NULL AND now_w >= lap.pd_recommended_w THEN 'full-speed'
+          WHEN lap.pd_recommended_w IS NULL THEN 'unknown'
+          ELSE 'below-recommended' END AS verdict_now
+WITH buy, c1, c2, new_w, now_w, verdict, verdict_now,
+     {`fast-charge`: 3, `full-speed`: 2, unknown: 1, `below-recommended`: 1, none: 0} AS rank
+WHERE rank[verdict] > rank[verdict_now] OR (verdict = 'unknown' AND verdict_now IN ['unknown', 'none'])
+     OR (verdict = verdict_now AND verdict <> 'fast-charge')
+WITH buy, c1, c2, new_w, now_w, verdict, verdict_now, rank,
+     CASE WHEN c2 IS NOT NULL THEN c2 WHEN c1.kind = 'cable' THEN c1 ELSE null END AS cab
+RETURN buy, [c1.name] + CASE WHEN c2 IS NULL THEN [] ELSE [c2.name] END AS names,
+       new_w AS capacity_w, now_w AS capacity_now_w, verdict, verdict_now
+// ties: the plainest cable that does the job (least video, lowest rating, not Thunderbolt/USB4), generic before branded
+ORDER BY rank[verdict] DESC,
+         CASE WHEN c2 IS NOT NULL THEN 2 WHEN c1.kind = 'cable' THEN 0 WHEN c1.kind = 'charger' THEN 1 ELSE 3 END,
+         new_w ASC,
+         CASE WHEN cab IS NULL THEN 0 ELSE reduce(hi = 0.0, x IN [(cab)-[:HAS_PORT]->()-[v:VIDEO]->() | v.gbps] | CASE WHEN x > hi THEN x ELSE hi END) END,
+         CASE WHEN cab IS NULL THEN 0 ELSE reduce(hi = 0, x IN [(cab)-[:HAS_PORT]->()-[r:POWER]->() | r.watts] | CASE WHEN x > hi THEN x ELSE hi END) END,
+         CASE WHEN cab IS NOT NULL AND (cab.name CONTAINS 'Thunderbolt' OR cab.name CONTAINS 'USB4') THEN 1 ELSE 0 END,
+         CASE WHEN c1.class = 'generic' THEN 0 ELSE 1 END,
+         CASE WHEN cab IS NULL OR cab.class = 'generic' THEN 0 ELSE 1 END, buy
 ```
 
 ## `ingest_venue` (write)
