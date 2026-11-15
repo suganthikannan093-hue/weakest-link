@@ -49,9 +49,13 @@ export function catalog() {
     items: run(`MATCH (i:Item)
       OPTIONAL MATCH (i)-[:HAS_PORT]->(p:Port)
       WITH i, collect(DISTINCT p.connector) AS connectors
+      OPTIONAL MATCH (i)-[:HAS_ENDPOINT]->(ps:Endpoint {role: 'power-source'})
+      WITH i, connectors, count(ps) > 0 AS power_source
+      OPTIONAL MATCH (i)-[:HAS_ENDPOINT]->(bat:Endpoint {role: 'power-sink'})<-[pw:POWER]-()
+      WITH i, connectors, power_source, count(pw) > 0 AS charges
       RETURN i.id AS id, i.name AS name, i.kind AS kind, i.class AS class, i.maker AS maker,
              i.purchasable AS purchasable, i.pd_recommended_w AS pd_recommended_w, i.pd_fast_w AS pd_fast_w,
-             connectors ORDER BY i.kind, i.name`),
+             connectors, power_source, charges ORDER BY i.kind, i.name`),
     venues: run(`MATCH (v:Venue)
       OPTIONAL MATCH (v)-[:PROVIDES]->(i:Item)
       WITH v, collect(i.id) AS provides

@@ -20,7 +20,10 @@ const CUSTOM_INPUTS = [
   { id: 'usbc', connector: 'USB-C', standard: 'DP-Alt-4L-HBR3', label: 'USB-C (DisplayPort)' },
   { id: 'vga', connector: 'VGA', standard: 'VGA-1200p', label: 'VGA' },
 ];
-const BAG_GROUPS = [['adapter', 'Adapters & hubs'], ['cable', 'Cables'], ['charger', 'Chargers']];
+const BAG_GROUPS = [['adapter', 'Adapters, hubs & docks'], ['cable', 'Cables'], ['charger', 'Chargers']];
+const DEVICE_GROUPS = [['laptop', 'Laptops'], ['phone', 'Phones'], ['tablet', 'Tablets']];
+const isDevice = (id) => DEVICE_GROUPS.some(([k]) => k === ITEM.get(id)?.kind);
+const deviceWord = () => ({ phone: 'phone', tablet: 'tablet' })[ITEM.get(state.laptop)?.kind] || 'laptop';
 const ICON = {
   laptop: '<path d="M5 6h14v9H5z"/><path d="M2 18h20"/>',
   adapter: '<rect x="6" y="4" width="12" height="16" rx="3"/><path d="M10 8h4M10 16h4"/>',
@@ -32,7 +35,7 @@ const EXAMPLES = [
   { label: 'Old Apple adapter + 4K TV', state: { laptop: 'mba-m2', bag: ['adp-apple-av-a1621', 'hub-usbc-4k30', 'chg-apple-70w', 'cable-usbc-usb2-60w'], venue: 'meetup-hall', mode: '4K60', tab: 'connect' } },
   { label: '240 W cable at a USB-C monitor', state: { laptop: 'mba-m2', bag: ['cable-usbc-usb2-240w', 'chg-apple-70w'], venue: 'conference-booth', mode: '4K60', tab: 'connect' } },
   { label: "Venue's old HDMI cable", state: { laptop: 'mbp14-m3', bag: [], venue: 'studio-tv', mode: '4K60', tab: 'connect' } },
-  { label: 'One purchase, six venues', state: { laptop: 'mba-m2', bag: ['adp-apple-av-a1621'], venue: 'meetup-hall', mode: '4K60', tab: 'fix' } },
+  { label: 'One purchase, all venues', state: { laptop: 'mba-m2', bag: ['adp-apple-av-a1621'], venue: 'meetup-hall', mode: '4K60', tab: 'fix' } },
   { label: 'Big charger, thin cable', state: { laptop: 'mbp14-m3', bag: ['chg-apple-140w', 'cable-usbc-usb2-60w'], venue: 'meetup-hall', mode: '4K60', tab: 'power' } },
 ];
 
@@ -79,7 +82,7 @@ function writeHash() {
   history.replaceState(null, '', '#' + p.toString());
 }
 function sanitizeState() {
-  if (!ITEM.has(state.laptop) || ITEM.get(state.laptop).kind !== 'laptop') state.laptop = 'mba-m2';
+  if (!ITEM.has(state.laptop) || !isDevice(state.laptop)) state.laptop = 'mba-m2';
   state.bag = new Set([...state.bag].filter((id) => ITEM.has(id) && ['adapter', 'cable', 'charger'].includes(ITEM.get(id).kind)));
   if (state.venue !== 'custom' && !VENUE.has(state.venue)) state.venue = 'meetup-hall';
   if (!MODE.has(state.mode)) state.mode = '4K60';
@@ -88,8 +91,8 @@ function sanitizeState() {
 
 // ---------- controls ----------
 function renderControls() {
-  const laptops = CAT.items.filter((i) => i.kind === 'laptop');
-  $('#laptop').innerHTML = laptops.map((i) => `<option value="${i.id}">${esc(i.name)}</option>`).join('');
+  $('#laptop').innerHTML = DEVICE_GROUPS.map(([kind, title]) => `<optgroup label="${title}">${CAT.items.filter((i) => i.kind === kind)
+    .map((i) => `<option value="${i.id}">${esc(i.name)}</option>`).join('')}</optgroup>`).join('');
   $('#laptop').value = state.laptop;
 
   $('#venue').innerHTML = CAT.venues.map((v) => `<option value="${v.id}">${esc(v.name)}</option>`).join('')
@@ -148,7 +151,7 @@ function applyCustom() {
 
 // ---------- chain diagram ----------
 function hopOwner(id) {
-  if (id === state.laptop) return 'Your laptop';
+  if (id === state.laptop) return `Your ${deviceWord()}`;
   const venueProvides = state.venue === 'custom' ? ['custom-display', state.custom.cable] : VENUE.get(state.venue)?.provides || [];
   if (state.bag.has(id) && !venueProvides.includes(id)) return 'In your bag';
   if (venueProvides.includes(id)) return 'At the venue';
@@ -244,7 +247,7 @@ function renderConnect() {
     diagram = chainDiagram(best.hops, best.joints, { unit: 'Gbps', need: mode.gbps, weakest: best.weakest_item });
   } else {
     const dispConn = run(`MATCH (:Item {id: $d})-[:HAS_PORT]->(p:Port) RETURN collect(DISTINCT p.connector) AS c`, { d: displayId })[0]?.c || [];
-    verdict = verdictCard('bad', 'No. Nothing in your bag connects your laptop to this display.',
+    verdict = verdictCard('bad', `No. Nothing in your bag connects your ${deviceWord()} to this display.`,
       `Your ${esc(lap)} has ${esc(ITEM.get(state.laptop).connectors.filter((x) => x !== 'MagSafe3').join(' and '))}; the ${esc(display)} takes
        ${esc(dispConn.join(' or ') || 'nothing we know')}.${venueItems.length > 1 ? ` The venue provides ${venueItems.filter((i) => i !== displayId).map((i) => esc(shortName(i))).join(', ')}.` : ''}
        ${bag.some((id) => id.startsWith('cable-usbc-usb2')) ? ' USB 2.0 charge cables carry no video.' : ''}`);
@@ -323,33 +326,33 @@ function renderFix() {
 function renderPower() {
   const lap = ITEM.get(state.laptop);
   const bag = [...state.bag];
-  const chargers = bag.filter((id) => ITEM.get(id)?.kind === 'charger');
+  const chargers = bag.filter((id) => ITEM.get(id)?.power_source);
   const params = { laptop: state.laptop, bag };
   const p = query('power', params);
   let body = '';
   if (!chargers.length) {
-    body = verdictCard('warn', 'Add a charger to your bag to check charging.', 'Pick one below. You will also need a cable that fits between it and the laptop.')
+    body = verdictCard('warn', 'Add a charger to your bag to check charging.', `Pick one below (a dock or USB-C monitor with its own power supply also counts). You will also need a cable that fits between it and the ${deviceWord()}.`)
       + `<div class="chips">${CAT.items.filter((i) => i.kind === 'charger').map((i) => `<button type="button" class="chip as-btn" data-add="${i.id}">${icon('charger', 'icon sm')}<span>${esc(i.name)}</span></button>`).join('')}</div>`;
-  } else if (lap.pd_recommended_w == null) {
+  } else if (!lap.charges) {
     body = verdictCard('bad', `Your ${esc(shortName(state.laptop))} doesn't charge over USB-C.`, 'It charges from its own barrel-jack adapter. Its USB-C port is data only.');
   } else if (!p.rows.length) {
-    body = verdictCard('bad', 'No way to plug your charger into your laptop.',
-      `None of the cables in your bag fits between ${chargers.map((c) => esc(shortName(c))).join(' / ')} and your laptop. You need a USB-C to USB-C cable${lap.connectors.includes('MagSafe3') ? ' or a USB-C to MagSafe 3 cable' : ''}.`);
+    body = verdictCard('bad', `No way to plug your charger into your ${deviceWord()}.`,
+      `None of the cables in your bag fits between ${chargers.map((c) => esc(shortName(c))).join(' / ')} and your ${deviceWord()}. You need a USB-C to USB-C cable${lap.connectors.includes('MagSafe3') ? ' or a USB-C to MagSafe 3 cable' : ''}.`);
   } else {
     body = p.rows.map((r) => {
       const v = {
-        'fast-charge': ['ok', `Fast-charges. Up to ${fmt(r.capacity_w)} W can reach the laptop.`, `The maker says fast charging needs ${fmt(r.fast_w)} W or more.`],
-        'full-speed': ['ok', `Charges normally. Up to ${fmt(r.capacity_w)} W reaches the laptop.`, `That meets the ${fmt(r.recommended_w)} W recommended${r.fast_w ? `, but fast charging needs ${fmt(r.fast_w)} W` : ''}.`],
+        'fast-charge': ['ok', `Fast-charges. Up to ${fmt(r.capacity_w)} W can reach the ${deviceWord()}.`, `The maker says fast charging needs ${fmt(r.fast_w)} W or more.`],
+        'full-speed': ['ok', `Charges normally. Up to ${fmt(r.capacity_w)} W reaches the ${deviceWord()}.`, `That meets the ${fmt(r.recommended_w)} W recommended${r.fast_w ? `, but fast charging needs ${fmt(r.fast_w)} W` : ''}.`],
         'below-recommended': ['warn', `Charges slowly. Only ${fmt(r.capacity_w)} W gets through.`, `The weakest link is the <strong>${esc(shortName(r.weakest_item))}</strong>. The recommended minimum is ${fmt(r.recommended_w)} W, so under heavy use the battery may still drain.`],
-        unknown: ['warn', `About ${fmt(r.capacity_w)} W can reach the laptop.`, ''],
+        unknown: ['warn', `About ${fmt(r.capacity_w)} W can reach the ${deviceWord()}.`, 'The maker does not publish a recommended wattage, so we cannot say whether that is full speed.'],
       }[r.verdict];
       const need = r.verdict === 'fast-charge' ? r.fast_w : r.recommended_w;
       return `<article class="power-card"><h3 class="visually-hidden">${esc(itemName(r.charger))}</h3>${verdictCard(v[0], `${esc(shortName(r.charger))}: ${v[1]}`, v[2])}
-        ${chainDiagram(r.hops, r.joints, { unit: 'W', need, weakest: r.weakest_item, owner: (id) => (id === state.laptop ? 'Your laptop' : 'In your bag') })}</article>`;
+        ${chainDiagram(r.hops, r.joints, { unit: 'W', need, weakest: r.weakest_item, owner: (id) => (id === state.laptop ? `Your ${deviceWord()}` : 'In your bag') })}</article>`;
     }).join('');
     const charging = new Set(p.rows.map((r) => r.charger));
     const unplugged = chargers.filter((c) => !charging.has(c));
-    if (unplugged.length) body += `<p class="hint">No cable in your bag fits ${unplugged.map((c) => esc(shortName(c))).join(', ')} to this laptop.</p>`;
+    if (unplugged.length) body += `<p class="hint">No cable in your bag fits ${unplugged.map((c) => esc(shortName(c))).join(', ')} to this ${deviceWord()}.</p>`;
   }
   $('#panel-power').innerHTML = body + cypherDetails([{ name: 'power', params, ms: p.ms }]);
 }
