@@ -203,6 +203,18 @@ class DemoAndConfigTest(unittest.TestCase):
         self.assertFalse(d["plan"]["considering_fixes_venue"])
         self.assertTrue(all(d["plan"]["after_ok"].values()))
 
+    def test_brief_demo_fits_a_wide_terminal_and_tells_the_story(self):
+        res = subprocess.run([sys.executable, str(ROOT / "scripts" / "agent_demo.py"), "--brief", "--no-color", "--width", "86"],
+                             capture_output=True, text=True, timeout=120, cwd=ROOT)
+        self.assertEqual(res.returncode, 0, res.stderr)
+        lines = res.stdout.splitlines()
+        self.assertLessEqual(max(len(x) for x in lines), 86)
+        self.assertLessEqual(len(lines), 26)
+        text = res.stdout
+        for phrase in ("Venue email -> graph", "Riverside Library, Room 2", "Weakest link: Standard HDMI cable",
+                       "Buy: USB-C to HDMI cable, 4K60", "Pack:", "Leave:", "Charging: buy"):
+            self.assertIn(phrase, text)
+
     def test_demo_is_deterministic(self):
         runs = [json.loads(subprocess.run([sys.executable, str(ROOT / "scripts" / "agent_demo.py"), "--json"],
                                           capture_output=True, text=True, timeout=120, cwd=ROOT).stdout)

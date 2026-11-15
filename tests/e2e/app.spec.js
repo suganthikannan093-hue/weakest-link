@@ -235,3 +235,15 @@ test('empty states: an empty bag and no venues get a clear next step', async ({ 
   for (const box of await page.locator('#panel-fix .venue-pick input[type=checkbox]').all()) await box.uncheck();
   await expect(verdict(page, 'fix')).toContainText('Pick at least one venue');
 });
+
+test('the verdict updates live as bag items are ticked', async ({ page }) => {
+  const errors = await open(page, '#l=mba-m2&b=&v=meetup-hall&m=4K60&t=connect');
+  await expect(page.locator('#panel-connect')).toContainText('Your bag is empty');
+  await page.getByRole('checkbox', { name: /USB-C multiport hub/ }).check();
+  await expect(page.locator('#panel-connect')).not.toContainText('Your bag is empty');
+  await expect(page.locator('#panel-connect .hop.weak .hop-name')).toContainText('USB-C multiport hub');
+  await expect(page.locator('#bag-count')).toHaveText('(1 item)');
+  await page.getByRole('checkbox', { name: /USB-C multiport hub/ }).uncheck();
+  await expect(page.locator('#panel-connect')).toContainText('Your bag is empty');
+  expect(errors).toEqual([]);
+});
