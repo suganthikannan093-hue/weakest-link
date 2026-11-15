@@ -79,8 +79,7 @@ CREATE (p:Port {id: 'custom-display:' + inp.id, item: 'custom-display', name: in
                 gender: 'receptacle', dual_mode: false, requires_dual_mode: false})
 CREATE (i)-[:HAS_PORT]->(p)
 CREATE (p)-[:VIDEO {item: 'custom-display', from_item: 'custom-display', to_item: 'custom-display',
-                    gbps: s.data_gbps, standard: s.id, source: 'user', confidence: 'user',
-                    note: 'Entered by you'}]->(e);
+                    gbps: s.data_gbps, standard: s.id, source: 'user', confidence: 'user'}]->(e);
 MATCH (p:Port {item: 'custom-display'}), (q:Port {gender: 'plug'})
 WHERE q.connector = p.connector AND NOT q.requires_dual_mode
 CREATE (p)-[:MATES {from_item: 'custom-display', to_item: q.item, connector: p.connector}]->(q),

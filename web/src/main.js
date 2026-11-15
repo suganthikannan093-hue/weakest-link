@@ -52,12 +52,11 @@ const state = {
   custom: { name: 'Venue projector', inputs: ['hdmi14', 'vga'], max: '1080p60', cable: '' },
 };
 
-const itemName = (id) => ITEM.get(id)?.name ?? id;
+const itemName = (id) => (id === 'custom-display' ? state.custom.name : ITEM.get(id)?.name ?? id);
 const shortName = (id) => {
   const n = itemName(id);
   return n.replace(/\s*\((?!model|older model)[^)]*\)\s*$/i, '').replace(/^Generic\s+/i, '');
 };
-const article = (s) => s;
 
 // ---------- URL state ----------
 function readHash() {
