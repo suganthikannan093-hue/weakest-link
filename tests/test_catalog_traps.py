@@ -3,6 +3,7 @@ to the maker's or spec body's own page (see docs/DATA.md, audit table).
 
     python3 -m unittest tests.test_catalog_traps -v
 """
+import subprocess
 import sys
 import unittest
 from pathlib import Path
@@ -39,6 +40,12 @@ class AuditFixes(unittest.TestCase):
     def test_every_product_edge_cites_a_maker_or_spec_body(self):
         rows = run_cypher("MATCH (i:Item {class: 'product'})-[:CITES]->(s:Source) WHERE NOT s.kind IN ['manufacturer', 'spec-body'] RETURN i.id AS id, s.id AS s")
         self.assertEqual(rows, [])
+
+
+    def test_audit_table_is_up_to_date(self):
+        root = Path(__file__).resolve().parent.parent
+        res = subprocess.run([sys.executable, str(root / "scripts" / "build_audit.py"), "--check"], capture_output=True, text=True)
+        self.assertEqual(res.returncode, 0, res.stderr)
 
 
 class LaptopTraps(unittest.TestCase):

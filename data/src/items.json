@@ -126,8 +126,8 @@
        {"from": "gpu", "to": "tb1", "standard": "DP-Alt-4L-HBR3", "source": "dell-xps13-9340", "confidence": "medium", "note": "Dell manual: Thunderbolt 4 with DisplayPort 1.4 and Power Delivery. No HDMI port. (dell.com blocks scripted fetches; checked in a browser search result.)"},
        {"from": "gpu", "to": "tb2", "standard": "DP-Alt-4L-HBR3", "source": "dell-xps13-9340", "confidence": "medium"}],
      "power": [
-       {"from": "tb1", "to": "battery", "source": "dell-xps13-9340", "confidence": "high"},
-       {"from": "tb2", "to": "battery", "source": "dell-xps13-9340", "confidence": "high"}]},
+       {"from": "tb1", "to": "battery", "source": "dell-xps13-9340", "confidence": "medium"},
+       {"from": "tb2", "to": "battery", "source": "dell-xps13-9340", "confidence": "medium"}]},
     {"id": "elitebook-840-g10", "kind": "laptop", "class": "product", "maker": "HP", "name": "HP EliteBook 840 G10",
      "pd_recommended_w": 45, "pd_fast_w": 65, "pd_source": "hp-840g10",
      "ports": [{"id": "tb1", "connector": "USB-C", "gender": "receptacle"}, {"id": "tb2", "connector": "USB-C", "gender": "receptacle"}, {"id": "hdmi", "connector": "HDMI", "gender": "receptacle"}],
@@ -422,7 +422,7 @@
      "ports": [{"id": "a", "connector": "USB-C", "gender": "plug"}, {"id": "b", "connector": "USB-C", "gender": "plug"}],
      "video": [],
      "power": [
-       {"from": "a", "to": "b", "standard": "USB-PD-EPR", "source": "apple-240w-cable", "confidence": "high", "note": "Apple: 240W, USB 2 data only, so no video."}]},
+       {"from": "a", "to": "b", "standard": "USB-PD-EPR", "source": "apple-240w-cable", "confidence": "medium", "note": "Apple: 240W, USB 2 data only, so no video."}]},
     {"id": "cable-usb4-240w", "kind": "cable", "class": "generic", "name": "USB4 40Gbps 240W certified USB-C cable", "purchasable": true, "bidirectional": true,
      "ports": [{"id": "a", "connector": "USB-C", "gender": "plug"}, {"id": "b", "connector": "USB-C", "gender": "plug"}],
      "video": [

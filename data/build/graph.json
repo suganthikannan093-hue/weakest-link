@@ -7967,7 +7967,7 @@
     "to_item": "xps13-9340",
     "source": "dell-xps13-9340",
     "source_url": "https://www.dell.com/support/manuals/en-us/xps-13-9340-laptop/xps-13-9340_owners_manual/external-ports-and-slots?guid=guid-b8f739cc-a41e-4ac9-b3f8-ff6d9c6d8c19&lang=en-us",
-    "confidence": "high",
+    "confidence": "medium",
     "note": null
    }
   },
@@ -7980,7 +7980,7 @@
     "to_item": "xps13-9340",
     "source": "dell-xps13-9340",
     "source_url": "https://www.dell.com/support/manuals/en-us/xps-13-9340-laptop/xps-13-9340_owners_manual/external-ports-and-slots?guid=guid-b8f739cc-a41e-4ac9-b3f8-ff6d9c6d8c19&lang=en-us",
-    "confidence": "high",
+    "confidence": "medium",
     "note": null
    }
   },
@@ -8504,7 +8504,7 @@
     "to_item": "cable-apple-240w",
     "source": "apple-240w-cable",
     "source_url": "https://www.apple.com/shop/product/myqt3am/a/240w-usb-c-charge-cable-2-m",
-    "confidence": "high",
+    "confidence": "medium",
     "note": "Apple: 240W, USB 2 data only, so no video.",
     "standard": "USB-PD-EPR",
     "watts": 240
@@ -8519,7 +8519,7 @@
     "to_item": "cable-apple-240w",
     "source": "apple-240w-cable",
     "source_url": "https://www.apple.com/shop/product/myqt3am/a/240w-usb-c-charge-cable-2-m",
-    "confidence": "high",
+    "confidence": "medium",
     "note": "Apple: 240W, USB 2 data only, so no video.",
     "standard": "USB-PD-EPR",
     "watts": 240

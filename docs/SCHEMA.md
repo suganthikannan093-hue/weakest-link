@@ -3,7 +3,7 @@
 The store is `data/weakest-link.rl`, a single-file Relate store. It is generated from `data/src/*.json`
 by `scripts/build_store.py`, which runs `scripts/import.cypher` with the Relate CLI.
 
-The graph has 203 nodes and 1,486 relationships (build of milestone 1).
+The graph has 499 nodes and 7,958 relationships (build of milestone 4: 100 items, 9 venues, 64 sources).
 
 ## The idea in one picture
 
@@ -24,13 +24,13 @@ hops and `watts`.
 
 | Label | Key | Properties |
 |---|---|---|
-| `Item` | `id` | `kind` (laptop, adapter, cable, charger, display), `class` (product or generic), `name`, `maker`, `purchasable`, `pd_recommended_w`, `pd_fast_w`, `pd_source` (laptops only), `license` |
+| `Item` | `id` | `kind` (laptop, phone, tablet, adapter, cable, charger, display), `class` (product or generic), `name`, `maker`, `purchasable`, `pd_recommended_w`, `pd_fast_w`, `pd_source` (laptops, phones and tablets), `license` |
 | `Port` | `id` = `<item>:<port>` | `item`, `name`, `connector` (USB-C, HDMI, DP, VGA, MagSafe3), `gender` (plug or receptacle), `dual_mode` (DP++ source), `requires_dual_mode` (passive DP-to-HDMI), `note` |
-| `Endpoint` | `id` = `<item>:<name>` | `item`, `name` (gpu, panel, psu, battery), `role` (video-source, video-sink, power-source, power-sink) |
+| `Endpoint` | `id` = `<item>:<name>` | `item`, `name` (gpu, panel, psu, battery), `role` (video-source, video-sink, power-source, power-sink). Laptops, phones and tablets have `gpu` and `battery`; displays have `panel`; chargers, and docks or monitors with their own supply, have `psu` |
 | `Mode` | `id` (e.g. `4K60`) | `width`, `height`, `hz`, `pixel_clock_mhz`, `timing` (CTA-861 or CVT-RB), `gbps` (= pixel clock × 24 bit, 8-bit RGB), `rank`, `source`, `source_url`, `confidence` |
 | `Standard` | `id` (e.g. `HDMI-2.0`) | `family`, `raw_gbps`, `data_gbps` (after line coding), `encoding`, `watts` (USB-PD), `source`, `confidence`, `note` |
 | `Venue` | `id` | `name`, `description` |
-| `Source` | `id` | `publisher`, `kind` (spec-body, manufacturer, reference, assumption), `title`, `url`, `supports` (what the source says) |
+| `Source` | `id` | `publisher`, `kind` (spec-body, manufacturer, reference; `email` for ingested venues), `title`, `url`, `supports` (what the source says) |
 
 ## Relationship types
 

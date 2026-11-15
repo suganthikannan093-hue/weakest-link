@@ -37,10 +37,13 @@ question, with watts, answers "will this charger and cable fast-charge my laptop
   URL, with no server. Per-user data (what is in your bag) is a query parameter, so one store
   serves everyone. In the browser the same import script and query files run on the WASM engine.
   `tests/wasm_parity.mjs` checks that the CLI and WASM results are identical.
-- **What the graph models:** 46 items (5 laptops, 11 adapters and hubs, 14 cables, 8 chargers,
-  8 displays and projectors) with 85 ports, 13 standards, 5 video modes, 6 venues and 22 sources.
-  That is 203 nodes and 1,486 relationships. Every capability edge carries a source URL and a
-  confidence level. See [docs/SCHEMA.md](docs/SCHEMA.md) and [docs/DATA.md](docs/DATA.md).
+- **What the graph models:** 100 items: 19 laptops (Apple, Lenovo, Dell, HP, a Chromebook), 7 phones,
+  4 tablets, 18 adapters, hubs and docks, 21 cables, 16 chargers and 15 monitors, TVs and projectors.
+  62 are named products from 13 makers. They have 208 ports, 16 standards, 5 video modes, 9 venues
+  and 64 sources. That is 499 nodes and 7,958 relationships. Every capability edge carries a public
+  source URL (the maker's page or a spec body) and a confidence level, and every edge was audited
+  against its source: see the audit table in [docs/DATA.md](docs/DATA.md) and
+  [docs/SCHEMA.md](docs/SCHEMA.md).
 - **Relate features used:** quantified path patterns with inline predicates, `SHORTEST 1`,
   `reduce()` over relationships for the bottleneck, `all()` over path nodes, `EXISTS {}` and
   `CALL () {}` subqueries, pattern comprehensions, aggregation, indexes, `--fetch-params` JSON import,
@@ -66,7 +69,7 @@ python3 scripts/wl.py best_fix --laptop mba-m2 --bag adp-apple-av-a1621 --venues
 python3 scripts/wl.py power  --laptop mbp14-m3 --bag chg-apple-140w,cable-usbc-usb2-60w
 python3 scripts/wl.py list   # every laptop, item and venue id
 
-# tests: 43 Python tests (22 queries on the .rl store, 21 agent/MCP flow), then CLI vs WASM parity
+# tests: 69 Python tests (22 queries, 26 catalog traps and audit checks, 21 agent/MCP flow), then CLI vs WASM parity
 python3 -m unittest -v
 npm install && node tests/wasm_parity.mjs
 
@@ -84,7 +87,7 @@ that link's source.
 {"chain": ["mba-m2", "adp-apple-av-a1621", "cable-hdmi-premium", "tv-4k-hdmi20"], "bottleneck_gbps": 8.16, "best_mode": "4K30", "weakest_item": "adp-apple-av-a1621", "weakest_source": "https://support.apple.com/en-us/119850"}
 ```
 
-`best_fix` (4K60 across all six venues, owning only the old A1621 adapter): buying a 4K60 USB-C-to-HDMI
+`best_fix` (4K60 across the six original venues, owning only the old A1621 adapter): buying a 4K60 USB-C-to-HDMI
 cable fixes 3 venues: the meetup hall, the conference booth, and the podcast studio, where it bypasses
 the venue's Standard HDMI cable. The remaining venues are limited by their own projector or display
 input, and the tool says so rather than suggesting a purchase.
@@ -94,7 +97,7 @@ The queries live in [`queries/`](queries/): `reach`, `chains`, `best_fix` and `p
 ## Web UI
 
 A static site (Vite) that runs entirely in the browser on `@relate/relate-wasm`. There is no server
-and no API key. Pick a laptop, fill your bag from the dataset, choose a venue or describe a display,
+and no API key. Pick a laptop, phone or tablet, fill your bag from the dataset, choose a venue or describe a display,
 and pick a target mode. You get:
 
 - **Will it connect?** A plain-English verdict and a chain diagram with the weakest link highlighted.
