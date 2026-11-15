@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Weakest Link: will your laptop reach that projector?</title>
+  <meta name="description" content="Check, before you leave, whether your laptop, adapters and cables will drive a venue's display at 4K60, find the weakest link, and the one purchase that fixes the most venues. Runs entirely in your browser on Relate." />
+  <meta name="theme-color" content="#0f172a" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+</head>
+<body>
+  <a class="skip" href="#results">Skip to result</a>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <div class="brand">
+        <svg class="logo" viewBox="0 0 32 32" aria-hidden="true"><rect x="2" y="12" width="8" height="8" rx="2"/><rect x="12" y="12" width="8" height="8" rx="2" class="weak"/><rect x="22" y="12" width="8" height="8" rx="2"/></svg>
+        <div>
+          <h1>Weakest Link</h1>
+          <p class="tagline">Will your laptop reach that projector at 4K60? Find out before you leave.</p>
+        </div>
+      </div>
+      <p class="engine-status" id="engine-status" role="status">Loading the graph engine…</p>
+    </div>
+  </header>
+
+  <main class="wrap" id="app" aria-busy="true">
+    <section class="examples" aria-labelledby="examples-h">
+      <h2 id="examples-h" class="eyebrow">Try an example</h2>
+      <div class="example-list" id="examples"></div>
+    </section>
+
+    <div class="layout">
+      <section class="setup card" id="setup" aria-labelledby="setup-h">
+        <h2 id="setup-h">Your setup</h2>
+
+        <div class="field">
+          <label for="laptop">Laptop</label>
+          <select id="laptop"></select>
+          <p class="hint" id="laptop-ports"></p>
+        </div>
+
+        <fieldset class="field">
+          <legend>Your bag <span class="count" id="bag-count"></span></legend>
+          <div class="bag-tools">
+            <label class="visually-hidden" for="bag-search">Search items</label>
+            <input id="bag-search" type="search" placeholder="Search adapters, cables, chargers…" autocomplete="off" />
+            <button type="button" class="link-btn" id="bag-clear">Clear</button>
+          </div>
+          <div id="bag"></div>
+        </fieldset>
+
+        <div class="field">
+          <label for="venue">Venue</label>
+          <select id="venue"></select>
+          <p class="hint" id="venue-desc"></p>
+        </div>
+
+        <fieldset class="field custom" id="custom" hidden>
+          <legend>Describe the display</legend>
+          <label for="custom-name">Name</label>
+          <input id="custom-name" type="text" value="Venue projector" maxlength="60" />
+          <p class="sub-legend" id="custom-inputs-label">Inputs it has</p>
+          <div class="check-grid" id="custom-inputs" role="group" aria-labelledby="custom-inputs-label"></div>
+          <label for="custom-max">Best picture it can show</label>
+          <select id="custom-max"></select>
+          <label for="custom-cable">Cable the venue leaves out</label>
+          <select id="custom-cable"></select>
+        </fieldset>
+
+        <fieldset class="field">
+          <legend>Target picture</legend>
+          <div class="segmented" id="modes"></div>
+        </fieldset>
+
+        <button type="button" class="btn ghost" id="share">Copy link to this setup</button>
+      </section>
+
+      <section class="results" id="results" aria-labelledby="results-h" tabindex="-1">
+        <h2 id="results-h" class="visually-hidden">Result</h2>
+        <p class="setup-summary" id="setup-summary"><span></span> <a href="#setup">Edit setup</a></p>
+        <div class="tabs" role="tablist" aria-label="Views">
+          <button role="tab" id="tab-connect" aria-controls="panel-connect" aria-selected="true">Will it connect?</button>
+          <button role="tab" id="tab-fix" aria-controls="panel-fix" aria-selected="false" tabindex="-1">Best purchase</button>
+          <button role="tab" id="tab-power" aria-controls="panel-power" aria-selected="false" tabindex="-1">Charging</button>
+        </div>
+        <div role="tabpanel" id="panel-connect" aria-labelledby="tab-connect" aria-live="polite"></div>
+        <div role="tabpanel" id="panel-fix" aria-labelledby="tab-fix" aria-live="polite" hidden></div>
+        <div role="tabpanel" id="panel-power" aria-labelledby="tab-power" aria-live="polite" hidden></div>
+      </section>
+    </div>
+
+    <section class="how card" aria-labelledby="how-h">
+      <h2 id="how-h">How it works</h2>
+      <p>Every laptop port, adapter, cable, charger and display is a small graph inside a
+        <a href="https://relatedb.ai">Relate</a> database that runs right here in your browser (WebAssembly). Signals hop
+        <em>through</em> an item (a <code>VIDEO</code> or <code>POWER</code> relationship that carries its Gbps or watts) and
+        <em>across</em> a plug-and-socket joint (<code>MATES</code>). One Cypher query finds a chain from your laptop's GPU to the
+        venue's panel where every hop carries the picture you want. The hop with the lowest capacity is the weakest link.</p>
+      <p>Each capacity comes from the standard the item follows (HDMI, DisplayPort, USB PD) or from the maker's spec page.
+        Each one carries a source link and a confidence level. Limits are conservative (8-bit colour, no compression), so a "no" can sometimes
+        work in practice, but a "yes" should not fail.</p>
+      <p class="hint">Data: CC BY 4.0. Code: MIT. Nothing leaves your browser.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer"><div class="wrap">Weakest Link: built for the Relate by Neo4j Hackathon. Queries run on <code>@relate/relate-wasm</code> 1.0.1.</div></footer>
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>
