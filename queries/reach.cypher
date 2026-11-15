@@ -20,6 +20,8 @@ RETURN v.id AS venue, d.id AS display, m.id AS mode, m.gbps AS need_gbps,
        panel_ok,
        [r IN links | r.item] AS chain,
        CASE WHEN p IS NULL THEN null ELSE bottleneck END AS bottleneck_gbps,
-       [r IN links WHERE r.gbps = bottleneck | r.item][0] AS weakest_item
+       [r IN links WHERE r.gbps = bottleneck | r.item][0] AS weakest_item,
+       [r IN links | {item: r.item, gbps: r.gbps, standard: r.standard, confidence: r.confidence, source_url: r.source_url, note: r.note}] AS hops,
+       [r IN relationships(p) WHERE type(r) = 'MATES' | r.connector] AS joints
 ORDER BY ok DESC
 LIMIT 1

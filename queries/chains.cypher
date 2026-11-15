@@ -12,13 +12,15 @@ MATCH p = (src)-[:VIDEO]->()
   (sink)
 // a physical item can only be used once in a chain
 WHERE all(k IN range(0, size(nodes(p)) - 2) WHERE NOT nodes(p)[k] IN nodes(p)[k + 1..])
-WITH v, d, sink, p, [r IN relationships(p) WHERE type(r) = 'VIDEO'] AS links
-WITH v, d, sink, p, links,
+WITH v, d, sink, p, [r IN relationships(p) WHERE type(r) = 'VIDEO'] AS links,
+     [r IN relationships(p) WHERE type(r) = 'MATES' | r.connector] AS joints
+WITH v, d, sink, p, links, joints,
      reduce(lo = 1.0e9, r IN links | CASE WHEN r.gbps < lo THEN r.gbps ELSE lo END) AS bottleneck
 // the same items can connect through different ports or cable orientations: keep one row per item chain
-WITH sink, [r IN links | r.item] AS chain, bottleneck, [r IN links WHERE r.gbps = bottleneck][0] AS weak
+WITH sink, [r IN links | r.item] AS chain, bottleneck, [r IN links WHERE r.gbps = bottleneck][0] AS weak,
+     [r IN links | {item: r.item, gbps: r.gbps, standard: r.standard, confidence: r.confidence, source_url: r.source_url, note: r.note}] AS hops, joints
 ORDER BY bottleneck DESC
-WITH sink, chain, collect({bottleneck: bottleneck, weak: weak})[0] AS best
+WITH sink, chain, collect({bottleneck: bottleneck, weak: weak, hops: hops, joints: joints})[0] AS best
 OPTIONAL MATCH (sink)-[:SUPPORTS_MODE]->(m:Mode) WHERE m.gbps <= best.bottleneck
 WITH chain, best, m ORDER BY m.rank DESC
 WITH chain, best, collect(m.id) AS modes
@@ -26,5 +28,6 @@ RETURN chain,
        best.bottleneck AS bottleneck_gbps,
        best.weak.item AS weakest_item, best.weak.standard AS weakest_standard,
        best.weak.confidence AS weakest_confidence, best.weak.source_url AS weakest_source,
-       modes[0] AS best_mode
+       modes[0] AS best_mode,
+       best.hops AS hops, best.joints AS joints
 ORDER BY bottleneck_gbps DESC, size(chain) ASC
