@@ -1,0 +1,115 @@
+1
+00:00:00,550 --> 00:00:03,130
+Five minutes before your talk, you plug in,
+
+2
+00:00:03,170 --> 00:00:06,570
+and the 4K projector shows a blurry 1080p.
+
+3
+00:00:06,610 --> 00:00:09,290
+Or nothing at all. The laptop is fine.
+
+4
+00:00:09,370 --> 00:00:11,150
+Somewhere in your bag is a weak link.
+
+5
+00:00:12,514 --> 00:00:14,954
+Weakest Link tells you before you leave.
+
+6
+00:00:15,654 --> 00:00:18,154
+Pick your laptop, tick what's in your bag,
+
+7
+00:00:18,194 --> 00:00:20,674
+then choose the venue and the picture you want.
+
+8
+00:00:21,074 --> 00:00:24,494
+It all runs in your browser, on Relate's WebAssembly engine.
+
+9
+00:00:25,798 --> 00:00:30,738
+The answer is a path through a graph: port, hub, cable, projector input.
+
+10
+00:00:30,838 --> 00:00:33,558
+The hop with the lowest capacity is the weakest link.
+
+11
+00:00:33,758 --> 00:00:36,538
+Here, a hub that only does HDMI 1.4.
+
+12
+00:00:36,578 --> 00:00:39,458
+Every link shows its source and a confidence level.
+
+13
+00:00:40,714 --> 00:00:43,934
+Best purchase looks across every venue you visit.
+
+14
+00:00:44,154 --> 00:00:47,194
+One USB-C to HDMI cable fixes three of nine.
+
+15
+00:00:47,234 --> 00:00:49,134
+And when the venue's own display is the limit,
+
+16
+00:00:49,174 --> 00:00:51,634
+it says so instead of selling you something.
+
+17
+00:00:53,350 --> 00:00:54,930
+Same graph, in watts.
+
+18
+00:00:54,970 --> 00:00:58,670
+A 140 watt charger on a thin cable charges slowly.
+
+19
+00:00:58,770 --> 00:01:02,150
+It names the cable to buy, and one click later, it fast-charges.
+
+20
+00:01:03,730 --> 00:01:07,930
+Your AI assistant gets the same graph through Relate's MCP server.
+
+21
+00:01:08,290 --> 00:01:10,990
+This pack-my-bag agent reads a venue's email,
+
+22
+00:01:11,170 --> 00:01:13,930
+writes it into its own copy of the graph with the source,
+
+23
+00:01:13,970 --> 00:01:16,290
+and runs the vetted query recipes.
+
+24
+00:01:16,670 --> 00:01:20,850
+Pack this, leave that, buy one cable, and a better charging cable.
+
+25
+00:01:21,826 --> 00:01:25,666
+Why a graph? Compatibility is relationships: what plugs into what,
+
+26
+00:01:25,706 --> 00:01:27,426
+and what each hop can carry.
+
+27
+00:01:27,926 --> 00:01:31,586
+Relate keeps it all in one cited file that runs the same in the command line,
+
+28
+00:01:31,626 --> 00:01:33,266
+the browser, and MCP.
+
+29
+00:01:33,586 --> 00:01:36,546
+Weakest Link. Find it before your audience does.

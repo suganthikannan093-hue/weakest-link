@@ -1,0 +1,62 @@
+{
+ "lead": 0.6,
+ "tail": {
+  "default": 0.9,
+  "agent": 0.6,
+  "close": 1.4,
+  "hook": 0.9
+ },
+ "agent": {
+  "pace": 1.75,
+  "type_at": 1.4,
+  "cols": 90,
+  "rows": 26,
+  "font_pt": 26,
+  "zoom": {
+   "start": 13.2,
+   "ramp": 0.9,
+   "factor": 1.184,
+   "focus_x": 0.0,
+   "focus_y": 1.0
+  },
+  "row_px": 41.9,
+  "boxes": [
+   {
+    "from": 13.5,
+    "to": 14.3,
+    "rows": [
+     16,
+     18
+    ],
+    "label": "pack"
+   },
+   {
+    "from": 14.3,
+    "to": 15.1,
+    "rows": [
+     19,
+     20
+    ],
+    "label": "leave"
+   },
+   {
+    "from": 15.1,
+    "to": 16.2,
+    "rows": [
+     15,
+     15
+    ],
+    "label": "buy"
+   },
+   {
+    "from": 16.2,
+    "to": 18.1,
+    "rows": [
+     21,
+     21
+    ],
+    "label": "charging"
+   }
+  ]
+ }
+}

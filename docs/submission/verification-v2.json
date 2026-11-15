@@ -1,0 +1,199 @@
+{
+  "file": "docs/submission/weakest-link-demo-v2.mp4",
+  "status": "DRAFT v2 for the owner's review. Not uploaded anywhere.",
+  "duration_seconds": 98.31,
+  "duration_limit_seconds": 105.0,
+  "size_bytes": 6715349,
+  "sha256": "c8ed17c132962d02b0c49c0c20d7a303c0188a71ec7d3b71696903d046691a3d",
+  "video": {
+    "codec": "h264",
+    "width": 1920,
+    "height": 1080,
+    "fps": "30/1"
+  },
+  "audio": {
+    "codec": "aac",
+    "sample_rate": 48000,
+    "channels": 2,
+    "narration": "one mono voice track, upmixed"
+  },
+  "loudness": {
+    "integrated_lufs": -16.0,
+    "loudness_range_lu": 4.5,
+    "true_peak_dbtp": -2.9,
+    "target_lufs": -16,
+    "measured_with": "ffmpeg ebur128=peak=true"
+  },
+  "narration": {
+    "model": "tts-1-hd",
+    "voice": "nova",
+    "speed": 1.0,
+    "engine": "OpenAI TTS",
+    "speech_seconds": 87.48,
+    "min_gap_between_clips_seconds": 1.2,
+    "clips": [
+      {
+        "id": "hook",
+        "start": 0.6,
+        "end": 11.064
+      },
+      {
+        "id": "ui",
+        "start": 12.564,
+        "end": 24.348
+      },
+      {
+        "id": "diagram",
+        "start": 25.848,
+        "end": 39.264
+      },
+      {
+        "id": "fix",
+        "start": 40.764,
+        "end": 51.9
+      },
+      {
+        "id": "charge",
+        "start": 53.4,
+        "end": 62.28
+      },
+      {
+        "id": "agent",
+        "start": 63.78,
+        "end": 80.676
+      },
+      {
+        "id": "close",
+        "start": 81.876,
+        "end": 96.78
+      }
+    ]
+  },
+  "captions": {
+    "burned_in": true,
+    "srt": "docs/submission/weakest-link-demo-v2.srt",
+    "cues": 29,
+    "timing": "Whisper (whisper-1) word timestamps per clip"
+  },
+  "capture": "Xvfb 1920x1200 + ffmpeg x11grab: Chromium (Playwright) on the local vite preview build at 1.25x, and xfce4-terminal (DejaVu Sans Mono 26 pt, 90 columns) running scripts/agent_demo.py --brief --pace 1.75",
+  "scenes": [
+    {
+      "id": "hook",
+      "start": 0.0,
+      "end": 11.964
+    },
+    {
+      "id": "ui",
+      "start": 11.964,
+      "end": 25.248
+    },
+    {
+      "id": "diagram",
+      "start": 25.248,
+      "end": 40.164
+    },
+    {
+      "id": "fix",
+      "start": 40.164,
+      "end": 52.8
+    },
+    {
+      "id": "charge",
+      "start": 52.8,
+      "end": 63.18
+    },
+    {
+      "id": "agent",
+      "start": 63.18,
+      "end": 81.276
+    },
+    {
+      "id": "close",
+      "start": 81.276,
+      "end": 98.18
+    }
+  ],
+  "checks": [
+    {
+      "check": "narration clips never overlap (placement)",
+      "pass": true,
+      "detail": "minimum gap 1.200 s"
+    },
+    {
+      "check": "clip 'hook' says the script once, no repeats or drops (Whisper)",
+      "pass": true,
+      "detail": "match 1.0, 32/32 words"
+    },
+    {
+      "check": "clip 'ui' says the script once, no repeats or drops (Whisper)",
+      "pass": true,
+      "detail": "match 1.0, 36/36 words"
+    },
+    {
+      "check": "clip 'diagram' says the script once, no repeats or drops (Whisper)",
+      "pass": true,
+      "detail": "match 1.0, 41/41 words"
+    },
+    {
+      "check": "clip 'fix' says the script once, no repeats or drops (Whisper)",
+      "pass": true,
+      "detail": "match 1.0, 36/36 words"
+    },
+    {
+      "check": "clip 'charge' says the script once, no repeats or drops (Whisper)",
+      "pass": true,
+      "detail": "match 1.0, 27/27 words"
+    },
+    {
+      "check": "clip 'agent' says the script once, no repeats or drops (Whisper)",
+      "pass": true,
+      "detail": "match 1.0, 52/52 words"
+    },
+    {
+      "check": "clip 'close' says the script once, no repeats or drops (Whisper)",
+      "pass": true,
+      "detail": "match 1.0, 44/44 words"
+    },
+    {
+      "check": "every caption lies inside its own scene",
+      "pass": true,
+      "detail": "29 cues"
+    },
+    {
+      "check": "captions never overlap",
+      "pass": true,
+      "detail": "min gap 0.040 s"
+    },
+    {
+      "check": "captions timed from Whisper word timestamps",
+      "pass": true,
+      "detail": "every script word of every cue found in the clip's transcript"
+    },
+    {
+      "check": "duration at most 1:45",
+      "pass": true,
+      "detail": "98.31 s"
+    },
+    {
+      "check": "loudness about -16 LUFS integrated, true peak below -1 dBTP",
+      "pass": true,
+      "detail": "-16.0 LUFS, -2.9 dBTP"
+    },
+    {
+      "check": "final mix: a silence of at least 0.9 s between every pair of clips (silencedetect)",
+      "pass": true,
+      "detail": "7 silences of 0.9 s or more"
+    },
+    {
+      "check": "final mix transcript matches the script (no doubled narration)",
+      "pass": true,
+      "detail": "match 0.989, 268/268 words, 'projector input' heard 1x"
+    },
+    {
+      "check": "no idle terminal after the agent narration",
+      "pass": true,
+      "detail": "0.60 s after the last word"
+    }
+  ],
+  "all_checks_pass": true
+}

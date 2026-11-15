@@ -83,7 +83,7 @@ python3 scripts/wl.py list   # every laptop, item and venue id
 npm install && npm run build && npm run preview   # http://localhost:4173
 python3 scripts/agent_demo.py                      # offline "pack my bag" agent over relate serve --mcp
 
-# tests: 79 Python tests (30 queries, 26 catalog traps and audit checks, 23 agent/MCP flow), then CLI vs WASM parity
+# tests: 79 Python tests (30 queries, 26 catalog traps and audit checks, 24 agent/MCP flow), then CLI vs WASM parity
 python3 -m unittest -v
 npm install && node tests/wasm_parity.mjs
 
@@ -184,10 +184,10 @@ item to buy.
 
 ```bash
 python3 scripts/agent_demo.py            # offline, deterministic: ingest an email + a spec page, query, recommend
-python3 scripts/agent_demo.py --pace 2   # slower, for filming
+python3 scripts/agent_demo.py --brief --pace 2   # condensed and slower, for filming
 python3 scripts/agent_demo.py --strict   # ignore low-confidence links (recipe parameter strict: true)
 python3 scripts/agent_demo.py --json     # for CI
-python3 -m unittest tests.test_agent_mcp # 23 MCP flow tests
+python3 -m unittest tests.test_agent_mcp # 24 MCP flow tests
 ```
 
 ```
