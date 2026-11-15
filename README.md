@@ -1,18 +1,17 @@
 # Weakest Link
 
-Find out before you leave whether your laptop will reach that projector at 4K60. If it won't,
-see which adapter, cable or charger in your bag is the weakest link, and the one purchase that fixes
-the most venues.
+Will your laptop reach that projector at 4K60? A Relate graph of ports, adapters, cables and venues
+names the weakest link in your bag, with its source, and the one purchase that fixes the most venues.
 
-> Status: milestones 1–3 done (graph, cited dataset, queries, browser UI, and the "pack my bag" agent
-> over Relate MCP). See [PLAN.md](PLAN.md).
+> Status: graph, cited dataset, queries, browser UI, "pack my bag" agent over Relate MCP, strict mode
+> and charging advice are done. The demo video is a draft under review. See [PLAN.md](PLAN.md).
 
 ![The weakest link highlighted in a laptop-to-TV chain](docs/screenshots/desktop-connect-weakest-link.png)
 
 ## Use case
 
-Speakers, teachers, consultants and hackathon teams lose the first ten minutes of a talk to the same
-problem. The laptop connects, but at 1080p30, or not at all. The cause is almost never the laptop.
+**Who:** speakers, teachers, consultants and hackathon teams who plug into someone else's screen.
+**Problem:** minutes before a talk, the projector shows 1080p30, or nothing. The laptop connects, but at 1080p30, or not at all. The cause is almost never the laptop.
 It is one link in a chain like *laptop port → hub or adapter → cable → venue cable → projector input*,
 and every link has its own limit:
 
@@ -27,6 +26,11 @@ carry through itself (`VIDEO` with Gbps, `POWER` with watts). Add which modes a 
 what each venue provides. The answer is a path question: is there a chain from the laptop's GPU to
 the venue's panel where every hop carries the mode? If not, which hop is the bottleneck? The same
 question, with watts, answers "will this charger and cable fast-charge my laptop?".
+
+**What you get:** a yes or no for your exact bag and venue, the weakest link with its public source
+and a confidence level, the single purchase that fixes the most of your venues, and the same for
+charging. A **strict mode** ignores links whose source only confirms the feature, not its speed, for
+when a wrong "yes" is not an option.
 
 ## How it uses Relate
 
@@ -44,6 +48,11 @@ question, with watts, answers "will this charger and cable fast-charge my laptop
   source URL (the maker's page or a spec body) and a confidence level, and every edge was audited
   against its source: see the audit table in [docs/DATA.md](docs/DATA.md) and
   [docs/SCHEMA.md](docs/SCHEMA.md).
+- **How a question becomes a query:** "does my bag reach the hall's TV at 4K60?" is one path match:
+  `(laptop video-source)-[:VIDEO WHERE gbps >= mode]->()(()-[:MATES]->()-[:VIDEO …]->())*(panel sink)`,
+  restricted to items you own or the venue provides. `reduce()` over the path's relationships picks
+  the hop with the lowest Gbps: that is the weakest link. Strict mode is one parameter, `$strict`,
+  that adds `confidence <> 'low'` to every hop predicate.
 - **Relate features used:** quantified path patterns with inline predicates, `SHORTEST 1`,
   `reduce()` over relationships for the bottleneck, `all()` over path nodes, `EXISTS {}` and
   `CALL () {}` subqueries, pattern comprehensions, aggregation, indexes, `--fetch-params` JSON import,
@@ -62,14 +71,19 @@ git clone https://github.com/suganthikannan093-hue/weakest-link && cd weakest-li
 # optional: rebuild the store from the cited JSON (data/src -> data/weakest-link.rl)
 python3 scripts/build_store.py
 
-# first result: does an old Apple AV adapter get a MacBook Air to 4K60 on the meetup-hall TV?
+# first result (about a minute): does an old Apple AV adapter get a MacBook Air to 4K60 on the meetup-hall TV?
 python3 scripts/wl.py reach  --laptop mba-m2 --venue meetup-hall --bag adp-apple-av-a1621 --mode 4K60
 python3 scripts/wl.py chains --laptop mba-m2 --venue meetup-hall --bag adp-apple-av-a1621,hub-usbc-4k30,cable-usbc-hdmi-4k60
 python3 scripts/wl.py best_fix --laptop mba-m2 --bag adp-apple-av-a1621 --venues all --mode 4K60
 python3 scripts/wl.py power  --laptop mbp14-m3 --bag chg-apple-140w,cable-usbc-usb2-60w
+python3 scripts/wl.py charge_fix --laptop mbp14-m3 --bag chg-apple-140w,cable-usbc-usb2-60w   # what to buy to fast-charge
 python3 scripts/wl.py list   # every laptop, item and venue id
 
-# tests: 69 Python tests (22 queries, 26 catalog traps and audit checks, 21 agent/MCP flow), then CLI vs WASM parity
+# the web UI and the agent demo (Node 18+)
+npm install && npm run build && npm run preview   # http://localhost:4173
+python3 scripts/agent_demo.py                      # offline "pack my bag" agent over relate serve --mcp
+
+# tests: 79 Python tests (30 queries, 26 catalog traps and audit checks, 23 agent/MCP flow), then CLI vs WASM parity
 python3 -m unittest -v
 npm install && node tests/wasm_parity.mjs
 
@@ -92,7 +106,20 @@ cable fixes 3 venues: the meetup hall, the conference booth, and the podcast stu
 the venue's Standard HDMI cable. The remaining venues are limited by their own projector or display
 input, and the tool says so rather than suggesting a purchase.
 
-The queries live in [`queries/`](queries/): `reach`, `chains`, `best_fix` and `power`.
+`charge_fix` (same MacBook Pro, 140 W charger, thin USB 2.0 60 W cable): buy a full-featured 100 W
+USB-C cable and it fast-charges at up to 100 W instead of 60 W.
+
+The queries live in [`queries/`](queries/): `reach`, `chains`, `best_fix`, `power` and `charge_fix`.
+Each takes `strict` (`true` ignores low-confidence links; `wl.py` passes `false`).
+
+## Where the data lives
+
+- `data/weakest-link.rl`: the persistent Relate store (single file). Inspect it with
+  `relate info -d data/weakest-link.rl`.
+- `data/src/*.json`: the hand-written, cited source of truth (items, standards, modes, venues,
+  sources).
+- `data/csv/*.csv`: the same graph as node and relationship CSVs.
+- `data/build/graph.json`: the flattened graph that `scripts/import.cypher` loads (CLI and WASM).
 
 ## Web UI
 
@@ -108,10 +135,14 @@ and pick a target mode. You get:
 - **Best purchase.** Tick the venues you visit, and the `best_fix` query ranks single purchases by
   how many of them they fix. It also says when a venue's own display is the limit.
 - **Charging.** Each charger → cable → laptop chain in watts, with a verdict against the laptop's
-  recommended and fast-charge wattage.
+  recommended and fast-charge wattage. If the bag doesn't fast-charge, the `charge_fix` query names
+  the best purchase (a cable, a charger, or a charger + cable kit) with one-click "Add to bag".
+- **Strict mode.** One checkbox re-runs every query with `strict: true`. If a setup only works through
+  a low-confidence link, the UI says which one, so you can check its source.
 
 State lives in the URL hash, so a setup can be shared as a link. Five one-click examples cover the
-main cases.
+main cases. First-time visitors get a three-step intro, and an empty bag, no venue, or a browser
+without WebAssembly each get a clear next step instead of a blank panel.
 
 ```bash
 npm install
@@ -124,9 +155,9 @@ npx playwright install chromium
 npm run test:e2e
 ```
 
-| Best purchase across venues | Charging | Mobile |
+| Best purchase across venues | Charging: what to buy | Mobile |
 |---|---|---|
-| ![](docs/screenshots/desktop-best-purchase.png) | ![](docs/screenshots/desktop-charging.png) | ![](docs/screenshots/mobile-connect.png) |
+| ![Best purchase ranked by venues fixed](docs/screenshots/desktop-best-purchase.png) | ![Charging chain with the cable to buy](docs/screenshots/desktop-charging-fix.png) | ![Mobile verdict](docs/screenshots/mobile-connect.png) |
 
 To deploy to GitHub Pages, copy [`deploy/github-pages.yml`](deploy/github-pages.yml) to
 `.github/workflows/pages.yml`, enable Pages with "Source: GitHub Actions" and run the workflow by
@@ -138,7 +169,7 @@ under `/weakest-link/`.
 A "pack my bag" agent works over Relate's own MCP server, and no paid API is needed. Paste a venue's AV
 email or an adapter's spec page into Claude Desktop, Cursor, VS Code or Claude Code. The agent writes
 the venue or item into a writable copy of the graph, with its source and a confidence level, then runs
-`reach`, `chains`, `best_fix` and `power`. It says what to pack, which link is the weakest, and the one
+`reach`, `chains`, `best_fix`, `power` and `charge_fix`. It says what to pack, which link is the weakest, and the one
 item to buy.
 
 - Two MCP servers via `scripts/mcp_server.py`: `catalog`, which is `relate serve --mcp stdio
@@ -154,8 +185,9 @@ item to buy.
 ```bash
 python3 scripts/agent_demo.py            # offline, deterministic: ingest an email + a spec page, query, recommend
 python3 scripts/agent_demo.py --pace 2   # slower, for filming
+python3 scripts/agent_demo.py --strict   # ignore low-confidence links (recipe parameter strict: true)
 python3 scripts/agent_demo.py --json     # for CI
-python3 -m unittest tests.test_agent_mcp # 21 MCP flow tests
+python3 -m unittest tests.test_agent_mcp # 23 MCP flow tests
 ```
 
 ```
@@ -169,15 +201,6 @@ python3 -m unittest tests.test_agent_mcp # 21 MCP flow tests
 ```
 
 Setup for each client, the safety model and the limits are in [agent/README.md](agent/README.md).
-
-## Where the data lives
-
-- `data/weakest-link.rl`: the persistent Relate store (single file). Inspect it with
-  `relate info -d data/weakest-link.rl`.
-- `data/src/*.json`: the hand-written, cited source of truth (items, standards, modes, venues,
-  sources).
-- `data/csv/*.csv`: the same graph as node and relationship CSVs.
-- `data/build/graph.json`: the flattened graph that `scripts/import.cypher` loads (CLI and WASM).
 
 ## Licenses and AI use
 

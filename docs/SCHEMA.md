@@ -69,3 +69,12 @@ store (`data/work/my-bag.rl`, a git-ignored copy) that the agent writes through 
   quoted sentences). Their `VIDEO`/`POWER` edges carry the same `source`, `source_url` and `confidence`.
 - `:Recipe {name, kind, description, example_params, cypher, file}` holds the vetted read queries and
   write statements, so an MCP host can discover them with `read_cypher`.
+
+## Confidence and strict mode
+
+Every `VIDEO` and `POWER` edge has `confidence`: `high` (the maker or spec states the limit),
+`medium` (stated by a reliable second source, or derived from a stated standard) or `low` (the
+source confirms the feature but not its speed). All five queries (`reach`, `chains`, `best_fix`,
+`power`, `charge_fix`) take a required `$strict` parameter. With `$strict = true` each hop predicate
+adds `confidence <> 'low'`, so a "yes" never rests on a low-confidence link. Callers (`wl.py`, the
+web UI, the agent and the MCP recipes) pass `false` by default.
