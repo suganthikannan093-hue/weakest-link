@@ -11,8 +11,8 @@ covered below.
 
 | # | Dates (IST) | Milestone | Done when |
 |---|---|---|---|
-| 1 | 15 Nov | **Graph and data.** Schema, 46 cited items, build to `.rl` with the CLI, queries `reach`, `chains`, `best_fix` and `power`, 22 tests, WASM parity | ✅ this commit |
-| 2 | 16–21 Nov | **Web UI** (static, `@relate/relate-wasm` in the browser). Bag builder (search items), venue picker plus "describe your venue", chain graph view with the weakest link highlighted, a citation and confidence chip on every link, a mode ladder (720p→4K60), charging panel, best-fix card | Runs from `npx serve` with no server, and every number is clickable to its source |
+| 1 | 15 Nov | **Graph and data.** Schema, 46 cited items, build to `.rl` with the CLI, queries `reach`, `chains`, `best_fix` and `power`, 22 tests, WASM parity | ✅ done |
+| 2 | 16–21 Nov | **Web UI** (static, `@relate/relate-wasm` in the browser). Bag builder (search items), venue picker plus "describe your venue", chain graph view with the weakest link highlighted, a citation and confidence chip on every link, a mode ladder (720p→4K60), charging panel, best-fix card | ✅ done: Vite static site, custom display written into the in-browser graph, best purchase across chosen venues, 22 Playwright tests (desktop + mobile, axe), screenshots in `docs/screenshots/`, manual-only Pages workflow in `deploy/` |
 | 3 | 22–27 Nov | **"Pack my bag" agent over MCP.** `relate serve --mcp` on the catalog (`get_schema`, `read_cypher`) plus a writable per-user store for `write_cypher`. Prompts and a skill file: paste a venue tech-requirements email or an adapter spec → the agent writes `Venue`/`Item` nodes with `confidence:'user'` → runs the four queries → answers with what to pack and why. Works in any MCP host, with no paid API in the repo | Scripted demo transcript, plus a test that replays an email through MCP |
 | 4 | 28 Nov–2 Dec | **Data depth and accuracy.** Grow to ~80 items: more common laptops, docks, popular named adapters and projectors. Second-source check on every `medium` edge. Add a `best_fix` for charging, more venue scenarios, and a `--strict` mode that excludes low-confidence edges. Model DSC/4K120 only if well documented | Every edge cited, the medium-confidence count goes down, tests still green |
 | 5 | 3–6 Dec | **Docs and demo.** README with screenshots and a graph image, architecture diagram, "how the query works" walkthrough. Demo video **≤ 2 min**: problem → bag → weakest link → one fix → agent reads a venue email | Video uploaded unlisted for review, captions checked |
@@ -24,5 +24,6 @@ covered below.
   every edge carries a source and confidence. Known simplifications are listed in `docs/DATA.md`.
 - **Relate is experimental.** We are pinned to 1.0.1 (CLI and WASM). Parity is tested so that a
   regression shows up immediately.
-- **Hosting the UI.** GitHub Pages needs a public repo. Until submission we develop locally. The
-  hosting choice is the owner's decision.
+- **Hosting the UI.** GitHub Pages needs a public repo. Until submission we develop locally.
+  `deploy/github-pages.yml` is a manual-only (`workflow_dispatch`) Pages workflow. It moves to
+  `.github/workflows/` and runs after the repo goes public. The hosting choice is the owner's decision.

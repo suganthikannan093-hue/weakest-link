@@ -4,8 +4,10 @@ Find out before you leave whether your laptop will reach that projector at 4K60.
 see which adapter, cable or charger in your bag is the weakest link, and the one purchase that fixes
 the most venues.
 
-> Status: milestone 1 (graph model, cited dataset, core queries and tests). The web UI and the
-> "pack my bag" agent are next, see [PLAN.md](PLAN.md).
+> Status: milestones 1 and 2 done (graph, cited dataset, queries, tests, browser UI). The "pack my
+> bag" agent is next, see [PLAN.md](PLAN.md).
+
+![The weakest link highlighted in a laptop-to-TV chain](docs/screenshots/desktop-connect-weakest-link.png)
 
 ## Use case
 
@@ -28,8 +30,8 @@ question, with watts, answers "will this charger and cable fast-charge my laptop
 
 ## How it uses Relate
 
-- **Mode:** single file, `data/weakest-link.rl`, built with the `relate` CLI. The planned browser UI
-  loads the same graph into `@relate/relate-wasm` in memory.
+- **Mode:** single file, `data/weakest-link.rl`, built with the `relate` CLI. The browser UI
+  (`web/`) loads the same graph into `@relate/relate-wasm` in memory.
 - **Why this mode:** the catalog is a shared, read-only reference that ships with the repo. One file
   is easy to commit, diff-review, open read-only (`--read-only`), and `--load` straight from a GitHub
   URL, with no server. Per-user data (what is in your bag) is a query parameter, so one store
@@ -88,6 +90,45 @@ input, and the tool says so rather than suggesting a purchase.
 
 The queries live in [`queries/`](queries/): `reach`, `chains`, `best_fix` and `power`.
 
+## Web UI
+
+A static site (Vite) that runs entirely in the browser on `@relate/relate-wasm`. There is no server
+and no API key. Pick a laptop, fill your bag from the dataset, choose a venue or describe a display,
+and pick a target mode. You get:
+
+- **Will it connect?** A plain-English verdict and a chain diagram with the weakest link highlighted.
+  Every hop shows its capacity, its confidence and a link to its source. You also get the one
+  purchase that would fix this venue, and the Cypher that produced the answer.
+- **Describe a display.** The display you describe is written into the in-browser graph as real
+  `Item`/`Port`/`Endpoint` nodes with `confidence:'user'`, so the same queries apply to it.
+- **Best purchase.** Tick the venues you visit, and the `best_fix` query ranks single purchases by
+  how many of them they fix. It also says when a venue's own display is the limit.
+- **Charging.** Each charger → cable → laptop chain in watts, with a verdict against the laptop's
+  recommended and fast-charge wattage.
+
+State lives in the URL hash, so a setup can be shared as a link. Five one-click examples cover the
+main cases.
+
+```bash
+npm install
+npm run dev                      # http://localhost:5173
+# or the production build
+npm run build && npm run preview # http://localhost:4173
+
+# browser tests (desktop + mobile Chromium, axe accessibility, screenshots to docs/screenshots/)
+npx playwright install chromium
+npm run test:e2e
+```
+
+| Best purchase across venues | Charging | Mobile |
+|---|---|---|
+| ![](docs/screenshots/desktop-best-purchase.png) | ![](docs/screenshots/desktop-charging.png) | ![](docs/screenshots/mobile-connect.png) |
+
+To deploy to GitHub Pages, copy [`deploy/github-pages.yml`](deploy/github-pages.yml) to
+`.github/workflows/pages.yml`, enable Pages with "Source: GitHub Actions" and run the workflow by
+hand (it is `workflow_dispatch` only). The Vite build uses relative paths (`base: './'`), so it works
+under `/weakest-link/`.
+
 ## Where the data lives
 
 - `data/weakest-link.rl`: the persistent Relate store (single file). Inspect it with
@@ -101,5 +142,5 @@ The queries live in [`queries/`](queries/): `reach`, `chains`, `best_fix` and `p
 
 - Code: MIT ([LICENSE](LICENSE)). Dataset (`data/`): CC BY 4.0 ([data/LICENSE](data/LICENSE)).
 - Relate (`relate` CLI, `@relate/relate-wasm`) is Apache-2.0 and is used as a dependency.
-- AI-assisted development: an AI coding agent helped write the build script, queries, tests and
-  docs. Every spec value was checked against the cited source pages.
+- AI-assisted development: an AI coding agent helped write the build script, queries, web UI,
+  tests and docs. Every spec value was checked against the cited source pages.
