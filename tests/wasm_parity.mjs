@@ -27,6 +27,10 @@ const scenarios = [
   ['best_fix', { laptop: 'mba-m2', bag: ['adp-apple-av-a1621'], mode: '1080p60',
                  venues: ['meetup-hall', 'college-seminar', 'hotel-ballroom', 'coworking-room', 'conference-booth', 'studio-tv'] }],
   ['power', { laptop: 'mbp14-m3', bag: ['chg-apple-140w', 'cable-usbc-usb2-60w', 'chg-apple-96w', 'cable-usbc-magsafe3'] }],
+  ['chains', { laptop: 'ideapad-slim3-15iru8', venue: 'meetup-hall', bag: ['adp-usbc-hdmi-4k60', 'hub-anker-341'] }],
+  ['reach', { laptop: 'ipad-10', venue: 'conference-booth', bag: ['cable-usbc-dp14'], mode: '4K60' }],
+  ['best_fix', { laptop: 'iphone-15', bag: [], mode: '1080p60', venues: ['meeting-room', 'school-classroom', 'hot-desk', 'meetup-hall'] }],
+  ['power', { laptop: 'mba-m2', bag: ['mon-lg-27up850', 'cable-usbc-10g-100w', 'dock-caldigit-ts4'] }],
 ];
 
 const canon = (rows) => JSON.stringify(rows.map((r) => Object.fromEntries(Object.entries(r).sort())));

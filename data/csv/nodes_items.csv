@@ -2,8 +2,33 @@ id,kind,class,maker,name,pd_recommended_w,pd_fast_w,pd_source,purchasable,licens
 mba-m2,laptop,product,Apple,"MacBook Air 13-inch (M2, 2022)",30,67,apple-fastcharge,False,CC-BY-4.0
 mbp14-m3,laptop,product,Apple,"MacBook Pro 14-inch (M3, Nov 2023)",67,94,apple-fastcharge,False,CC-BY-4.0
 x1c-g11,laptop,product,Lenovo,ThinkPad X1 Carbon Gen 11,45,65,lenovo-x1c11,False,CC-BY-4.0
-gen-laptop-usbc,laptop,generic,,"Generic thin laptop, USB-C only (DP Alt Mode + USB PD 65 W)",65,,class-assumption,False,CC-BY-4.0
-gen-laptop-budget,laptop,generic,,Generic budget laptop: HDMI 1.4b + data-only USB-C (barrel-jack charging),,,class-assumption,False,CC-BY-4.0
+gen-laptop-usbc,laptop,generic,,"Generic thin laptop, USB-C only (DP Alt Mode + USB PD 65 W)",65,,usbif-pd,False,CC-BY-4.0
+gen-laptop-budget,laptop,generic,,Generic budget laptop: HDMI 1.4b + data-only USB-C (barrel-jack charging),,,lenovo-ideapad1-15amn7,False,CC-BY-4.0
+mba-m1,laptop,product,Apple,"MacBook Air 13-inch (M1, 2020)",30,,apple-power,False,CC-BY-4.0
+mba-m3,laptop,product,Apple,"MacBook Air 13-inch (M3, 2024)",30,67,apple-fastcharge,False,CC-BY-4.0
+mba-m4,laptop,product,Apple,"MacBook Air 13-inch (M4, 2025)",30,67,apple-fastcharge,False,CC-BY-4.0
+mbp14-m4,laptop,product,Apple,"MacBook Pro 14-inch (M4, 2024)",67,94,apple-fastcharge,False,CC-BY-4.0
+x1c-g12,laptop,product,Lenovo,ThinkPad X1 Carbon Gen 12,45,65,lenovo-x1c12,False,CC-BY-4.0
+t14-g4,laptop,product,Lenovo,ThinkPad T14 Gen 4 (Intel),45,65,lenovo-t14g4,False,CC-BY-4.0
+yoga-slim7-14,laptop,product,Lenovo,Yoga Slim 7 14IMH9,45,65,lenovo-yoga-slim7-14imh9,False,CC-BY-4.0
+xps13-9340,laptop,product,Dell,Dell XPS 13 9340,60,,dell-xps13-9340,False,CC-BY-4.0
+elitebook-840-g10,laptop,product,HP,HP EliteBook 840 G10,45,65,hp-840g10,False,CC-BY-4.0
+e14-g5,laptop,product,Lenovo,ThinkPad E14 Gen 5 (Intel),65,,lenovo-e14g5,False,CC-BY-4.0
+ideapad-slim3-15iru8,laptop,product,Lenovo,IdeaPad Slim 3 15IRU8,65,,lenovo-slim3-15iru8,False,CC-BY-4.0
+ideapad1-15amn7,laptop,product,Lenovo,IdeaPad 1 15AMN7,,,lenovo-ideapad1-15amn7,False,CC-BY-4.0
+chromebook-flex5-plus,laptop,product,Lenovo,IdeaPad Flex 5 Chromebook Plus 14IAU7,45,,lenovo-flex5-cbplus,False,CC-BY-4.0
+ideapad-slim3-15iah8,laptop,product,Lenovo,IdeaPad Slim 3 15IAH8,,,lenovo-slim3-15iah8,False,CC-BY-4.0
+iphone-15,phone,product,Apple,iPhone 15,,20,apple-iphone15,False,CC-BY-4.0
+iphone-15-pro,phone,product,Apple,iPhone 15 Pro,,20,apple-iphone15pro,False,CC-BY-4.0
+iphone-16,phone,product,Apple,iPhone 16,,20,apple-iphone16,False,CC-BY-4.0
+pixel-8,phone,product,Google,Google Pixel 8,,,google-pixel-display,False,CC-BY-4.0
+pixel-7a,phone,product,Google,Google Pixel 7a,,,google-pixel-display,False,CC-BY-4.0
+galaxy-s24,phone,product,Samsung,Samsung Galaxy S24,,,samsung-dex,False,CC-BY-4.0
+galaxy-z-flip6,phone,product,Samsung,Samsung Galaxy Z Flip6,,,samsung-dex,False,CC-BY-4.0
+ipad-10,tablet,product,Apple,iPad (10th generation),20,,apple-ipad10,False,CC-BY-4.0
+ipad-air-m2,tablet,product,Apple,iPad Air 11-inch (M2),20,,apple-ipadair-m2,False,CC-BY-4.0
+galaxy-tab-s9,tablet,product,Samsung,Samsung Galaxy Tab S9,,,samsung-dex,False,CC-BY-4.0
+galaxy-tab-s9-fe,tablet,product,Samsung,Samsung Galaxy Tab S9 FE,,,samsung-dex,False,CC-BY-4.0
 adp-usbc-hdmi-4k30,adapter,generic,,"USB-C to HDMI adapter, 4K30 (HDMI 1.4 class)",,,,True,CC-BY-4.0
 adp-usbc-hdmi-4k60,adapter,generic,,"USB-C to HDMI adapter, 4K60 (HDMI 2.0 class)",,,,True,CC-BY-4.0
 adp-usbc-hdmi21,adapter,generic,,USB-C to HDMI 2.1 adapter (8K60/4K120 class),,,,True,CC-BY-4.0
@@ -15,6 +40,13 @@ adp-dp-hdmi-passive,adapter,generic,,Passive DP++ to HDMI adapter (4K30),,,,True
 adp-dp-hdmi-active,adapter,generic,,Active DisplayPort to HDMI 2.0 adapter (4K60),,,,True,CC-BY-4.0
 adp-hdmi-vga,adapter,generic,,HDMI to VGA converter (up to 1920x1200@60),,,,True,CC-BY-4.0
 hub-usbc-4k30,adapter,generic,,USB-C multiport hub with HDMI 4K30 (typical 7-in-1),,,,True,CC-BY-4.0
+adp-apple-vga,adapter,product,Apple,Apple USB-C VGA Multiport Adapter,,,,True,CC-BY-4.0
+hub-anker-341,adapter,product,Anker,Anker 341 USB-C Hub (7-in-1),,,,True,CC-BY-4.0
+hub-ms-travel,adapter,product,Microsoft,Microsoft Surface USB-C Travel Hub,,,,True,CC-BY-4.0
+dock-caldigit-ts4,adapter,product,CalDigit,CalDigit TS4 Thunderbolt 4 dock (with its TB4 cable),,,,True,CC-BY-4.0
+dock-lenovo-universal,adapter,product,Lenovo,ThinkPad Universal USB-C Dock (with its USB-C cable),,,,True,CC-BY-4.0
+dock-ms-usb4,adapter,product,Microsoft,Microsoft Surface USB4 Dock (with its USB-C cable),,,,True,CC-BY-4.0
+adp-framework-hdmi,adapter,product,Framework,Framework HDMI (3rd Gen) Expansion Card,,,,True,CC-BY-4.0
 cable-usbc-usb2-60w,cable,generic,,"USB-C to USB-C charge cable, USB 2.0, 60 W",,,,True,CC-BY-4.0
 cable-usbc-usb2-240w,cable,generic,,"USB-C to USB-C 240 W EPR charge cable, USB 2.0 data",,,,True,CC-BY-4.0
 cable-usbc-10g-100w,cable,generic,,"USB-C to USB-C full-featured 10 Gbps, 100 W (5 A e-marked)",,,,True,CC-BY-4.0
@@ -24,11 +56,18 @@ cable-hdmi-high-speed,cable,generic,,High Speed HDMI cable (10.2 Gbps),,,,True,C
 cable-hdmi-premium,cable,generic,,Premium High Speed HDMI cable (18 Gbps),,,,True,CC-BY-4.0
 cable-hdmi-ultra,cable,generic,,Ultra High Speed HDMI cable (48 Gbps),,,,True,CC-BY-4.0
 cable-dp-hbr2,cable,generic,,DisplayPort cable rated HBR2 (DP 1.2 class),,,,True,CC-BY-4.0
-cable-dp8k,cable,generic,,VESA-certified DP8K DisplayPort cable,,,,True,CC-BY-4.0
+cable-dp8k,cable,generic,,VESA-certified DP8K DisplayPort cable (HBR3),,,,True,CC-BY-4.0
 cable-usbc-hdmi-4k60,cable,generic,,"USB-C to HDMI cable, 4K60 (HDMI 2.0 class)",,,,True,CC-BY-4.0
 cable-usbc-dp14,cable,generic,,USB-C to DisplayPort 1.4 cable,,,,True,CC-BY-4.0
 cable-vga,cable,generic,,VGA cable (analog),,,,True,CC-BY-4.0
 cable-usbc-magsafe3,cable,product,Apple,Apple USB-C to MagSafe 3 cable (2 m),,,,True,CC-BY-4.0
+cable-apple-tb4-pro,cable,product,Apple,Apple Thunderbolt 4 (USB-C) Pro Cable,,,,True,CC-BY-4.0
+cable-apple-tb5-pro,cable,product,Apple,Apple Thunderbolt 5 (USB-C) Pro Cable,,,,True,CC-BY-4.0
+cable-apple-240w,cable,product,Apple,Apple 240W USB-C Charge Cable (2 m),,,,True,CC-BY-4.0
+cable-usb4-240w,cable,generic,,USB4 40Gbps 240W certified USB-C cable,,,,True,CC-BY-4.0
+cable-usbc-5g-60w,cable,generic,,"USB-C to USB-C cable, USB 3.2 Gen 1 (5 Gbps), 60 W",,,,True,CC-BY-4.0
+cable-dp54,cable,generic,,VESA-certified DP54 DisplayPort cable (UHBR13.5),,,,True,CC-BY-4.0
+cable-apple-60w,cable,product,Apple,Apple 60W USB-C Charge Cable (1 m),,,,True,CC-BY-4.0
 chg-apple-30w,charger,product,Apple,Apple 30W USB-C Power Adapter,,,,True,CC-BY-4.0
 chg-apple-35w-dual,charger,product,Apple,Apple 35W Dual USB-C Port Power Adapter,,,,True,CC-BY-4.0
 chg-apple-70w,charger,product,Apple,Apple 70W USB-C Power Adapter,,,,True,CC-BY-4.0
@@ -37,6 +76,14 @@ chg-apple-140w,charger,product,Apple,Apple 140W USB-C Power Adapter (USB PD 3.1 
 chg-gen-20w,charger,generic,,Generic 20 W USB-C PD phone charger,,,,True,CC-BY-4.0
 chg-gen-65w,charger,generic,,Generic 65 W USB-C PD charger (GaN),,,,True,CC-BY-4.0
 chg-gen-100w,charger,generic,,Generic 100 W USB-C PD charger (GaN),,,,True,CC-BY-4.0
+chg-apple-20w,charger,product,Apple,Apple 20W USB-C Power Adapter,,,,True,CC-BY-4.0
+chg-apple-67w,charger,product,Apple,Apple 67W USB-C Power Adapter,,,,True,CC-BY-4.0
+chg-lenovo-65w,charger,product,Lenovo,Lenovo 65W USB-C AC adapter (PD 3.0),,,,True,CC-BY-4.0
+chg-lenovo-45w,charger,product,Lenovo,Lenovo 45W USB-C AC adapter (PD 3.0),,,,True,CC-BY-4.0
+chg-hp-65w,charger,product,HP,HP Smart 65W USB-C adapter,,,,True,CC-BY-4.0
+chg-anker-735,charger,product,Anker,Anker 735 Charger (Nano II 65W),,,,True,CC-BY-4.0
+chg-anker-prime-100w,charger,product,Anker,"Anker Prime Charger (100W, 3 ports)",,,,True,CC-BY-4.0
+chg-hp-45w,charger,product,HP,HP Smart 45W USB-C adapter,,,,True,CC-BY-4.0
 proj-1080p,display,generic,,1080p projector with HDMI 1.4 and VGA inputs,,,,False,CC-BY-4.0
 proj-xga-vga,display,generic,,"Older XGA classroom projector, VGA input only",,,,False,CC-BY-4.0
 tv-4k-hdmi20,display,generic,,4K TV with HDMI 2.0 inputs,,,,False,CC-BY-4.0
@@ -45,3 +92,10 @@ disp-4k-hdmi14,display,generic,,4K meeting-room display with HDMI 1.4 inputs onl
 mon-4k-multi,display,generic,,"4K monitor with DP 1.4, HDMI 2.0 and USB-C (DP Alt Mode) inputs",,,,False,CC-BY-4.0
 mon-1440p,display,generic,,1440p monitor with DP 1.2 and HDMI 1.4 inputs,,,,False,CC-BY-4.0
 mon-portable-1080p,display,generic,,Portable 1080p USB-C monitor (DP Alt Mode),,,,False,CC-BY-4.0
+mon-lenovo-t27h30,display,product,Lenovo,"Lenovo ThinkVision T27h-30 (1440p, USB-C 90W)",,,,False,CC-BY-4.0
+mon-lenovo-p27u20,display,product,Lenovo,"Lenovo ThinkVision P27u-20 (4K, Thunderbolt 4)",,,,False,CC-BY-4.0
+mon-lg-27up850,display,product,LG,"LG 27UP850-W (4K, USB-C 96W)",,,,False,CC-BY-4.0
+mon-dell-p2723qe,display,product,Dell,"Dell P2723QE (4K, USB-C 90W)",,,,False,CC-BY-4.0
+proj-epson-2250u,display,product,Epson,Epson PowerLite 2250U (WUXGA meeting-room projector),,,,False,CC-BY-4.0
+proj-epson-118,display,product,Epson,Epson PowerLite 118 (XGA classroom projector),,,,False,CC-BY-4.0
+proj-benq-mh560,display,product,BenQ,BenQ MH560 (1080p business projector),,,,False,CC-BY-4.0

@@ -23,6 +23,8 @@ BUILD = ROOT / "data" / "build"
 CSV_DIR = ROOT / "data" / "csv"
 STORE = ROOT / "data" / "weakest-link.rl"
 CONFIDENCE = {"high", "medium", "low"}
+KINDS = {"laptop", "phone", "tablet", "adapter", "cable", "charger", "display"}
+DEVICES = {"laptop", "phone", "tablet"}  # things you carry that render video and charge
 DATA_LICENSE = "CC-BY-4.0"
 
 
@@ -67,7 +69,7 @@ def build_graph():
         iid = it["id"]
         need(iid not in item_ids, f"duplicate item {iid}")
         item_ids.add(iid)
-        need(it["kind"] in {"laptop", "adapter", "cable", "charger", "display"}, f"{iid}: bad kind")
+        need(it["kind"] in KINDS, f"{iid}: bad kind")
         node = {k: v for k, v in it.items() if k not in ("ports", "video", "power", "modes", "bidirectional")}
         node.setdefault("purchasable", False)
         node["license"] = DATA_LICENSE
@@ -87,9 +89,11 @@ def build_graph():
             local[p["id"]] = pid
 
         # Internal endpoints: where a signal starts or ends inside an item.
-        roles = {"laptop": [("gpu", "video-source"), ("battery", "power-sink")],
-                 "display": [("panel", "video-sink")],
-                 "charger": [("psu", "power-source")]}.get(it["kind"], [])
+        roles = [("gpu", "video-source"), ("battery", "power-sink")] if it["kind"] in DEVICES else \
+            {"display": [("panel", "video-sink")], "charger": [("psu", "power-source")]}.get(it["kind"], [])
+        # Docks and USB-C monitors with their own power supply can charge a laptop too.
+        if it["kind"] != "charger" and any(e.get("from") == "psu" for e in it.get("power", [])):
+            roles = roles + [("psu", "power-source")]
         for name, role in roles:
             eid = f"{iid}:{name}"
             g["endpoints"].append({"id": eid, "item": iid, "name": name, "role": role})
@@ -135,8 +139,8 @@ def build_graph():
             g["supports_mode"].append({"endpoint": f"{iid}:panel", "mode": m})
         if it["kind"] == "display":
             need(bool(it.get("modes")), f"{iid}: display needs modes")
-        if it["kind"] == "laptop":
-            for m in modes:  # every modelled laptop GPU can render every mode here; ports set the limit
+        if it["kind"] in DEVICES:
+            for m in modes:  # every modelled device GPU can render every mode here; ports set the limit
                 g["supports_mode"].append({"endpoint": f"{iid}:gpu", "mode": m})
 
     # Physical mating: a plug fits a receptacle of the same connector on a different item.

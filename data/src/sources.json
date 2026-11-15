@@ -5,7 +5,7 @@
     "kind": "spec-body",
     "title": "HDMI Cables - Different Cable Types",
     "url": "https://www.hdmi.org/resource/cables",
-    "supports": "Standard cable tested for 720p/1080i; High Speed up to 10.2 Gbps (1080p, 4K30); Premium High Speed certified 18 Gbps (4K60); Ultra High Speed 48 Gbps (4K120/8K60)."
+    "supports": "Standard cable tested for 720p/1080i; High Speed cable listed at up to 10.2 Gbps (1080p, 4K30); Premium High Speed certified 18 Gbps (4K60); Ultra High Speed 48 Gbps (4K120/8K60)."
   },
   {
     "id": "hdmi-premium",
@@ -35,9 +35,9 @@
     "id": "hdmi-21",
     "publisher": "HDMI Licensing Administrator",
     "kind": "spec-body",
-    "title": "HDMI Specification 2.1",
+    "title": "HDMI Specification overview (now HDMI 2.2; formerly the HDMI 2.1 page)",
     "url": "https://www.hdmi.org/spec/hdmi2_1",
-    "supports": "HDMI 2.1 up to 48 Gbps (FRL)."
+    "supports": "The HDMI 2.1/2.2 family uses Fixed Rate Link (FRL); 48 Gbps FRL is the HDMI 2.1 level carried by Ultra High Speed cables (see hdmi-uhs)."
   },
   {
     "id": "wiki-hdmi",
@@ -168,11 +168,347 @@
     "supports": "2x Thunderbolt 4 / USB4 (PD 3.0, DisplayPort 1.4a); 1x HDMI 2.1 up to 4K/60Hz; 45 W or 65 W USB-C adapters; Rapid Charge with 65 W."
   },
   {
-    "id": "class-assumption",
-    "publisher": "Weakest Link project",
-    "kind": "assumption",
-    "title": "Generic product class (see docs/DATA.md)",
-    "url": "https://github.com/suganthikannan093-hue/weakest-link/blob/main/docs/DATA.md",
-    "supports": "A generic class whose limit is set by the standard it claims (e.g. an 'HDMI 2.0 4K60 adapter'); individual products can be worse."
+    "id": "hdmi-20-pr",
+    "publisher": "HDMI Licensing Administrator",
+    "kind": "spec-body",
+    "title": "HDMI Forum releases version 2.0 of the HDMI Specification (press release)",
+    "url": "https://www.hdmi.org/press/bodydetails/24",
+    "supports": "HDMI 2.0 raises bandwidth to 18 Gbps and adds 4K@50/60 (2160p). Also states that existing High Speed (Category 2) cables carry the 18 Gbps rate."
+  },
+  {
+    "id": "vesa-tokyo-2024",
+    "publisher": "VESA",
+    "kind": "spec-body",
+    "title": "VESA Tokyo Workshop, October 2024 (DisplayPort and cable certification overview)",
+    "url": "https://vesa.org/wp-content/uploads/2024/10/VESA-Tokyo-Workshop_October-2024.pdf",
+    "supports": "DPv1.2 = HBR2 (5.4 Gbps/lane), DPv1.4 = HBR3 (8.1 Gbps/lane), DPv2.x = UHBR10/13.5/20. DP8K cables: up to 4-lane HBR3. DP54: up to UHBR13.5. DP80: UHBR20."
+  },
+  {
+    "id": "vesa-dp8k-pr",
+    "publisher": "VESA",
+    "kind": "spec-body",
+    "title": "VESA strengthens 8K video resolution ecosystem with DP8K-certified DisplayPort cables (press release)",
+    "url": "https://vesa.org/press-releases/vesa-strengthens-8k-video-resolution-ecosystem-with-market-ready-dp8k-certified-displayport-cables/",
+    "supports": "DP8K certification covers the full HBR3 rate (32.4 Gbps across 4 lanes) defined in DisplayPort 1.3/1.4."
+  },
+  {
+    "id": "apple-mba-m1",
+    "publisher": "Apple",
+    "kind": "manufacturer",
+    "title": "MacBook Air (M1, 2020) - Tech Specs",
+    "url": "https://support.apple.com/en-us/111883",
+    "supports": "Two Thunderbolt / USB 4 ports with charging and DisplayPort; one external display up to 6K60; 30W USB-C Power Adapter."
+  },
+  {
+    "id": "apple-mba-m3",
+    "publisher": "Apple",
+    "kind": "manufacturer",
+    "title": "MacBook Air (13-inch, M3, 2024) - Tech Specs",
+    "url": "https://support.apple.com/en-us/118551",
+    "supports": "Two Thunderbolt / USB 4 ports (charging, DisplayPort); MagSafe 3; one external display up to 6K60; 30W or 35W adapter; fast-charge capable with 70W."
+  },
+  {
+    "id": "apple-mba-m4",
+    "publisher": "Apple",
+    "kind": "manufacturer",
+    "title": "MacBook Air (13-inch, M4, 2025) - Tech Specs",
+    "url": "https://support.apple.com/en-us/122209",
+    "supports": "Two Thunderbolt 4 (USB-C) ports with native DisplayPort 1.4 output; MagSafe 3; up to two external displays up to 6K60; fast-charge capable with 70W."
+  },
+  {
+    "id": "apple-mbp14-m4",
+    "publisher": "Apple",
+    "kind": "manufacturer",
+    "title": "MacBook Pro (14-inch, M4, 2024) - Tech Specs",
+    "url": "https://support.apple.com/en-us/121552",
+    "supports": "Three Thunderbolt 4 ports with native DisplayPort 1.4; HDMI up to 8K60 or 4K240; MagSafe 3; 70W adapter; fast-charge capable with 96W."
+  },
+  {
+    "id": "apple-iphone15",
+    "publisher": "Apple",
+    "kind": "manufacturer",
+    "title": "iPhone 15 - Tech Specs",
+    "url": "https://support.apple.com/en-us/111831",
+    "supports": "USB-C with USB 2 (480 Mb/s) and DisplayPort; video out up to 4K HDR via native DisplayPort over USB-C or the A2119 adapter; fast-charge with a 20W adapter or higher."
+  },
+  {
+    "id": "apple-iphone15pro",
+    "publisher": "Apple",
+    "kind": "manufacturer",
+    "title": "iPhone 15 Pro - Tech Specs",
+    "url": "https://support.apple.com/en-us/111829",
+    "supports": "USB-C with USB 3 (up to 10 Gb/s) and DisplayPort; video out up to 4K HDR; fast-charge with a 20W adapter or higher."
+  },
+  {
+    "id": "apple-iphone16",
+    "publisher": "Apple",
+    "kind": "manufacturer",
+    "title": "iPhone 16 - Tech Specs",
+    "url": "https://support.apple.com/en-us/121029",
+    "supports": "USB-C with USB 2 and DisplayPort; video out up to 4K HDR; fast-charge with a 20W adapter or higher."
+  },
+  {
+    "id": "apple-ipad10",
+    "publisher": "Apple",
+    "kind": "manufacturer",
+    "title": "iPad (10th generation) - Tech Specs",
+    "url": "https://support.apple.com/en-us/111840",
+    "supports": "USB-C with DisplayPort; external display up to 4K at 30 Hz or 1080p at 60 Hz (per Apple's display support note); 20W USB-C adapter."
+  },
+  {
+    "id": "apple-ipadair-m2",
+    "publisher": "Apple",
+    "kind": "manufacturer",
+    "title": "iPad Air 11-inch (M2) - Tech Specs",
+    "url": "https://support.apple.com/en-us/119894",
+    "supports": "USB-C with DisplayPort and USB 3; one external display up to 6K at 60 Hz; 20W USB-C adapter."
+  },
+  {
+    "id": "apple-vga-adapter",
+    "publisher": "Apple",
+    "kind": "manufacturer",
+    "title": "About the Apple USB-C VGA Multiport Adapter",
+    "url": "https://support.apple.com/en-us/111815",
+    "supports": "VGA up to 1080p (1920x1080) at 60 Hz; USB-C port is for charging only (max 60W), not data or video."
+  },
+  {
+    "id": "apple-tb-cables",
+    "publisher": "Apple",
+    "kind": "manufacturer",
+    "title": "About the Apple Thunderbolt Pro Cables",
+    "url": "https://support.apple.com/en-us/118204",
+    "supports": "Thunderbolt 4 Pro Cable: 40 Gbps, DisplayPort HBR3 video, up to 100W. Thunderbolt 5 Pro Cable: up to 120 Gbps, HBR3 video, up to 240W. Apple USB-C Charge Cable: USB 2 (480 Mbps), no video."
+  },
+  {
+    "id": "apple-240w-cable",
+    "publisher": "Apple",
+    "kind": "manufacturer",
+    "title": "240W USB-C Charge Cable (2 m)",
+    "url": "https://www.apple.com/shop/product/myqt3am/a/240w-usb-c-charge-cable-2-m",
+    "supports": "Charges up to 240W; transfers data at USB 2 speeds (480 Mb/s)."
+  },
+  {
+    "id": "lenovo-x1c12",
+    "publisher": "Lenovo",
+    "kind": "manufacturer",
+    "title": "ThinkPad X1 Carbon Gen 12 - PSREF",
+    "url": "https://psref.lenovo.com/syspool/Sys/PDF/ThinkPad/ThinkPad_X1_Carbon_Gen_12/ThinkPad_X1_Carbon_Gen_12_Spec.pdf",
+    "supports": "2x Thunderbolt 4 / USB4 with USB PD 3.0 and DisplayPort 2.1; HDMI 2.1 up to 4K/60Hz; 45W/65W USB-C adapters; Rapid Charge with 65W."
+  },
+  {
+    "id": "lenovo-t14g4",
+    "publisher": "Lenovo",
+    "kind": "manufacturer",
+    "title": "ThinkPad T14 Gen 4 (Intel) - PSREF",
+    "url": "https://psref.lenovo.com/syspool/Sys/PDF/ThinkPad/ThinkPad_T14_Gen_4_Intel/ThinkPad_T14_Gen_4_Intel_Spec.pdf",
+    "supports": "2x Thunderbolt 4 / USB4 (PD 3.0, DisplayPort 1.4); HDMI 2.1 up to 4K/60Hz; 45W or 65W USB-C PD 3.0 adapters; Rapid Charge."
+  },
+  {
+    "id": "lenovo-e14g5",
+    "publisher": "Lenovo",
+    "kind": "manufacturer",
+    "title": "ThinkPad E14 Gen 5 (Intel) - PSREF",
+    "url": "https://psref.lenovo.com/syspool/Sys/PDF/ThinkPad/ThinkPad_E14_Gen_5_Intel/ThinkPad_E14_Gen_5_Intel_Spec.pdf",
+    "supports": "1x Thunderbolt 4 and 1x USB-C 3.2 Gen 2, both with PD 3.0 and DisplayPort 1.4; HDMI 2.1 up to 4096x2160@60Hz; 65W USB-C adapter."
+  },
+  {
+    "id": "lenovo-slim3-15iru8",
+    "publisher": "Lenovo",
+    "kind": "manufacturer",
+    "title": "IdeaPad Slim 3 15IRU8 - PSREF",
+    "url": "https://psref.lenovo.com/syspool/Sys/PDF/IdeaPad/IdeaPad_Slim_3_15IRU8/IdeaPad_Slim_3_15IRU8_Spec.pdf",
+    "supports": "HDMI 1.4 up to 4K@30Hz; USB-C 3.2 Gen 1 with USB PD 45-65W and DisplayPort 1.2, up to 4K@60Hz; 65W round-tip adapter."
+  },
+  {
+    "id": "lenovo-ideapad1-15amn7",
+    "publisher": "Lenovo",
+    "kind": "manufacturer",
+    "title": "IdeaPad 1 15AMN7 - PSREF",
+    "url": "https://psref.lenovo.com/syspool/Sys/PDF/IdeaPad/IdeaPad_1_15AMN7/IdeaPad_1_15AMN7_Spec.pdf",
+    "supports": "HDMI 1.4b up to 4K@30Hz; USB-C 3.2 Gen 1 supports data transfer only; round-tip power connector."
+  },
+  {
+    "id": "lenovo-yoga-slim7-14imh9",
+    "publisher": "Lenovo",
+    "kind": "manufacturer",
+    "title": "Yoga Slim 7 14IMH9 - PSREF",
+    "url": "https://psref.lenovo.com/syspool/Sys/PDF/Yoga/Yoga_Slim_7_14IMH9/Yoga_Slim_7_14IMH9_Spec.pdf",
+    "supports": "2x Thunderbolt 4 with USB PD 45-65W and DisplayPort 1.4; HDMI 2.1 up to 4K/60Hz; 65W USB-C adapter."
+  },
+  {
+    "id": "lenovo-flex5-cbplus",
+    "publisher": "Lenovo",
+    "kind": "manufacturer",
+    "title": "IdeaPad Flex 5 Chromebook Plus 14IAU7 - PSREF",
+    "url": "https://psref.lenovo.com/syspool/Sys/PDF/IdeaPad/IP_Flex_5_Chrome_14IAU7_Plus/IP_Flex_5_Chrome_14IAU7_Plus_Spec.PDF",
+    "supports": "2x USB-C (10Gbps) with USB PD 3.0 and DisplayPort 1.4, up to 3840x2160@60Hz; no HDMI; 45W USB-C PD 3.0 adapter."
+  },
+  {
+    "id": "lenovo-t27h30",
+    "publisher": "Lenovo",
+    "kind": "manufacturer",
+    "title": "ThinkVision T27h-30 - PSREF",
+    "url": "https://psref.lenovo.com/syspool/Sys/PDF/ThinkVision/ThinkVision_T27h_30/ThinkVision_T27h_30_Spec.pdf",
+    "supports": "2560x1440 panel; USB-C 3.2 Gen 1 with DP 1.4 Alt Mode and up to 90W PD; HDMI 2.1 TMDS (2560x1440@60Hz); DisplayPort 1.4."
+  },
+  {
+    "id": "lenovo-p27u20",
+    "publisher": "Lenovo",
+    "kind": "manufacturer",
+    "title": "ThinkVision P27u-20 - PSREF",
+    "url": "https://psref.lenovo.com/syspool/Sys/PDF/ThinkVision/ThinkVision_P27u_20/ThinkVision_P27u_20_Spec.pdf",
+    "supports": "3840x2160 panel; Thunderbolt 4 In; 2x HDMI 2.1 TMDS (3840x2160@60Hz); DisplayPort 1.2; downstream USB-C 3.2 Gen 1 is data (and up to 27W) only."
+  },
+  {
+    "id": "lenovo-univ-dock",
+    "publisher": "Lenovo",
+    "kind": "manufacturer",
+    "title": "ThinkPad Universal USB-C Dock - datasheet",
+    "url": "https://techtoday.lenovo.com/sites/default/files/2025-08/thinkpad-universal-usb-c-dock-datasheet-ww-en.pdf",
+    "supports": "2x DisplayPort 1.4 and 1x HDMI 2.0, multi 4K@60Hz; charges the notebook at 65W with the included 90W adapter (100W with a 135W adapter)."
+  },
+  {
+    "id": "dell-xps13-9340",
+    "publisher": "Dell",
+    "kind": "manufacturer",
+    "title": "XPS 13 9340 Owner's Manual - External ports",
+    "url": "https://www.dell.com/support/manuals/en-us/xps-13-9340-laptop/xps-13-9340_owners_manual/external-ports-and-slots?guid=guid-b8f739cc-a41e-4ac9-b3f8-ff6d9c6d8c19&lang=en-us",
+    "supports": "2x Thunderbolt 4 (USB-C) with DisplayPort 1.4 and Power Delivery; no HDMI port; ships with a 60W USB-C adapter."
+  },
+  {
+    "id": "hp-840g10",
+    "publisher": "HP",
+    "kind": "manufacturer",
+    "title": "HP EliteBook 840 14 inch G10 - Datasheet",
+    "url": "https://www8.hp.com/h20195/v2/GetDocument.aspx?docname=c08488438",
+    "supports": "2x Thunderbolt 4 USB-C 40Gbps (USB Power Delivery, DisplayPort 1.4); HDMI 2.1 up to 4K@60Hz; HP Smart 45W or 65W USB-C adapter."
+  },
+  {
+    "id": "ms-usb4-dock",
+    "publisher": "Microsoft",
+    "kind": "manufacturer",
+    "title": "Surface USB4 Dock - technical overview",
+    "url": "https://learn.microsoft.com/en-us/surface/surface-usb4-dock",
+    "supports": "HDMI 2.1 and two video-enabled USB4 USB-C ports; two 4K60 monitors; 100W power supply with 65W delivered to the host."
+  },
+  {
+    "id": "ms-travel-hub",
+    "publisher": "Microsoft",
+    "kind": "manufacturer",
+    "title": "Use the Surface USB-C Travel Hub",
+    "url": "https://support.microsoft.com/en-US/surface/surface-dock/use-the-surface-usb-c-travel-hub",
+    "supports": "HDMI 2.0 up to 3840x2160@60Hz; VGA up to 1920x1080@60Hz (not at the same time); USB-C port for USB-C devices (data, phone charging), not for video."
+  },
+  {
+    "id": "caldigit-ts4",
+    "publisher": "CalDigit",
+    "kind": "manufacturer",
+    "title": "Thunderbolt Station 4 (TS4)",
+    "url": "https://www.caldigit.com/thunderbolt-station-4/",
+    "supports": "DisplayPort 1.4 port plus downstream Thunderbolt 4 ports for displays; USB-C and USB-A ports are data only; 98W laptop charging."
+  },
+  {
+    "id": "anker-341",
+    "publisher": "Anker",
+    "kind": "manufacturer",
+    "title": "Anker 341 USB-C Hub (7-in-1)",
+    "url": "https://www.anker.com/products/a8346",
+    "supports": "HDMI 1.4 up to 4K@30Hz; up to 100W pass-through with 85W to the laptop (needs a 100W charger and cable); USB-C data port has no video."
+  },
+  {
+    "id": "anker-735",
+    "publisher": "Anker",
+    "kind": "manufacturer",
+    "title": "Anker 735 Charger (Nano II 65W)",
+    "url": "https://www.anker.com/products/a2667",
+    "supports": "65W max from a single USB-C port."
+  },
+  {
+    "id": "anker-prime-100w",
+    "publisher": "Anker",
+    "kind": "manufacturer",
+    "title": "Anker Prime Charger (100W, 3 Ports, GaN)",
+    "url": "https://www.anker.com/products/a2688-anker-prime-charger-100w-3-ports-gan",
+    "supports": "100W max from a single USB-C port."
+  },
+  {
+    "id": "framework-hdmi",
+    "publisher": "Framework",
+    "kind": "manufacturer",
+    "title": "HDMI (3rd Gen) Expansion Card",
+    "url": "https://frame.work/products/hdmi-expansion-card-gen-3",
+    "supports": "USB-C to HDMI 2.0b expansion card, 4K at 60Hz."
+  },
+  {
+    "id": "google-pixel-display",
+    "publisher": "Google",
+    "kind": "manufacturer",
+    "title": "Connect your Pixel phone to a display (Pixel Phone Help)",
+    "url": "https://support.google.com/pixelphone/answer/2865484?hl=en",
+    "supports": "Wired display output with a USB-C to DisplayPort or HDMI cable is supported on Pixel 8 and later."
+  },
+  {
+    "id": "samsung-dex",
+    "publisher": "Samsung",
+    "kind": "manufacturer",
+    "title": "Use the Samsung DeX screen on your Galaxy phone or tablet",
+    "url": "https://www.samsung.com/us/support/answer/ANS10001955/",
+    "supports": "DeX with a DeX or HDMI cable on Galaxy S8 to S26 series; the Z Flip7 FE and previous Z Flip models are not compatible with DeX or HDMI cable output."
+  },
+  {
+    "id": "lg-27up850",
+    "publisher": "LG",
+    "kind": "manufacturer",
+    "title": "LG 27UP850-W 27\" UHD 4K IPS monitor - specifications",
+    "url": "https://www.lg.com/uk/monitors/uhd-4k-5k/27up850-w/",
+    "supports": "USB-C with DP Alternate Mode, 3840x2160@60Hz and 96W Power Delivery; 2x HDMI and 1x DisplayPort at 3840x2160@60Hz."
+  },
+  {
+    "id": "dell-p2723qe",
+    "publisher": "Dell",
+    "kind": "manufacturer",
+    "title": "Dell 27 4K USB-C Hub Monitor - P2723QE",
+    "url": "https://www.dell.com/en-us/shop/dell-27-4k-usb-c-hub-monitor-p2723qe/apd/210-bdlk/monitors-monitor-accessories",
+    "supports": "3840x2160 60Hz; USB-C with DisplayPort Alt Mode and up to 90W power delivery; DisplayPort 1.4; HDMI 2.0."
+  },
+  {
+    "id": "epson-2250u",
+    "publisher": "Epson",
+    "kind": "manufacturer",
+    "title": "PowerLite 2250U Full HD WUXGA 3LCD Projector - specification sheet",
+    "url": "https://files.support.epson.com/docid/cpd5/cpd53093.pdf",
+    "supports": "1920x1200 native; Full HD 1080p support; 2x HDMI (one MHL) and 1x Computer (D-sub 15) input."
+  },
+  {
+    "id": "epson-118",
+    "publisher": "Epson",
+    "kind": "manufacturer",
+    "title": "PowerLite 118 3LCD XGA Classroom Projector - specification sheet",
+    "url": "https://mediaserver.goepson.com/ImConvServlet/imconv/12d3ce5619f0521940bf4c07116acc0915c3ebf4/original?assetDescr=PowerLite-118-Projector_Specification-Sheet-CPD-58835.pdf",
+    "supports": "1024x768 native (XGA); 2x HDMI and 2x Computer/Component (VGA) inputs; resizes inputs up to 1600x1200."
+  },
+  {
+    "id": "benq-mh560",
+    "publisher": "BenQ",
+    "kind": "manufacturer",
+    "title": "BenQ MH560 - specifications",
+    "url": "https://www.benq.com/en-in/business/projector/mh560/specifications.html",
+    "supports": "1920x1080 native; 2x HDMI 1.4a; PC in (D-sub 15) supporting VGA to WUXGA reduced blanking."
+  },
+  {
+    "id": "apple-adapters-mac",
+    "publisher": "Apple",
+    "kind": "manufacturer",
+    "title": "Adapters for the Thunderbolt or USB-C port on your Mac",
+    "url": "https://support.apple.com/en-us/102477",
+    "supports": "Display adapters must support DisplayPort Alt Mode, Thunderbolt 3 or 4; names the 60W USB-C Charge Cable."
+  },
+  {
+    "id": "lenovo-slim3-15iah8",
+    "publisher": "Lenovo",
+    "kind": "manufacturer",
+    "title": "IdeaPad Slim 3 15IAH8 - PSREF",
+    "url": "https://psref.lenovo.com/syspool/Sys/PDF/IdeaPad/IdeaPad_Slim_3_15IAH8/IdeaPad_Slim_3_15IAH8_Spec.pdf",
+    "supports": "HDMI 1.4 up to 4K@30Hz; USB-C 3.2 Gen 1 with Power Delivery and DisplayPort 1.2, up to 4K@60Hz; 65W round-tip adapter."
   }
 ]

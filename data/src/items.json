@@ -4,157 +4,611 @@
     {"id": "mba-m2", "kind": "laptop", "class": "product", "maker": "Apple", "name": "MacBook Air 13-inch (M2, 2022)",
      "pd_recommended_w": 30, "pd_fast_w": 67, "pd_source": "apple-fastcharge",
      "ports": [{"id": "tb1", "connector": "USB-C", "gender": "receptacle"}, {"id": "tb2", "connector": "USB-C", "gender": "receptacle"}, {"id": "magsafe", "connector": "MagSafe3", "gender": "receptacle"}],
-     "video": [{"from": "gpu", "to": "tb1", "standard": "DP-Alt-4L-HBR3", "source": "apple-mba-m2", "confidence": "medium", "note": "Apple documents DisplayPort over USB-C and one external display up to 6K60, not the lane rate. HBR3 x4 assumed."},
-               {"from": "gpu", "to": "tb2", "standard": "DP-Alt-4L-HBR3", "source": "apple-mba-m2", "confidence": "medium"}],
-     "power": [{"from": "tb1", "to": "battery", "source": "apple-mba-m2", "confidence": "high"}, {"from": "tb2", "to": "battery", "source": "apple-mba-m2", "confidence": "high"}, {"from": "magsafe", "to": "battery", "source": "apple-mba-m2", "confidence": "high"}]},
-
+     "video": [
+       {"from": "gpu", "to": "tb1", "standard": "DP-Alt-4L-HBR3", "source": "apple-mba-m2", "confidence": "medium", "note": "Apple documents DisplayPort over USB-C and one external display up to 6K60, not the lane rate. HBR3 x4 assumed."},
+       {"from": "gpu", "to": "tb2", "standard": "DP-Alt-4L-HBR3", "source": "apple-mba-m2", "confidence": "medium"}],
+     "power": [
+       {"from": "tb1", "to": "battery", "source": "apple-mba-m2", "confidence": "high"},
+       {"from": "tb2", "to": "battery", "source": "apple-mba-m2", "confidence": "high"},
+       {"from": "magsafe", "to": "battery", "source": "apple-mba-m2", "confidence": "high"}]},
     {"id": "mbp14-m3", "kind": "laptop", "class": "product", "maker": "Apple", "name": "MacBook Pro 14-inch (M3, Nov 2023)",
      "pd_recommended_w": 67, "pd_fast_w": 94, "pd_source": "apple-fastcharge",
      "ports": [{"id": "tb1", "connector": "USB-C", "gender": "receptacle"}, {"id": "tb2", "connector": "USB-C", "gender": "receptacle"}, {"id": "hdmi", "connector": "HDMI", "gender": "receptacle"}, {"id": "magsafe", "connector": "MagSafe3", "gender": "receptacle"}],
-     "video": [{"from": "gpu", "to": "tb1", "standard": "DP-Alt-4L-HBR3", "source": "apple-mbp14-m3", "confidence": "medium", "note": "DisplayPort over Thunderbolt; up to 6K60 documented. HBR3 x4 assumed."},
-               {"from": "gpu", "to": "tb2", "standard": "DP-Alt-4L-HBR3", "source": "apple-mbp14-m3", "confidence": "medium"},
-               {"from": "gpu", "to": "hdmi", "standard": "HDMI-2.0", "source": "apple-mbp14-m3", "confidence": "high", "note": "Apple documents up to 4K at 120 Hz. Modelled conservatively as HDMI 2.0 class, which already covers every mode in this dataset."}],
-     "power": [{"from": "tb1", "to": "battery", "source": "apple-mbp14-m3", "confidence": "high"}, {"from": "tb2", "to": "battery", "source": "apple-mbp14-m3", "confidence": "high"}, {"from": "magsafe", "to": "battery", "source": "apple-mbp14-m3", "confidence": "high"}]},
-
+     "video": [
+       {"from": "gpu", "to": "tb1", "standard": "DP-Alt-4L-HBR3", "source": "apple-mbp14-m3", "confidence": "medium", "note": "DisplayPort over Thunderbolt; up to 6K60 documented. HBR3 x4 assumed."},
+       {"from": "gpu", "to": "tb2", "standard": "DP-Alt-4L-HBR3", "source": "apple-mbp14-m3", "confidence": "medium"},
+       {"from": "gpu", "to": "hdmi", "standard": "HDMI-2.0", "source": "apple-mbp14-m3", "confidence": "high", "note": "Apple documents up to 4K at 120 Hz. Modelled conservatively as HDMI 2.0 class, which already covers every mode in this dataset."}],
+     "power": [
+       {"from": "tb1", "to": "battery", "source": "apple-mbp14-m3", "confidence": "high"},
+       {"from": "tb2", "to": "battery", "source": "apple-mbp14-m3", "confidence": "high"},
+       {"from": "magsafe", "to": "battery", "source": "apple-mbp14-m3", "confidence": "high"}]},
     {"id": "x1c-g11", "kind": "laptop", "class": "product", "maker": "Lenovo", "name": "ThinkPad X1 Carbon Gen 11",
      "pd_recommended_w": 45, "pd_fast_w": 65, "pd_source": "lenovo-x1c11",
      "ports": [{"id": "tb1", "connector": "USB-C", "gender": "receptacle"}, {"id": "tb2", "connector": "USB-C", "gender": "receptacle"}, {"id": "hdmi", "connector": "HDMI", "gender": "receptacle"}],
-     "video": [{"from": "gpu", "to": "tb1", "standard": "DP-Alt-4L-HBR3", "source": "lenovo-x1c11", "confidence": "high", "note": "PSREF: Thunderbolt 4 with DisplayPort 1.4a."},
-               {"from": "gpu", "to": "tb2", "standard": "DP-Alt-4L-HBR3", "source": "lenovo-x1c11", "confidence": "high"},
-               {"from": "gpu", "to": "hdmi", "standard": "HDMI-2.0", "source": "lenovo-x1c11", "confidence": "high", "note": "PSREF: HDMI 2.1 port, up to 4K/60Hz, so modelled at the 4K60 (HDMI 2.0) rate."}],
-     "power": [{"from": "tb1", "to": "battery", "source": "lenovo-x1c11", "confidence": "high"}, {"from": "tb2", "to": "battery", "source": "lenovo-x1c11", "confidence": "high"}]},
-
+     "video": [
+       {"from": "gpu", "to": "tb1", "standard": "DP-Alt-4L-HBR3", "source": "lenovo-x1c11", "confidence": "high", "note": "PSREF: Thunderbolt 4 with DisplayPort 1.4a."},
+       {"from": "gpu", "to": "tb2", "standard": "DP-Alt-4L-HBR3", "source": "lenovo-x1c11", "confidence": "high"},
+       {"from": "gpu", "to": "hdmi", "standard": "HDMI-2.0", "source": "lenovo-x1c11", "confidence": "high", "note": "PSREF: HDMI 2.1 port, up to 4K/60Hz, so modelled at the 4K60 (HDMI 2.0) rate."}],
+     "power": [
+       {"from": "tb1", "to": "battery", "source": "lenovo-x1c11", "confidence": "high"},
+       {"from": "tb2", "to": "battery", "source": "lenovo-x1c11", "confidence": "high"}]},
     {"id": "gen-laptop-usbc", "kind": "laptop", "class": "generic", "name": "Generic thin laptop, USB-C only (DP Alt Mode + USB PD 65 W)",
-     "pd_recommended_w": 65, "pd_fast_w": null, "pd_source": "class-assumption",
+     "pd_recommended_w": 65, "pd_fast_w": null, "pd_source": "usbif-pd",
      "ports": [{"id": "usbc1", "connector": "USB-C", "gender": "receptacle"}, {"id": "usbc2", "connector": "USB-C", "gender": "receptacle"}],
-     "video": [{"from": "gpu", "to": "usbc1", "standard": "DP-Alt-4L-HBR3", "source": "class-assumption", "confidence": "medium"}, {"from": "gpu", "to": "usbc2", "standard": "DP-Alt-4L-HBR3", "source": "class-assumption", "confidence": "medium"}],
-     "power": [{"from": "usbc1", "to": "battery", "source": "class-assumption", "confidence": "medium"}, {"from": "usbc2", "to": "battery", "source": "class-assumption", "confidence": "medium"}]},
-
+     "video": [
+       {"from": "gpu", "to": "usbc1", "standard": "DP-Alt-4L-HBR3", "source": "vesa-altmode", "confidence": "medium", "note": "Class: a laptop whose USB-C ports advertise DisplayPort Alt Mode at DP 1.4."},
+       {"from": "gpu", "to": "usbc2", "standard": "DP-Alt-4L-HBR3", "source": "vesa-altmode", "confidence": "medium"}],
+     "power": [
+       {"from": "usbc1", "to": "battery", "source": "usbif-pd", "confidence": "medium"},
+       {"from": "usbc2", "to": "battery", "source": "usbif-pd", "confidence": "medium"}]},
     {"id": "gen-laptop-budget", "kind": "laptop", "class": "generic", "name": "Generic budget laptop: HDMI 1.4b + data-only USB-C (barrel-jack charging)",
-     "pd_recommended_w": null, "pd_fast_w": null, "pd_source": "class-assumption",
+     "pd_recommended_w": null, "pd_fast_w": null, "pd_source": "lenovo-ideapad1-15amn7",
      "ports": [{"id": "hdmi", "connector": "HDMI", "gender": "receptacle"}, {"id": "usbc", "connector": "USB-C", "gender": "receptacle", "note": "Data only: no DP Alt Mode, no PD input."}],
-     "video": [{"from": "gpu", "to": "hdmi", "standard": "HDMI-1.4", "source": "class-assumption", "confidence": "medium"}],
+     "video": [
+       {"from": "gpu", "to": "hdmi", "standard": "HDMI-1.4", "source": "hdmi-14b", "confidence": "medium", "note": "Class. A real example is the Lenovo IdeaPad 1 15AMN7 (HDMI 1.4b, 4K30; data-only USB-C)."}],
      "power": []},
-
+    {"id": "mba-m1", "kind": "laptop", "class": "product", "maker": "Apple", "name": "MacBook Air 13-inch (M1, 2020)",
+     "pd_recommended_w": 30, "pd_fast_w": null, "pd_source": "apple-power",
+     "ports": [{"id": "tb1", "connector": "USB-C", "gender": "receptacle"}, {"id": "tb2", "connector": "USB-C", "gender": "receptacle"}],
+     "video": [
+       {"from": "gpu", "to": "tb1", "standard": "DP-Alt-4L-HBR3", "source": "apple-mba-m1", "confidence": "medium", "note": "Apple documents DisplayPort over Thunderbolt / USB 4 and one external display up to 6K60, not the lane rate. HBR3 x4 assumed."},
+       {"from": "gpu", "to": "tb2", "standard": "DP-Alt-4L-HBR3", "source": "apple-mba-m1", "confidence": "medium"}],
+     "power": [
+       {"from": "tb1", "to": "battery", "source": "apple-mba-m1", "confidence": "high"},
+       {"from": "tb2", "to": "battery", "source": "apple-mba-m1", "confidence": "high"}]},
+    {"id": "mba-m3", "kind": "laptop", "class": "product", "maker": "Apple", "name": "MacBook Air 13-inch (M3, 2024)",
+     "pd_recommended_w": 30, "pd_fast_w": 67, "pd_source": "apple-fastcharge",
+     "ports": [{"id": "tb1", "connector": "USB-C", "gender": "receptacle"}, {"id": "tb2", "connector": "USB-C", "gender": "receptacle"}, {"id": "magsafe", "connector": "MagSafe3", "gender": "receptacle"}],
+     "video": [
+       {"from": "gpu", "to": "tb1", "standard": "DP-Alt-4L-HBR3", "source": "apple-mba-m3", "confidence": "medium", "note": "One external display up to 6K60 documented (two with the lid closed). HBR3 x4 assumed."},
+       {"from": "gpu", "to": "tb2", "standard": "DP-Alt-4L-HBR3", "source": "apple-mba-m3", "confidence": "medium"}],
+     "power": [
+       {"from": "tb1", "to": "battery", "source": "apple-mba-m3", "confidence": "high"},
+       {"from": "tb2", "to": "battery", "source": "apple-mba-m3", "confidence": "high"},
+       {"from": "magsafe", "to": "battery", "source": "apple-mba-m3", "confidence": "high"}]},
+    {"id": "mba-m4", "kind": "laptop", "class": "product", "maker": "Apple", "name": "MacBook Air 13-inch (M4, 2025)",
+     "pd_recommended_w": 30, "pd_fast_w": 67, "pd_source": "apple-fastcharge",
+     "ports": [{"id": "tb1", "connector": "USB-C", "gender": "receptacle"}, {"id": "tb2", "connector": "USB-C", "gender": "receptacle"}, {"id": "magsafe", "connector": "MagSafe3", "gender": "receptacle"}],
+     "video": [
+       {"from": "gpu", "to": "tb1", "standard": "DP-Alt-4L-HBR3", "source": "apple-mba-m4", "confidence": "high", "note": "Apple: native DisplayPort 1.4 output over USB-C (Thunderbolt 4)."},
+       {"from": "gpu", "to": "tb2", "standard": "DP-Alt-4L-HBR3", "source": "apple-mba-m4", "confidence": "high"}],
+     "power": [
+       {"from": "tb1", "to": "battery", "source": "apple-mba-m4", "confidence": "high"},
+       {"from": "tb2", "to": "battery", "source": "apple-mba-m4", "confidence": "high"},
+       {"from": "magsafe", "to": "battery", "source": "apple-mba-m4", "confidence": "high"}]},
+    {"id": "mbp14-m4", "kind": "laptop", "class": "product", "maker": "Apple", "name": "MacBook Pro 14-inch (M4, 2024)",
+     "pd_recommended_w": 67, "pd_fast_w": 94, "pd_source": "apple-fastcharge",
+     "ports": [{"id": "tb1", "connector": "USB-C", "gender": "receptacle"}, {"id": "tb2", "connector": "USB-C", "gender": "receptacle"}, {"id": "tb3", "connector": "USB-C", "gender": "receptacle"}, {"id": "hdmi", "connector": "HDMI", "gender": "receptacle"}, {"id": "magsafe", "connector": "MagSafe3", "gender": "receptacle"}],
+     "video": [
+       {"from": "gpu", "to": "tb1", "standard": "DP-Alt-4L-HBR3", "source": "apple-mbp14-m4", "confidence": "high", "note": "Apple: Thunderbolt 4 with native DisplayPort 1.4 output."},
+       {"from": "gpu", "to": "tb2", "standard": "DP-Alt-4L-HBR3", "source": "apple-mbp14-m4", "confidence": "high"},
+       {"from": "gpu", "to": "tb3", "standard": "DP-Alt-4L-HBR3", "source": "apple-mbp14-m4", "confidence": "high"},
+       {"from": "gpu", "to": "hdmi", "standard": "HDMI-2.1-FRL", "source": "apple-mbp14-m4", "confidence": "high", "note": "Apple: HDMI up to 8K60 or 4K240, which needs an FRL (HDMI 2.1) link."}],
+     "power": [
+       {"from": "tb1", "to": "battery", "source": "apple-mbp14-m4", "confidence": "high"},
+       {"from": "tb2", "to": "battery", "source": "apple-mbp14-m4", "confidence": "high"},
+       {"from": "tb3", "to": "battery", "source": "apple-mbp14-m4", "confidence": "high"},
+       {"from": "magsafe", "to": "battery", "source": "apple-mbp14-m4", "confidence": "high"}]},
+    {"id": "x1c-g12", "kind": "laptop", "class": "product", "maker": "Lenovo", "name": "ThinkPad X1 Carbon Gen 12",
+     "pd_recommended_w": 45, "pd_fast_w": 65, "pd_source": "lenovo-x1c12",
+     "ports": [{"id": "tb1", "connector": "USB-C", "gender": "receptacle"}, {"id": "tb2", "connector": "USB-C", "gender": "receptacle"}, {"id": "hdmi", "connector": "HDMI", "gender": "receptacle"}],
+     "video": [
+       {"from": "gpu", "to": "tb1", "standard": "DP-Alt-4L-HBR3", "source": "lenovo-x1c12", "confidence": "medium", "note": "PSREF says DisplayPort 2.1 over Thunderbolt 4; the UHBR rate is not stated, so modelled at HBR3."},
+       {"from": "gpu", "to": "tb2", "standard": "DP-Alt-4L-HBR3", "source": "lenovo-x1c12", "confidence": "medium"},
+       {"from": "gpu", "to": "hdmi", "standard": "HDMI-2.0", "source": "lenovo-x1c12", "confidence": "high", "note": "HDMI 2.1 port documented up to 4K/60Hz, so modelled at the 4K60 (HDMI 2.0 TMDS) rate."}],
+     "power": [
+       {"from": "tb1", "to": "battery", "source": "lenovo-x1c12", "confidence": "high"},
+       {"from": "tb2", "to": "battery", "source": "lenovo-x1c12", "confidence": "high"}]},
+    {"id": "t14-g4", "kind": "laptop", "class": "product", "maker": "Lenovo", "name": "ThinkPad T14 Gen 4 (Intel)",
+     "pd_recommended_w": 45, "pd_fast_w": 65, "pd_source": "lenovo-t14g4",
+     "ports": [{"id": "tb1", "connector": "USB-C", "gender": "receptacle"}, {"id": "tb2", "connector": "USB-C", "gender": "receptacle"}, {"id": "hdmi", "connector": "HDMI", "gender": "receptacle"}],
+     "video": [
+       {"from": "gpu", "to": "tb1", "standard": "DP-Alt-4L-HBR3", "source": "lenovo-t14g4", "confidence": "high", "note": "PSREF: Thunderbolt 4 with DisplayPort 1.4."},
+       {"from": "gpu", "to": "tb2", "standard": "DP-Alt-4L-HBR3", "source": "lenovo-t14g4", "confidence": "high"},
+       {"from": "gpu", "to": "hdmi", "standard": "HDMI-2.0", "source": "lenovo-t14g4", "confidence": "high", "note": "HDMI 2.1 port documented up to 4K/60Hz, so modelled at the 4K60 (HDMI 2.0 TMDS) rate."}],
+     "power": [
+       {"from": "tb1", "to": "battery", "source": "lenovo-t14g4", "confidence": "high"},
+       {"from": "tb2", "to": "battery", "source": "lenovo-t14g4", "confidence": "high"}]},
+    {"id": "yoga-slim7-14", "kind": "laptop", "class": "product", "maker": "Lenovo", "name": "Yoga Slim 7 14IMH9",
+     "pd_recommended_w": 45, "pd_fast_w": 65, "pd_source": "lenovo-yoga-slim7-14imh9",
+     "ports": [{"id": "tb1", "connector": "USB-C", "gender": "receptacle"}, {"id": "tb2", "connector": "USB-C", "gender": "receptacle"}, {"id": "hdmi", "connector": "HDMI", "gender": "receptacle"}],
+     "video": [
+       {"from": "gpu", "to": "tb1", "standard": "DP-Alt-4L-HBR3", "source": "lenovo-yoga-slim7-14imh9", "confidence": "high", "note": "PSREF: Thunderbolt 4 with DisplayPort 1.4 and USB PD 45-65W."},
+       {"from": "gpu", "to": "tb2", "standard": "DP-Alt-4L-HBR3", "source": "lenovo-yoga-slim7-14imh9", "confidence": "high"},
+       {"from": "gpu", "to": "hdmi", "standard": "HDMI-2.0", "source": "lenovo-yoga-slim7-14imh9", "confidence": "high", "note": "HDMI 2.1 port documented up to 4K/60Hz, so modelled at the 4K60 (HDMI 2.0 TMDS) rate."}],
+     "power": [
+       {"from": "tb1", "to": "battery", "source": "lenovo-yoga-slim7-14imh9", "confidence": "high"},
+       {"from": "tb2", "to": "battery", "source": "lenovo-yoga-slim7-14imh9", "confidence": "high"}]},
+    {"id": "xps13-9340", "kind": "laptop", "class": "product", "maker": "Dell", "name": "Dell XPS 13 9340",
+     "pd_recommended_w": 60, "pd_fast_w": null, "pd_source": "dell-xps13-9340",
+     "ports": [{"id": "tb1", "connector": "USB-C", "gender": "receptacle"}, {"id": "tb2", "connector": "USB-C", "gender": "receptacle"}],
+     "video": [
+       {"from": "gpu", "to": "tb1", "standard": "DP-Alt-4L-HBR3", "source": "dell-xps13-9340", "confidence": "medium", "note": "Dell manual: Thunderbolt 4 with DisplayPort 1.4 and Power Delivery. No HDMI port. (dell.com blocks scripted fetches; checked in a browser search result.)"},
+       {"from": "gpu", "to": "tb2", "standard": "DP-Alt-4L-HBR3", "source": "dell-xps13-9340", "confidence": "medium"}],
+     "power": [
+       {"from": "tb1", "to": "battery", "source": "dell-xps13-9340", "confidence": "high"},
+       {"from": "tb2", "to": "battery", "source": "dell-xps13-9340", "confidence": "high"}]},
+    {"id": "elitebook-840-g10", "kind": "laptop", "class": "product", "maker": "HP", "name": "HP EliteBook 840 G10",
+     "pd_recommended_w": 45, "pd_fast_w": 65, "pd_source": "hp-840g10",
+     "ports": [{"id": "tb1", "connector": "USB-C", "gender": "receptacle"}, {"id": "tb2", "connector": "USB-C", "gender": "receptacle"}, {"id": "hdmi", "connector": "HDMI", "gender": "receptacle"}],
+     "video": [
+       {"from": "gpu", "to": "tb1", "standard": "DP-Alt-4L-HBR3", "source": "hp-840g10", "confidence": "high", "note": "HP datasheet: Thunderbolt 4 with USB Power Delivery and DisplayPort 1.4."},
+       {"from": "gpu", "to": "tb2", "standard": "DP-Alt-4L-HBR3", "source": "hp-840g10", "confidence": "high"},
+       {"from": "gpu", "to": "hdmi", "standard": "HDMI-2.0", "source": "hp-840g10", "confidence": "high", "note": "HP: HDMI 2.1, supports resolution up to 4K@60Hz; modelled at the HDMI 2.0 TMDS rate."}],
+     "power": [
+       {"from": "tb1", "to": "battery", "source": "hp-840g10", "confidence": "high"},
+       {"from": "tb2", "to": "battery", "source": "hp-840g10", "confidence": "high"}]},
+    {"id": "e14-g5", "kind": "laptop", "class": "product", "maker": "Lenovo", "name": "ThinkPad E14 Gen 5 (Intel)",
+     "pd_recommended_w": 65, "pd_fast_w": null, "pd_source": "lenovo-e14g5",
+     "ports": [{"id": "tb4", "connector": "USB-C", "gender": "receptacle"}, {"id": "usbc", "connector": "USB-C", "gender": "receptacle", "note": "USB-C 3.2 Gen 2 with PD 3.0 and DisplayPort 1.4."}, {"id": "hdmi", "connector": "HDMI", "gender": "receptacle"}],
+     "video": [
+       {"from": "gpu", "to": "tb4", "standard": "DP-Alt-4L-HBR3", "source": "lenovo-e14g5", "confidence": "high", "note": "PSREF: Thunderbolt 4 with DisplayPort 1.4."},
+       {"from": "gpu", "to": "usbc", "standard": "DP-Alt-4L-HBR3", "source": "lenovo-e14g5", "confidence": "high", "note": "PSREF: USB-C 3.2 Gen 2 with DisplayPort 1.4, up to 4096x2160@60Hz."},
+       {"from": "gpu", "to": "hdmi", "standard": "HDMI-2.0", "source": "lenovo-e14g5", "confidence": "high", "note": "PSREF: HDMI 2.1 up to 4096x2160@60Hz; modelled at the HDMI 2.0 TMDS rate."}],
+     "power": [
+       {"from": "tb4", "to": "battery", "source": "lenovo-e14g5", "confidence": "high"},
+       {"from": "usbc", "to": "battery", "source": "lenovo-e14g5", "confidence": "high"}]},
+    {"id": "ideapad-slim3-15iru8", "kind": "laptop", "class": "product", "maker": "Lenovo", "name": "IdeaPad Slim 3 15IRU8",
+     "pd_recommended_w": 65, "pd_fast_w": null, "pd_source": "lenovo-slim3-15iru8",
+     "ports": [{"id": "usbc", "connector": "USB-C", "gender": "receptacle", "note": "USB-C 3.2 Gen 1 with USB PD 45-65W and DisplayPort 1.2."}, {"id": "hdmi", "connector": "HDMI", "gender": "receptacle"}, {"id": "dc", "connector": "DC-round", "gender": "receptacle", "note": "65W round-tip charger port."}],
+     "video": [
+       {"from": "gpu", "to": "usbc", "standard": "DP-Alt-4L-HBR2", "source": "lenovo-slim3-15iru8", "confidence": "high", "note": "PSREF: DisplayPort 1.2 over USB-C, up to 4K@60Hz (HBR2 x4 is the only DP 1.2 rate that fits 4K60)."},
+       {"from": "gpu", "to": "hdmi", "standard": "HDMI-1.4", "source": "lenovo-slim3-15iru8", "confidence": "high", "note": "PSREF: HDMI 1.4, up to 4K@30Hz. The trap: HDMI caps you at 4K30 even with a 4K60 TV."}],
+     "power": [
+       {"from": "usbc", "to": "battery", "source": "lenovo-slim3-15iru8", "confidence": "high", "note": "PSREF: USB PD 45-65W input. The bundled charger is a 65W round-tip one."}]},
+    {"id": "ideapad1-15amn7", "kind": "laptop", "class": "product", "maker": "Lenovo", "name": "IdeaPad 1 15AMN7",
+     "pd_recommended_w": null, "pd_fast_w": null, "pd_source": "lenovo-ideapad1-15amn7",
+     "ports": [{"id": "usbc", "connector": "USB-C", "gender": "receptacle", "note": "USB-C 3.2 Gen 1, data transfer only: no video, no charging."}, {"id": "hdmi", "connector": "HDMI", "gender": "receptacle"}, {"id": "dc", "connector": "DC-round", "gender": "receptacle", "note": "Round-tip charger port."}],
+     "video": [
+       {"from": "gpu", "to": "hdmi", "standard": "HDMI-1.4", "source": "lenovo-ideapad1-15amn7", "confidence": "high", "note": "PSREF: HDMI 1.4b, up to 4K@30Hz. Its USB-C port is data only, so USB-C adapters give no picture."}],
+     "power": []},
+    {"id": "chromebook-flex5-plus", "kind": "laptop", "class": "product", "maker": "Lenovo", "name": "IdeaPad Flex 5 Chromebook Plus 14IAU7",
+     "pd_recommended_w": 45, "pd_fast_w": null, "pd_source": "lenovo-flex5-cbplus",
+     "ports": [{"id": "usbc1", "connector": "USB-C", "gender": "receptacle"}, {"id": "usbc2", "connector": "USB-C", "gender": "receptacle"}],
+     "video": [
+       {"from": "gpu", "to": "usbc1", "standard": "DP-Alt-4L-HBR3", "source": "lenovo-flex5-cbplus", "confidence": "high", "note": "PSREF: USB-C 10Gbps with DisplayPort 1.4, up to 3840x2160@60Hz. No HDMI port."},
+       {"from": "gpu", "to": "usbc2", "standard": "DP-Alt-4L-HBR3", "source": "lenovo-flex5-cbplus", "confidence": "high"}],
+     "power": [
+       {"from": "usbc1", "to": "battery", "source": "lenovo-flex5-cbplus", "confidence": "high"},
+       {"from": "usbc2", "to": "battery", "source": "lenovo-flex5-cbplus", "confidence": "high"}]},
+    {"id": "ideapad-slim3-15iah8", "kind": "laptop", "class": "product", "maker": "Lenovo", "name": "IdeaPad Slim 3 15IAH8",
+     "pd_recommended_w": null, "pd_fast_w": null, "pd_source": "lenovo-slim3-15iah8",
+     "ports": [{"id": "usbc", "connector": "USB-C", "gender": "receptacle", "note": "USB-C 3.2 Gen 1 with Power Delivery and DisplayPort 1.2."}, {"id": "hdmi", "connector": "HDMI", "gender": "receptacle"}, {"id": "dc", "connector": "DC-round", "gender": "receptacle", "note": "65W round-tip charger port."}],
+     "video": [
+       {"from": "gpu", "to": "usbc", "standard": "DP-Alt-4L-HBR2", "source": "lenovo-slim3-15iah8", "confidence": "high", "note": "PSREF: DisplayPort 1.2 over USB-C, up to 4K@60Hz."},
+       {"from": "gpu", "to": "hdmi", "standard": "HDMI-1.4", "source": "lenovo-slim3-15iah8", "confidence": "high", "note": "PSREF: HDMI 1.4, up to 4K@30Hz."}],
+     "power": [
+       {"from": "usbc", "to": "battery", "source": "lenovo-slim3-15iah8", "confidence": "high", "note": "PSREF lists Power Delivery on USB-C but no wattage."}]},
+    {"id": "iphone-15", "kind": "phone", "class": "product", "maker": "Apple", "name": "iPhone 15",
+     "pd_recommended_w": null, "pd_fast_w": 20, "pd_source": "apple-iphone15",
+     "ports": [{"id": "usbc", "connector": "USB-C", "gender": "receptacle", "note": "USB 2 with DisplayPort."}],
+     "video": [
+       {"from": "gpu", "to": "usbc", "standard": "DP-Alt-2L-HBR2", "source": "apple-iphone15", "confidence": "low", "note": "Apple says video out up to 4K HDR over native DisplayPort, without a refresh rate or lane count. Modelled conservatively at 4K30 / 1080p60."}],
+     "power": [
+       {"from": "usbc", "to": "battery", "source": "apple-iphone15", "confidence": "high"}]},
+    {"id": "iphone-15-pro", "kind": "phone", "class": "product", "maker": "Apple", "name": "iPhone 15 Pro",
+     "pd_recommended_w": null, "pd_fast_w": 20, "pd_source": "apple-iphone15pro",
+     "ports": [{"id": "usbc", "connector": "USB-C", "gender": "receptacle", "note": "USB 3 (10 Gb/s) with DisplayPort."}],
+     "video": [
+       {"from": "gpu", "to": "usbc", "standard": "DP-Alt-2L-HBR2", "source": "apple-iphone15pro", "confidence": "low", "note": "Up to 4K HDR documented, refresh rate not stated; modelled conservatively at 4K30 / 1080p60."}],
+     "power": [
+       {"from": "usbc", "to": "battery", "source": "apple-iphone15pro", "confidence": "high"}]},
+    {"id": "iphone-16", "kind": "phone", "class": "product", "maker": "Apple", "name": "iPhone 16",
+     "pd_recommended_w": null, "pd_fast_w": 20, "pd_source": "apple-iphone16",
+     "ports": [{"id": "usbc", "connector": "USB-C", "gender": "receptacle", "note": "USB 2 with DisplayPort."}],
+     "video": [
+       {"from": "gpu", "to": "usbc", "standard": "DP-Alt-2L-HBR2", "source": "apple-iphone16", "confidence": "low", "note": "Up to 4K HDR documented, refresh rate not stated; modelled conservatively at 4K30 / 1080p60."}],
+     "power": [
+       {"from": "usbc", "to": "battery", "source": "apple-iphone16", "confidence": "high"}]},
+    {"id": "pixel-8", "kind": "phone", "class": "product", "maker": "Google", "name": "Google Pixel 8",
+     "pd_recommended_w": null, "pd_fast_w": null, "pd_source": "google-pixel-display",
+     "ports": [{"id": "usbc", "connector": "USB-C", "gender": "receptacle"}],
+     "video": [
+       {"from": "gpu", "to": "usbc", "standard": "DP-Alt-2L-HBR2", "source": "google-pixel-display", "confidence": "low", "note": "Google documents wired display output on Pixel 8 and later, without resolution. Modelled conservatively at 1080p60 / 4K30."}],
+     "power": [
+       {"from": "usbc", "to": "battery", "source": "google-pixel-display", "confidence": "medium", "note": "USB-C charging; Google's help page does not state wattage."}]},
+    {"id": "pixel-7a", "kind": "phone", "class": "product", "maker": "Google", "name": "Google Pixel 7a",
+     "pd_recommended_w": null, "pd_fast_w": null, "pd_source": "google-pixel-display",
+     "ports": [{"id": "usbc", "connector": "USB-C", "gender": "receptacle", "note": "No wired video output (Google: Pixel 8 and later only)."}],
+     "video": [],
+     "power": [
+       {"from": "usbc", "to": "battery", "source": "google-pixel-display", "confidence": "medium", "note": "USB-C charging; wattage not on the cited page."}]},
+    {"id": "galaxy-s24", "kind": "phone", "class": "product", "maker": "Samsung", "name": "Samsung Galaxy S24",
+     "pd_recommended_w": null, "pd_fast_w": null, "pd_source": "samsung-dex",
+     "ports": [{"id": "usbc", "connector": "USB-C", "gender": "receptacle"}],
+     "video": [
+       {"from": "gpu", "to": "usbc", "standard": "DP-Alt-2L-HBR2", "source": "samsung-dex", "confidence": "low", "note": "Samsung lists the S24 series for DeX over an HDMI cable but not the output resolution. Modelled conservatively at 1080p60 / 4K30."}],
+     "power": [
+       {"from": "usbc", "to": "battery", "source": "samsung-dex", "confidence": "medium", "note": "USB-C charging; wattage not on the cited page."}]},
+    {"id": "galaxy-z-flip6", "kind": "phone", "class": "product", "maker": "Samsung", "name": "Samsung Galaxy Z Flip6",
+     "pd_recommended_w": null, "pd_fast_w": null, "pd_source": "samsung-dex",
+     "ports": [{"id": "usbc", "connector": "USB-C", "gender": "receptacle", "note": "Samsung: Z Flip models before the Flip7 do not support DeX or HDMI cable output."}],
+     "video": [],
+     "power": [
+       {"from": "usbc", "to": "battery", "source": "samsung-dex", "confidence": "medium", "note": "USB-C charging; wattage not on the cited page."}]},
+    {"id": "ipad-10", "kind": "tablet", "class": "product", "maker": "Apple", "name": "iPad (10th generation)",
+     "pd_recommended_w": 20, "pd_fast_w": null, "pd_source": "apple-ipad10",
+     "ports": [{"id": "usbc", "connector": "USB-C", "gender": "receptacle", "note": "USB-C with DisplayPort."}],
+     "video": [
+       {"from": "gpu", "to": "usbc", "standard": "DP-Alt-2L-HBR2", "source": "apple-ipad10", "confidence": "medium", "note": "Apple: external display up to 4K at 30Hz or 1080p at 60Hz. The 2-lane HBR2 rate matches that limit; the lane count itself is our inference."}],
+     "power": [
+       {"from": "usbc", "to": "battery", "source": "apple-ipad10", "confidence": "high"}]},
+    {"id": "ipad-air-m2", "kind": "tablet", "class": "product", "maker": "Apple", "name": "iPad Air 11-inch (M2)",
+     "pd_recommended_w": 20, "pd_fast_w": null, "pd_source": "apple-ipadair-m2",
+     "ports": [{"id": "usbc", "connector": "USB-C", "gender": "receptacle", "note": "USB-C with DisplayPort and USB 3."}],
+     "video": [
+       {"from": "gpu", "to": "usbc", "standard": "DP-Alt-4L-HBR3", "source": "apple-ipadair-m2", "confidence": "medium", "note": "Apple: one external display up to 6K60. HBR3 x4 assumed."}],
+     "power": [
+       {"from": "usbc", "to": "battery", "source": "apple-ipadair-m2", "confidence": "high"}]},
+    {"id": "galaxy-tab-s9", "kind": "tablet", "class": "product", "maker": "Samsung", "name": "Samsung Galaxy Tab S9",
+     "pd_recommended_w": null, "pd_fast_w": null, "pd_source": "samsung-dex",
+     "ports": [{"id": "usbc", "connector": "USB-C", "gender": "receptacle"}],
+     "video": [
+       {"from": "gpu", "to": "usbc", "standard": "DP-Alt-2L-HBR2", "source": "samsung-dex", "confidence": "low", "note": "Samsung lists the Tab S9 series for DeX over HDMI but not the resolution. Modelled conservatively at 1080p60 / 4K30."}],
+     "power": [
+       {"from": "usbc", "to": "battery", "source": "samsung-dex", "confidence": "medium", "note": "USB-C charging; wattage not on the cited page."}]},
+    {"id": "galaxy-tab-s9-fe", "kind": "tablet", "class": "product", "maker": "Samsung", "name": "Samsung Galaxy Tab S9 FE",
+     "pd_recommended_w": null, "pd_fast_w": null, "pd_source": "samsung-dex",
+     "ports": [{"id": "usbc", "connector": "USB-C", "gender": "receptacle", "note": "Samsung: the Tab S9 FE series is not compatible with HDMI output."}],
+     "video": [],
+     "power": [
+       {"from": "usbc", "to": "battery", "source": "samsung-dex", "confidence": "medium", "note": "USB-C charging; wattage not on the cited page."}]},
     {"id": "adp-usbc-hdmi-4k30", "kind": "adapter", "class": "generic", "purchasable": true, "name": "USB-C to HDMI adapter, 4K30 (HDMI 1.4 class)",
      "ports": [{"id": "in", "connector": "USB-C", "gender": "plug"}, {"id": "out", "connector": "HDMI", "gender": "receptacle"}],
-     "video": [{"from": "in", "to": "out", "standard": "HDMI-1.4", "source": "class-assumption", "confidence": "high"}]},
+     "video": [
+       {"from": "in", "to": "out", "standard": "HDMI-1.4", "source": "hdmi-14b", "confidence": "high"}]},
     {"id": "adp-usbc-hdmi-4k60", "kind": "adapter", "class": "generic", "purchasable": true, "name": "USB-C to HDMI adapter, 4K60 (HDMI 2.0 class)",
      "ports": [{"id": "in", "connector": "USB-C", "gender": "plug"}, {"id": "out", "connector": "HDMI", "gender": "receptacle"}],
-     "video": [{"from": "in", "to": "out", "standard": "HDMI-2.0", "source": "class-assumption", "confidence": "high"}]},
+     "video": [
+       {"from": "in", "to": "out", "standard": "HDMI-2.0", "source": "hdmi-20-pr", "confidence": "high"}]},
     {"id": "adp-usbc-hdmi21", "kind": "adapter", "class": "generic", "purchasable": true, "name": "USB-C to HDMI 2.1 adapter (8K60/4K120 class)",
      "ports": [{"id": "in", "connector": "USB-C", "gender": "plug"}, {"id": "out", "connector": "HDMI", "gender": "receptacle"}],
-     "video": [{"from": "in", "to": "out", "standard": "DP-Alt-4L-HBR3", "source": "vesa-altmode", "confidence": "high", "note": "Uncompressed throughput is capped by its DP Alt Mode input (HBR3 x4), not by the HDMI 2.1 side."}]},
+     "video": [
+       {"from": "in", "to": "out", "standard": "DP-Alt-4L-HBR3", "source": "vesa-altmode", "confidence": "high", "note": "Uncompressed throughput is capped by its DP Alt Mode input (HBR3 x4), not by the HDMI 2.1 side."}]},
     {"id": "adp-apple-av-a2119", "kind": "adapter", "class": "product", "maker": "Apple", "purchasable": true, "name": "Apple USB-C Digital AV Multiport Adapter (model A2119)",
      "ports": [{"id": "in", "connector": "USB-C", "gender": "plug"}, {"id": "out", "connector": "HDMI", "gender": "receptacle"}],
-     "video": [{"from": "in", "to": "out", "standard": "HDMI-2.0", "source": "apple-av", "confidence": "high", "note": "3840x2160@60 with MacBook Air 2020+ and 14-inch MacBook Pro 2021+."}]},
+     "video": [
+       {"from": "in", "to": "out", "standard": "HDMI-2.0", "source": "apple-av", "confidence": "high", "note": "3840x2160@60 with MacBook Air 2020+ and 14-inch MacBook Pro 2021+."}]},
     {"id": "adp-apple-av-a1621", "kind": "adapter", "class": "product", "maker": "Apple", "purchasable": false, "name": "Apple USB-C Digital AV Multiport Adapter (older model A1621)",
      "ports": [{"id": "in", "connector": "USB-C", "gender": "plug"}, {"id": "out", "connector": "HDMI", "gender": "receptacle"}],
-     "video": [{"from": "in", "to": "out", "standard": "HDMI-1.4", "source": "apple-av", "confidence": "high", "note": "3840x2160@30, up to 1080p60. Looks identical to A2119."}]},
+     "video": [
+       {"from": "in", "to": "out", "standard": "HDMI-1.4", "source": "apple-av", "confidence": "high", "note": "3840x2160@30, up to 1080p60. Looks identical to A2119."}]},
     {"id": "adp-usbc-dp", "kind": "adapter", "class": "generic", "purchasable": true, "name": "USB-C to DisplayPort 1.4 adapter (female DP)",
      "ports": [{"id": "in", "connector": "USB-C", "gender": "plug"}, {"id": "out", "connector": "DP", "gender": "receptacle", "dual_mode": false}],
-     "video": [{"from": "in", "to": "out", "standard": "DP-Alt-4L-HBR3", "source": "vesa-altmode", "confidence": "high", "note": "Its DP output is not dual-mode (DP++), so passive DP-to-HDMI adapters will not work on it."}]},
+     "video": [
+       {"from": "in", "to": "out", "standard": "DP-Alt-4L-HBR3", "source": "vesa-altmode", "confidence": "high", "note": "Its DP output is not dual-mode (DP++), so passive DP-to-HDMI adapters will not work on it."}]},
     {"id": "adp-usbc-vga", "kind": "adapter", "class": "generic", "purchasable": true, "name": "USB-C to VGA adapter (up to 1920x1200@60)",
      "ports": [{"id": "in", "connector": "USB-C", "gender": "plug"}, {"id": "out", "connector": "VGA", "gender": "receptacle"}],
-     "video": [{"from": "in", "to": "out", "standard": "VGA-1200p", "source": "wiki-vga", "confidence": "medium"}]},
+     "video": [
+       {"from": "in", "to": "out", "standard": "VGA-1200p", "source": "wiki-vga", "confidence": "medium"}]},
     {"id": "adp-dp-hdmi-passive", "kind": "adapter", "class": "generic", "purchasable": true, "name": "Passive DP++ to HDMI adapter (4K30)",
      "ports": [{"id": "in", "connector": "DP", "gender": "plug", "requires_dual_mode": true}, {"id": "out", "connector": "HDMI", "gender": "receptacle"}],
-     "video": [{"from": "in", "to": "out", "standard": "HDMI-1.4", "source": "wiki-dp", "confidence": "medium", "note": "Only works on a dual-mode (DP++) source port."}]},
+     "video": [
+       {"from": "in", "to": "out", "standard": "HDMI-1.4", "source": "wiki-dp", "confidence": "medium", "note": "Only works on a dual-mode (DP++) source port."}]},
     {"id": "adp-dp-hdmi-active", "kind": "adapter", "class": "generic", "purchasable": true, "name": "Active DisplayPort to HDMI 2.0 adapter (4K60)",
      "ports": [{"id": "in", "connector": "DP", "gender": "plug"}, {"id": "out", "connector": "HDMI", "gender": "receptacle"}],
-     "video": [{"from": "in", "to": "out", "standard": "HDMI-2.0", "source": "wiki-dp", "confidence": "high"}]},
+     "video": [
+       {"from": "in", "to": "out", "standard": "HDMI-2.0", "source": "wiki-dp", "confidence": "medium", "note": "Class: an active DP-to-HDMI 2.0 converter (4K60). Check the box says 4K60; many sold as 'active' are 4K30."}]},
     {"id": "adp-hdmi-vga", "kind": "adapter", "class": "generic", "purchasable": true, "name": "HDMI to VGA converter (up to 1920x1200@60)",
      "ports": [{"id": "in", "connector": "HDMI", "gender": "plug"}, {"id": "out", "connector": "VGA", "gender": "receptacle"}],
-     "video": [{"from": "in", "to": "out", "standard": "VGA-1200p", "source": "wiki-vga", "confidence": "medium"}]},
+     "video": [
+       {"from": "in", "to": "out", "standard": "VGA-1200p", "source": "wiki-vga", "confidence": "medium"}]},
     {"id": "hub-usbc-4k30", "kind": "adapter", "class": "generic", "purchasable": true, "name": "USB-C multiport hub with HDMI 4K30 (typical 7-in-1)",
      "ports": [{"id": "in", "connector": "USB-C", "gender": "plug"}, {"id": "out", "connector": "HDMI", "gender": "receptacle"}],
-     "video": [{"from": "in", "to": "out", "standard": "HDMI-1.4", "source": "class-assumption", "confidence": "medium", "note": "Many hubs keep 2 lanes for USB 3 and expose HDMI 1.4 (4K30)."}]},
-
+     "video": [
+       {"from": "in", "to": "out", "standard": "HDMI-1.4", "source": "hdmi-14b", "confidence": "medium", "note": "Many hubs keep 2 lanes for USB 3 and expose HDMI 1.4 (4K30)."}]},
+    {"id": "adp-apple-vga", "kind": "adapter", "class": "product", "maker": "Apple", "name": "Apple USB-C VGA Multiport Adapter", "purchasable": true,
+     "ports": [{"id": "in", "connector": "USB-C", "gender": "plug"}, {"id": "vga", "connector": "VGA", "gender": "receptacle"}, {"id": "pd", "connector": "USB-C", "gender": "receptacle", "note": "Charging only (max 60W): no data, no video."}],
+     "video": [
+       {"from": "in", "to": "vga", "standard": "VGA-1200p", "source": "apple-vga-adapter", "confidence": "high", "note": "Apple: VGA up to 1080p (1920x1080) at 60Hz."}],
+     "power": [
+       {"from": "pd", "to": "in", "watts": 60, "source": "apple-vga-adapter", "confidence": "high", "note": "Apple: this port delivers a maximum of 60W."}]},
+    {"id": "hub-anker-341", "kind": "adapter", "class": "product", "maker": "Anker", "name": "Anker 341 USB-C Hub (7-in-1)", "purchasable": true,
+     "ports": [{"id": "in", "connector": "USB-C", "gender": "plug"}, {"id": "hdmi", "connector": "HDMI", "gender": "receptacle"}, {"id": "pd", "connector": "USB-C", "gender": "receptacle", "note": "USB-C PD input for pass-through charging."}, {"id": "usbc-data", "connector": "USB-C", "gender": "receptacle", "note": "Data only: no video."}],
+     "video": [
+       {"from": "in", "to": "hdmi", "standard": "HDMI-1.4", "source": "anker-341", "confidence": "high", "note": "Anker: HDMI 1.4, 4K@30Hz. Its USB-C data port carries no video."}],
+     "power": [
+       {"from": "pd", "to": "in", "watts": 85, "source": "anker-341", "confidence": "high", "note": "Anker: up to 85W to the laptop (100W in minus 15W for the hub); needs a 100W charger and cable."}]},
+    {"id": "hub-ms-travel", "kind": "adapter", "class": "product", "maker": "Microsoft", "name": "Microsoft Surface USB-C Travel Hub", "purchasable": true,
+     "ports": [{"id": "in", "connector": "USB-C", "gender": "plug"}, {"id": "hdmi", "connector": "HDMI", "gender": "receptacle"}, {"id": "vga", "connector": "VGA", "gender": "receptacle"}, {"id": "usbc-data", "connector": "USB-C", "gender": "receptacle", "note": "For USB-C devices (data, phone charging). No video, no laptop charging."}],
+     "video": [
+       {"from": "in", "to": "hdmi", "standard": "HDMI-2.0", "source": "ms-travel-hub", "confidence": "high", "note": "Microsoft: HDMI 2.0, up to 3840x2160 at 60Hz."},
+       {"from": "in", "to": "vga", "standard": "VGA-1200p", "source": "ms-travel-hub", "confidence": "high", "note": "Microsoft: VGA up to 1920x1080 at 60Hz; not at the same time as HDMI."}],
+     "power": []},
+    {"id": "dock-caldigit-ts4", "kind": "adapter", "class": "product", "maker": "CalDigit", "name": "CalDigit TS4 Thunderbolt 4 dock (with its TB4 cable)", "purchasable": true,
+     "ports": [{"id": "host", "connector": "USB-C", "gender": "plug", "note": "The included Thunderbolt 4 cable, modelled as part of the dock."}, {"id": "dp", "connector": "DP", "gender": "receptacle"}, {"id": "tb-down1", "connector": "USB-C", "gender": "receptacle"}, {"id": "tb-down2", "connector": "USB-C", "gender": "receptacle"}, {"id": "usbc-data", "connector": "USB-C", "gender": "receptacle", "note": "Data only: no video."}],
+     "video": [
+       {"from": "host", "to": "dp", "standard": "DP-1.4-HBR3", "source": "caldigit-ts4", "confidence": "high", "note": "CalDigit: DisplayPort 1.4 port."},
+       {"from": "host", "to": "tb-down1", "standard": "DP-Alt-4L-HBR3", "source": "caldigit-ts4", "confidence": "high", "note": "CalDigit: monitors go on the DP port or the downstream Thunderbolt ports, not the USB-C data ports."},
+       {"from": "host", "to": "tb-down2", "standard": "DP-Alt-4L-HBR3", "source": "caldigit-ts4", "confidence": "high"}],
+     "power": [
+       {"from": "psu", "to": "host", "watts": 98, "source": "caldigit-ts4", "confidence": "high", "note": "CalDigit: 98W laptop charging from the dock's own power supply."}]},
+    {"id": "dock-lenovo-universal", "kind": "adapter", "class": "product", "maker": "Lenovo", "name": "ThinkPad Universal USB-C Dock (with its USB-C cable)", "purchasable": true,
+     "ports": [{"id": "host", "connector": "USB-C", "gender": "plug", "note": "The dock's USB-C host cable, modelled as part of the dock."}, {"id": "dp1", "connector": "DP", "gender": "receptacle"}, {"id": "dp2", "connector": "DP", "gender": "receptacle"}, {"id": "hdmi", "connector": "HDMI", "gender": "receptacle"}],
+     "video": [
+       {"from": "host", "to": "dp1", "standard": "DP-1.4-HBR3", "source": "lenovo-univ-dock", "confidence": "high", "note": "Lenovo: 2x DisplayPort 1.4, multi 4K@60Hz."},
+       {"from": "host", "to": "dp2", "standard": "DP-1.4-HBR3", "source": "lenovo-univ-dock", "confidence": "high"},
+       {"from": "host", "to": "hdmi", "standard": "HDMI-2.0", "source": "lenovo-univ-dock", "confidence": "high", "note": "Lenovo: HDMI 2.0."}],
+     "power": [
+       {"from": "psu", "to": "host", "watts": 65, "source": "lenovo-univ-dock", "confidence": "high", "note": "Lenovo: 65W to the notebook with the included 90W adapter (100W needs the optional 135W adapter)."}]},
+    {"id": "dock-ms-usb4", "kind": "adapter", "class": "product", "maker": "Microsoft", "name": "Microsoft Surface USB4 Dock (with its USB-C cable)", "purchasable": true,
+     "ports": [{"id": "host", "connector": "USB-C", "gender": "plug", "note": "The dock's USB4 host cable, modelled as part of the dock."}, {"id": "hdmi", "connector": "HDMI", "gender": "receptacle"}, {"id": "usbc-front", "connector": "USB-C", "gender": "receptacle"}, {"id": "usbc-rear", "connector": "USB-C", "gender": "receptacle"}],
+     "video": [
+       {"from": "host", "to": "hdmi", "standard": "HDMI-2.0", "source": "ms-usb4-dock", "confidence": "high", "note": "Microsoft: HDMI 2.1 port, two 4K60 monitors; modelled at the 4K60 (HDMI 2.0 TMDS) rate."},
+       {"from": "host", "to": "usbc-front", "standard": "DP-Alt-4L-HBR3", "source": "ms-usb4-dock", "confidence": "medium", "note": "Microsoft: video-enabled USB4 port; DP rate not stated, HBR3 assumed."},
+       {"from": "host", "to": "usbc-rear", "standard": "DP-Alt-4L-HBR3", "source": "ms-usb4-dock", "confidence": "medium"}],
+     "power": [
+       {"from": "psu", "to": "host", "watts": 65, "source": "ms-usb4-dock", "confidence": "high", "note": "Microsoft: 65W power delivery to the host from the 100W supply."}]},
+    {"id": "adp-framework-hdmi", "kind": "adapter", "class": "product", "maker": "Framework", "name": "Framework HDMI (3rd Gen) Expansion Card", "purchasable": true,
+     "ports": [{"id": "in", "connector": "USB-C", "gender": "plug"}, {"id": "hdmi", "connector": "HDMI", "gender": "receptacle"}],
+     "video": [
+       {"from": "in", "to": "hdmi", "standard": "HDMI-2.0", "source": "framework-hdmi", "confidence": "medium", "note": "Framework: HDMI 2.0b, 4K60. Fits a Framework laptop bay, but is electrically a USB-C to HDMI adapter. (frame.work blocks scripted fetches; checked via search.)"}]},
     {"id": "cable-usbc-usb2-60w", "kind": "cable", "class": "generic", "purchasable": true, "bidirectional": true, "name": "USB-C to USB-C charge cable, USB 2.0, 60 W",
      "ports": [{"id": "a", "connector": "USB-C", "gender": "plug"}, {"id": "b", "connector": "USB-C", "gender": "plug"}],
-     "video": [], "power": [{"from": "a", "to": "b", "standard": "USB-PD-3A", "source": "wiki-usbc", "confidence": "high", "note": "No SuperSpeed pairs, so no DisplayPort Alt Mode."}]},
+     "video": [],
+     "power": [
+       {"from": "a", "to": "b", "standard": "USB-PD-3A", "source": "usbif-cable", "confidence": "high", "note": "No SuperSpeed pairs, so no DisplayPort Alt Mode."}]},
     {"id": "cable-usbc-usb2-240w", "kind": "cable", "class": "generic", "purchasable": true, "bidirectional": true, "name": "USB-C to USB-C 240 W EPR charge cable, USB 2.0 data",
      "ports": [{"id": "a", "connector": "USB-C", "gender": "plug"}, {"id": "b", "connector": "USB-C", "gender": "plug"}],
-     "video": [], "power": [{"from": "a", "to": "b", "standard": "USB-PD-EPR", "source": "usbif-pd", "confidence": "high", "note": "240 W but USB 2.0 only: no video."}]},
+     "video": [],
+     "power": [
+       {"from": "a", "to": "b", "standard": "USB-PD-EPR", "source": "usbif-pd", "confidence": "high", "note": "240 W but USB 2.0 only: no video."}]},
     {"id": "cable-usbc-10g-100w", "kind": "cable", "class": "generic", "purchasable": true, "bidirectional": true, "name": "USB-C to USB-C full-featured 10 Gbps, 100 W (5 A e-marked)",
      "ports": [{"id": "a", "connector": "USB-C", "gender": "plug"}, {"id": "b", "connector": "USB-C", "gender": "plug"}],
-     "video": [{"from": "a", "to": "b", "standard": "DP-Alt-4L-HBR3", "source": "vesa-altmode", "confidence": "high"}],
-     "power": [{"from": "a", "to": "b", "standard": "USB-PD-5A", "source": "wiki-usbc", "confidence": "high"}]},
+     "video": [
+       {"from": "a", "to": "b", "standard": "DP-Alt-4L-HBR3", "source": "vesa-altmode", "confidence": "high", "note": "A full-featured 10 Gbps Type-C cable has all four high-speed pairs, rated above HBR3's 8.1 Gbps per lane."}],
+     "power": [
+       {"from": "a", "to": "b", "standard": "USB-PD-5A", "source": "usbif-pd", "confidence": "high"}]},
     {"id": "cable-tb4", "kind": "cable", "class": "generic", "purchasable": true, "bidirectional": true, "name": "Thunderbolt 4 cable (40 Gbps, 100 W)",
      "ports": [{"id": "a", "connector": "USB-C", "gender": "plug"}, {"id": "b", "connector": "USB-C", "gender": "plug"}],
-     "video": [{"from": "a", "to": "b", "standard": "DP-Alt-4L-HBR3", "source": "wiki-thunderbolt", "confidence": "high"}],
-     "power": [{"from": "a", "to": "b", "standard": "USB-PD-5A", "source": "wiki-thunderbolt", "confidence": "high"}]},
+     "video": [
+       {"from": "a", "to": "b", "standard": "DP-Alt-4L-HBR3", "source": "apple-tb-cables", "confidence": "high", "note": "Apple's Thunderbolt 4 Pro Cable documents DisplayPort HBR3 video and 100 W; any certified TB4 cable carries both."}],
+     "power": [
+       {"from": "a", "to": "b", "standard": "USB-PD-5A", "source": "apple-tb-cables", "confidence": "high"}]},
     {"id": "cable-hdmi-standard", "kind": "cable", "class": "generic", "purchasable": false, "bidirectional": true, "name": "Standard HDMI cable (Category 1, 720p/1080i)",
      "ports": [{"id": "a", "connector": "HDMI", "gender": "plug"}, {"id": "b", "connector": "HDMI", "gender": "plug"}],
-     "video": [{"from": "a", "to": "b", "standard": "HDMI-Standard-cable", "source": "hdmi-cables", "confidence": "medium"}]},
+     "video": [
+       {"from": "a", "to": "b", "standard": "HDMI-Standard-cable", "source": "hdmi-cables", "confidence": "medium"}]},
     {"id": "cable-hdmi-high-speed", "kind": "cable", "class": "generic", "purchasable": true, "bidirectional": true, "name": "High Speed HDMI cable (10.2 Gbps)",
      "ports": [{"id": "a", "connector": "HDMI", "gender": "plug"}, {"id": "b", "connector": "HDMI", "gender": "plug"}],
-     "video": [{"from": "a", "to": "b", "standard": "HDMI-1.4", "source": "hdmi-cables", "confidence": "high", "note": "Certified to 10.2 Gbps (4K30). Many also pass 4K60, but that is not certified."}]},
+     "video": [
+       {"from": "a", "to": "b", "standard": "HDMI-1.4", "source": "hdmi-cables", "confidence": "medium", "note": "hdmi.org lists High Speed cables at 10.2 Gbps (4K30), but the HDMI 2.0 release says Category 2 cables carry 18 Gbps. Modelled conservatively at 10.2 Gbps; many will pass 4K60."}]},
     {"id": "cable-hdmi-premium", "kind": "cable", "class": "generic", "purchasable": true, "bidirectional": true, "name": "Premium High Speed HDMI cable (18 Gbps)",
      "ports": [{"id": "a", "connector": "HDMI", "gender": "plug"}, {"id": "b", "connector": "HDMI", "gender": "plug"}],
-     "video": [{"from": "a", "to": "b", "standard": "HDMI-2.0", "source": "hdmi-premium", "confidence": "high"}]},
+     "video": [
+       {"from": "a", "to": "b", "standard": "HDMI-2.0", "source": "hdmi-premium", "confidence": "high"}]},
     {"id": "cable-hdmi-ultra", "kind": "cable", "class": "generic", "purchasable": true, "bidirectional": true, "name": "Ultra High Speed HDMI cable (48 Gbps)",
      "ports": [{"id": "a", "connector": "HDMI", "gender": "plug"}, {"id": "b", "connector": "HDMI", "gender": "plug"}],
-     "video": [{"from": "a", "to": "b", "standard": "HDMI-2.1-FRL", "source": "hdmi-uhs", "confidence": "high"}]},
+     "video": [
+       {"from": "a", "to": "b", "standard": "HDMI-2.1-FRL", "source": "hdmi-uhs", "confidence": "high"}]},
     {"id": "cable-dp-hbr2", "kind": "cable", "class": "generic", "purchasable": true, "bidirectional": true, "name": "DisplayPort cable rated HBR2 (DP 1.2 class)",
      "ports": [{"id": "a", "connector": "DP", "gender": "plug"}, {"id": "b", "connector": "DP", "gender": "plug"}],
-     "video": [{"from": "a", "to": "b", "standard": "DP-1.2-HBR2", "source": "wiki-dp", "confidence": "medium"}]},
-    {"id": "cable-dp8k", "kind": "cable", "class": "generic", "purchasable": true, "bidirectional": true, "name": "VESA-certified DP8K DisplayPort cable",
+     "video": [
+       {"from": "a", "to": "b", "standard": "DP-1.2-HBR2", "source": "vesa-tokyo-2024", "confidence": "medium", "note": "Cable certified to the DisplayPort 1.2 level (HBR2)."}]},
+    {"id": "cable-dp8k", "kind": "cable", "class": "generic", "purchasable": true, "bidirectional": true, "name": "VESA-certified DP8K DisplayPort cable (HBR3)",
      "ports": [{"id": "a", "connector": "DP", "gender": "plug"}, {"id": "b", "connector": "DP", "gender": "plug"}],
-     "video": [{"from": "a", "to": "b", "standard": "DP-2.1-UHBR10", "source": "wiki-dp", "confidence": "high"}]},
+     "video": [
+       {"from": "a", "to": "b", "standard": "DP-1.4-HBR3", "source": "vesa-dp8k-pr", "confidence": "high", "note": "Audit fix: DP8K certification is the full HBR3 rate (4 lanes x 8.1 Gbps), not UHBR10. Enough for 4K60 uncompressed."}]},
     {"id": "cable-usbc-hdmi-4k60", "kind": "cable", "class": "generic", "purchasable": true, "name": "USB-C to HDMI cable, 4K60 (HDMI 2.0 class)",
      "ports": [{"id": "c", "connector": "USB-C", "gender": "plug"}, {"id": "h", "connector": "HDMI", "gender": "plug"}],
-     "video": [{"from": "c", "to": "h", "standard": "HDMI-2.0", "source": "class-assumption", "confidence": "high"}]},
+     "video": [
+       {"from": "c", "to": "h", "standard": "HDMI-2.0", "source": "hdmi-20-pr", "confidence": "high"}]},
     {"id": "cable-usbc-dp14", "kind": "cable", "class": "generic", "purchasable": true, "name": "USB-C to DisplayPort 1.4 cable",
      "ports": [{"id": "c", "connector": "USB-C", "gender": "plug"}, {"id": "d", "connector": "DP", "gender": "plug"}],
-     "video": [{"from": "c", "to": "d", "standard": "DP-Alt-4L-HBR3", "source": "vesa-altmode", "confidence": "high"}]},
+     "video": [
+       {"from": "c", "to": "d", "standard": "DP-Alt-4L-HBR3", "source": "vesa-altmode", "confidence": "high"}]},
     {"id": "cable-vga", "kind": "cable", "class": "generic", "purchasable": true, "bidirectional": true, "name": "VGA cable (analog)",
      "ports": [{"id": "a", "connector": "VGA", "gender": "plug"}, {"id": "b", "connector": "VGA", "gender": "plug"}],
-     "video": [{"from": "a", "to": "b", "standard": "VGA-1200p", "source": "wiki-vga", "confidence": "low", "note": "Analog quality depends on length and shielding."}]},
+     "video": [
+       {"from": "a", "to": "b", "standard": "VGA-1200p", "source": "wiki-vga", "confidence": "low", "note": "Analog quality depends on length and shielding."}]},
     {"id": "cable-usbc-magsafe3", "kind": "cable", "class": "product", "maker": "Apple", "purchasable": true, "name": "Apple USB-C to MagSafe 3 cable (2 m)",
      "ports": [{"id": "c", "connector": "USB-C", "gender": "plug"}, {"id": "m", "connector": "MagSafe3", "gender": "plug"}],
-     "video": [], "power": [{"from": "c", "to": "m", "watts": 140, "source": "apple-fastcharge", "confidence": "high", "note": "Apple pairs it with the 140 W adapter for 16-inch MacBook Pro fast charging."}]},
-
+     "video": [],
+     "power": [
+       {"from": "c", "to": "m", "watts": 140, "source": "apple-fastcharge", "confidence": "high", "note": "Apple pairs it with the 140 W adapter for 16-inch MacBook Pro fast charging."}]},
+    {"id": "cable-apple-tb4-pro", "kind": "cable", "class": "product", "maker": "Apple", "name": "Apple Thunderbolt 4 (USB-C) Pro Cable", "purchasable": true, "bidirectional": true,
+     "ports": [{"id": "a", "connector": "USB-C", "gender": "plug"}, {"id": "b", "connector": "USB-C", "gender": "plug"}],
+     "video": [
+       {"from": "a", "to": "b", "standard": "DP-Alt-4L-HBR3", "source": "apple-tb-cables", "confidence": "high", "note": "Apple: DisplayPort HBR3 video."}],
+     "power": [
+       {"from": "a", "to": "b", "standard": "USB-PD-5A", "source": "apple-tb-cables", "confidence": "high", "note": "Apple: up to 100W."}]},
+    {"id": "cable-apple-tb5-pro", "kind": "cable", "class": "product", "maker": "Apple", "name": "Apple Thunderbolt 5 (USB-C) Pro Cable", "purchasable": true, "bidirectional": true,
+     "ports": [{"id": "a", "connector": "USB-C", "gender": "plug"}, {"id": "b", "connector": "USB-C", "gender": "plug"}],
+     "video": [
+       {"from": "a", "to": "b", "standard": "DP-Alt-4L-HBR3", "source": "apple-tb-cables", "confidence": "high", "note": "Apple: DisplayPort HBR3 video."}],
+     "power": [
+       {"from": "a", "to": "b", "standard": "USB-PD-EPR", "source": "apple-tb-cables", "confidence": "high", "note": "Apple: up to 240W."}]},
+    {"id": "cable-apple-240w", "kind": "cable", "class": "product", "maker": "Apple", "name": "Apple 240W USB-C Charge Cable (2 m)", "purchasable": true, "bidirectional": true,
+     "ports": [{"id": "a", "connector": "USB-C", "gender": "plug"}, {"id": "b", "connector": "USB-C", "gender": "plug"}],
+     "video": [],
+     "power": [
+       {"from": "a", "to": "b", "standard": "USB-PD-EPR", "source": "apple-240w-cable", "confidence": "high", "note": "Apple: 240W, USB 2 data only, so no video."}]},
+    {"id": "cable-usb4-240w", "kind": "cable", "class": "generic", "name": "USB4 40Gbps 240W certified USB-C cable", "purchasable": true, "bidirectional": true,
+     "ports": [{"id": "a", "connector": "USB-C", "gender": "plug"}, {"id": "b", "connector": "USB-C", "gender": "plug"}],
+     "video": [
+       {"from": "a", "to": "b", "standard": "DP-Alt-4L-HBR3", "source": "vesa-altmode", "confidence": "high", "note": "Class: a certified USB4 cable has all four high-speed pairs, rated above HBR3."}],
+     "power": [
+       {"from": "a", "to": "b", "standard": "USB-PD-EPR", "source": "usbif-cable", "confidence": "high", "note": "USB-IF 240W logo cable."}]},
+    {"id": "cable-usbc-5g-60w", "kind": "cable", "class": "generic", "name": "USB-C to USB-C cable, USB 3.2 Gen 1 (5 Gbps), 60 W", "purchasable": true, "bidirectional": true,
+     "ports": [{"id": "a", "connector": "USB-C", "gender": "plug"}, {"id": "b", "connector": "USB-C", "gender": "plug"}],
+     "video": [
+       {"from": "a", "to": "b", "standard": "DP-Alt-4L-HBR2", "source": "vesa-altmode", "confidence": "medium", "note": "Class: full-featured but only rated for 5 Gbps per pair, so modelled at HBR2 (5.4 Gbps/lane). Many work at HBR3, but that is not guaranteed."}],
+     "power": [
+       {"from": "a", "to": "b", "standard": "USB-PD-3A", "source": "usbif-cable", "confidence": "high"}]},
+    {"id": "cable-dp54", "kind": "cable", "class": "generic", "name": "VESA-certified DP54 DisplayPort cable (UHBR13.5)", "purchasable": true, "bidirectional": true,
+     "ports": [{"id": "a", "connector": "DP", "gender": "plug"}, {"id": "b", "connector": "DP", "gender": "plug"}],
+     "video": [
+       {"from": "a", "to": "b", "standard": "DP-2.1-UHBR13.5", "source": "vesa-tokyo-2024", "confidence": "high", "note": "VESA: DP54 certifies up to UHBR13.5 (formerly DP40/UHBR10)."}]},
+    {"id": "cable-apple-60w", "kind": "cable", "class": "product", "maker": "Apple", "name": "Apple 60W USB-C Charge Cable (1 m)", "purchasable": true, "bidirectional": true,
+     "ports": [{"id": "a", "connector": "USB-C", "gender": "plug"}, {"id": "b", "connector": "USB-C", "gender": "plug"}],
+     "video": [],
+     "power": [
+       {"from": "a", "to": "b", "standard": "USB-PD-3A", "source": "apple-tb-cables", "confidence": "high", "note": "Apple: the USB-C Charge Cable is USB 2 (480 Mbps) and does not support video."}]},
     {"id": "chg-apple-30w", "kind": "charger", "class": "product", "maker": "Apple", "purchasable": true, "name": "Apple 30W USB-C Power Adapter",
-     "ports": [{"id": "out", "connector": "USB-C", "gender": "receptacle"}], "power": [{"from": "psu", "to": "out", "watts": 30, "source": "apple-power", "confidence": "high"}]},
+     "ports": [{"id": "out", "connector": "USB-C", "gender": "receptacle"}],
+     "power": [
+       {"from": "psu", "to": "out", "watts": 30, "source": "apple-power", "confidence": "high"}]},
     {"id": "chg-apple-35w-dual", "kind": "charger", "class": "product", "maker": "Apple", "purchasable": true, "name": "Apple 35W Dual USB-C Port Power Adapter",
-     "ports": [{"id": "out", "connector": "USB-C", "gender": "receptacle"}], "power": [{"from": "psu", "to": "out", "watts": 35, "source": "apple-power", "confidence": "high", "note": "35 W shared across both ports; modelled as one port in use."}]},
+     "ports": [{"id": "out", "connector": "USB-C", "gender": "receptacle"}],
+     "power": [
+       {"from": "psu", "to": "out", "watts": 35, "source": "apple-power", "confidence": "high", "note": "35 W shared across both ports; modelled as one port in use."}]},
     {"id": "chg-apple-70w", "kind": "charger", "class": "product", "maker": "Apple", "purchasable": true, "name": "Apple 70W USB-C Power Adapter",
-     "ports": [{"id": "out", "connector": "USB-C", "gender": "receptacle"}], "power": [{"from": "psu", "to": "out", "watts": 70, "source": "apple-power", "confidence": "high"}]},
+     "ports": [{"id": "out", "connector": "USB-C", "gender": "receptacle"}],
+     "power": [
+       {"from": "psu", "to": "out", "watts": 70, "source": "apple-power", "confidence": "high"}]},
     {"id": "chg-apple-96w", "kind": "charger", "class": "product", "maker": "Apple", "purchasable": true, "name": "Apple 96W USB-C Power Adapter",
-     "ports": [{"id": "out", "connector": "USB-C", "gender": "receptacle"}], "power": [{"from": "psu", "to": "out", "watts": 96, "source": "apple-power", "confidence": "high"}]},
+     "ports": [{"id": "out", "connector": "USB-C", "gender": "receptacle"}],
+     "power": [
+       {"from": "psu", "to": "out", "watts": 96, "source": "apple-power", "confidence": "high"}]},
     {"id": "chg-apple-140w", "kind": "charger", "class": "product", "maker": "Apple", "purchasable": true, "name": "Apple 140W USB-C Power Adapter (USB PD 3.1 EPR)",
-     "ports": [{"id": "out", "connector": "USB-C", "gender": "receptacle"}], "power": [{"from": "psu", "to": "out", "watts": 140, "source": "apple-fastcharge", "confidence": "high", "note": "Above 100 W needs an EPR (240 W) cable or MagSafe 3."}]},
+     "ports": [{"id": "out", "connector": "USB-C", "gender": "receptacle"}],
+     "power": [
+       {"from": "psu", "to": "out", "watts": 140, "source": "apple-fastcharge", "confidence": "high", "note": "Above 100 W needs an EPR (240 W) cable or MagSafe 3."}]},
     {"id": "chg-gen-20w", "kind": "charger", "class": "generic", "purchasable": true, "name": "Generic 20 W USB-C PD phone charger",
-     "ports": [{"id": "out", "connector": "USB-C", "gender": "receptacle"}], "power": [{"from": "psu", "to": "out", "watts": 20, "source": "class-assumption", "confidence": "high"}]},
+     "ports": [{"id": "out", "connector": "USB-C", "gender": "receptacle"}],
+     "power": [
+       {"from": "psu", "to": "out", "watts": 20, "source": "usbif-pd", "confidence": "high"}]},
     {"id": "chg-gen-65w", "kind": "charger", "class": "generic", "purchasable": true, "name": "Generic 65 W USB-C PD charger (GaN)",
-     "ports": [{"id": "out", "connector": "USB-C", "gender": "receptacle"}], "power": [{"from": "psu", "to": "out", "watts": 65, "source": "class-assumption", "confidence": "high"}]},
+     "ports": [{"id": "out", "connector": "USB-C", "gender": "receptacle"}],
+     "power": [
+       {"from": "psu", "to": "out", "watts": 65, "source": "usbif-pd", "confidence": "high"}]},
     {"id": "chg-gen-100w", "kind": "charger", "class": "generic", "purchasable": true, "name": "Generic 100 W USB-C PD charger (GaN)",
-     "ports": [{"id": "out", "connector": "USB-C", "gender": "receptacle"}], "power": [{"from": "psu", "to": "out", "watts": 100, "source": "class-assumption", "confidence": "high"}]},
-
-    {"id": "proj-1080p", "kind": "display", "class": "generic", "name": "1080p projector with HDMI 1.4 and VGA inputs", "modes": ["720p60", "1080p60"],
+     "ports": [{"id": "out", "connector": "USB-C", "gender": "receptacle"}],
+     "power": [
+       {"from": "psu", "to": "out", "watts": 100, "source": "usbif-pd", "confidence": "high"}]},
+    {"id": "chg-apple-20w", "kind": "charger", "class": "product", "maker": "Apple", "name": "Apple 20W USB-C Power Adapter", "purchasable": true,
+     "ports": [{"id": "out", "connector": "USB-C", "gender": "receptacle"}],
+     "power": [
+       {"from": "psu", "to": "out", "watts": 20, "source": "apple-iphone15", "confidence": "high", "note": "The adapter Apple names for iPhone fast charging."}]},
+    {"id": "chg-apple-67w", "kind": "charger", "class": "product", "maker": "Apple", "name": "Apple 67W USB-C Power Adapter", "purchasable": true,
+     "ports": [{"id": "out", "connector": "USB-C", "gender": "receptacle"}],
+     "power": [
+       {"from": "psu", "to": "out", "watts": 67, "source": "apple-power", "confidence": "high"}]},
+    {"id": "chg-lenovo-65w", "kind": "charger", "class": "product", "maker": "Lenovo", "name": "Lenovo 65W USB-C AC adapter (PD 3.0)", "purchasable": true,
+     "ports": [{"id": "out", "connector": "USB-C", "gender": "receptacle"}],
+     "power": [
+       {"from": "psu", "to": "out", "watts": 65, "source": "lenovo-t14g4", "confidence": "high", "note": "Listed as a PD 3.0 adapter option in ThinkPad PSREF."}]},
+    {"id": "chg-lenovo-45w", "kind": "charger", "class": "product", "maker": "Lenovo", "name": "Lenovo 45W USB-C AC adapter (PD 3.0)", "purchasable": true,
+     "ports": [{"id": "out", "connector": "USB-C", "gender": "receptacle"}],
+     "power": [
+       {"from": "psu", "to": "out", "watts": 45, "source": "lenovo-t14g4", "confidence": "high"}]},
+    {"id": "chg-hp-65w", "kind": "charger", "class": "product", "maker": "HP", "name": "HP Smart 65W USB-C adapter", "purchasable": true,
+     "ports": [{"id": "out", "connector": "USB-C", "gender": "receptacle"}],
+     "power": [
+       {"from": "psu", "to": "out", "watts": 65, "source": "hp-840g10", "confidence": "high"}]},
+    {"id": "chg-anker-735", "kind": "charger", "class": "product", "maker": "Anker", "name": "Anker 735 Charger (Nano II 65W)", "purchasable": true,
+     "ports": [{"id": "out", "connector": "USB-C", "gender": "receptacle"}],
+     "power": [
+       {"from": "psu", "to": "out", "watts": 65, "source": "anker-735", "confidence": "high", "note": "65W from one USB-C port; shared when several ports are used."}]},
+    {"id": "chg-anker-prime-100w", "kind": "charger", "class": "product", "maker": "Anker", "name": "Anker Prime Charger (100W, 3 ports)", "purchasable": true,
+     "ports": [{"id": "out", "connector": "USB-C", "gender": "receptacle"}],
+     "power": [
+       {"from": "psu", "to": "out", "watts": 100, "source": "anker-prime-100w", "confidence": "high", "note": "100W from the top USB-C port alone."}]},
+    {"id": "chg-hp-45w", "kind": "charger", "class": "product", "maker": "HP", "name": "HP Smart 45W USB-C adapter", "purchasable": true,
+     "ports": [{"id": "out", "connector": "USB-C", "gender": "receptacle"}],
+     "power": [
+       {"from": "psu", "to": "out", "watts": 45, "source": "hp-840g10", "confidence": "high"}]},
+    {"id": "proj-1080p", "kind": "display", "class": "generic", "name": "1080p projector with HDMI 1.4 and VGA inputs",
+     "modes": ["720p60", "1080p60"],
      "ports": [{"id": "hdmi", "connector": "HDMI", "gender": "receptacle"}, {"id": "vga", "connector": "VGA", "gender": "receptacle"}],
-     "video": [{"from": "hdmi", "to": "panel", "standard": "HDMI-1.4", "source": "class-assumption", "confidence": "medium"}, {"from": "vga", "to": "panel", "standard": "VGA-1200p", "source": "wiki-vga", "confidence": "medium"}]},
-    {"id": "proj-xga-vga", "kind": "display", "class": "generic", "name": "Older XGA classroom projector, VGA input only", "modes": ["720p60"],
+     "video": [
+       {"from": "hdmi", "to": "panel", "standard": "HDMI-1.4", "source": "hdmi-14b", "confidence": "medium"},
+       {"from": "vga", "to": "panel", "standard": "VGA-1200p", "source": "wiki-vga", "confidence": "medium"}]},
+    {"id": "proj-xga-vga", "kind": "display", "class": "generic", "name": "Older XGA classroom projector, VGA input only",
+     "modes": ["720p60"],
      "ports": [{"id": "vga", "connector": "VGA", "gender": "receptacle"}],
-     "video": [{"from": "vga", "to": "panel", "standard": "VGA-1200p", "source": "wiki-vga", "confidence": "low", "note": "1024x768 native panel. 720p60 input with scaling is assumed."}]},
-    {"id": "tv-4k-hdmi20", "kind": "display", "class": "generic", "name": "4K TV with HDMI 2.0 inputs", "modes": ["720p60", "1080p60", "4K30", "4K60"],
+     "video": [
+       {"from": "vga", "to": "panel", "standard": "VGA-1200p", "source": "wiki-vga", "confidence": "low", "note": "1024x768 native panel. 720p60 input with scaling is assumed."}]},
+    {"id": "tv-4k-hdmi20", "kind": "display", "class": "generic", "name": "4K TV with HDMI 2.0 inputs",
+     "modes": ["720p60", "1080p60", "4K30", "4K60"],
      "ports": [{"id": "hdmi1", "connector": "HDMI", "gender": "receptacle"}, {"id": "hdmi2", "connector": "HDMI", "gender": "receptacle"}],
-     "video": [{"from": "hdmi1", "to": "panel", "standard": "HDMI-2.0", "source": "class-assumption", "confidence": "high"}, {"from": "hdmi2", "to": "panel", "standard": "HDMI-2.0", "source": "class-assumption", "confidence": "high"}]},
-    {"id": "tv-4k-hdmi21", "kind": "display", "class": "generic", "name": "4K TV with HDMI 2.1 input", "modes": ["720p60", "1080p60", "4K30", "4K60"],
+     "video": [
+       {"from": "hdmi1", "to": "panel", "standard": "HDMI-2.0", "source": "hdmi-20-pr", "confidence": "high"},
+       {"from": "hdmi2", "to": "panel", "standard": "HDMI-2.0", "source": "hdmi-20-pr", "confidence": "high"}]},
+    {"id": "tv-4k-hdmi21", "kind": "display", "class": "generic", "name": "4K TV with HDMI 2.1 input",
+     "modes": ["720p60", "1080p60", "4K30", "4K60"],
      "ports": [{"id": "hdmi", "connector": "HDMI", "gender": "receptacle"}],
-     "video": [{"from": "hdmi", "to": "panel", "standard": "HDMI-2.1-FRL", "source": "class-assumption", "confidence": "high"}]},
-    {"id": "disp-4k-hdmi14", "kind": "display", "class": "generic", "name": "4K meeting-room display with HDMI 1.4 inputs only", "modes": ["720p60", "1080p60", "4K30", "4K60"],
+     "video": [
+       {"from": "hdmi", "to": "panel", "standard": "HDMI-2.1-FRL", "source": "hdmi-uhs", "confidence": "high"}]},
+    {"id": "disp-4k-hdmi14", "kind": "display", "class": "generic", "name": "4K meeting-room display with HDMI 1.4 inputs only",
+     "modes": ["720p60", "1080p60", "4K30", "4K60"],
      "ports": [{"id": "hdmi", "connector": "HDMI", "gender": "receptacle"}],
-     "video": [{"from": "hdmi", "to": "panel", "standard": "HDMI-1.4", "source": "class-assumption", "confidence": "medium", "note": "The panel is 4K60, but the input tops out at 4K30."}]},
-    {"id": "mon-4k-multi", "kind": "display", "class": "generic", "name": "4K monitor with DP 1.4, HDMI 2.0 and USB-C (DP Alt Mode) inputs", "modes": ["720p60", "1080p60", "1440p60", "4K30", "4K60"],
+     "video": [
+       {"from": "hdmi", "to": "panel", "standard": "HDMI-1.4", "source": "hdmi-14b", "confidence": "medium", "note": "The panel is 4K60, but the input tops out at 4K30."}]},
+    {"id": "mon-4k-multi", "kind": "display", "class": "generic", "name": "4K monitor with DP 1.4, HDMI 2.0 and USB-C (DP Alt Mode) inputs",
+     "modes": ["720p60", "1080p60", "1440p60", "4K30", "4K60"],
      "ports": [{"id": "dp", "connector": "DP", "gender": "receptacle"}, {"id": "hdmi", "connector": "HDMI", "gender": "receptacle"}, {"id": "usbc", "connector": "USB-C", "gender": "receptacle"}],
-     "video": [{"from": "dp", "to": "panel", "standard": "DP-1.4-HBR3", "source": "class-assumption", "confidence": "high"}, {"from": "hdmi", "to": "panel", "standard": "HDMI-2.0", "source": "class-assumption", "confidence": "high"}, {"from": "usbc", "to": "panel", "standard": "DP-Alt-4L-HBR3", "source": "class-assumption", "confidence": "high"}]},
-    {"id": "mon-1440p", "kind": "display", "class": "generic", "name": "1440p monitor with DP 1.2 and HDMI 1.4 inputs", "modes": ["720p60", "1080p60", "1440p60"],
+     "video": [
+       {"from": "dp", "to": "panel", "standard": "DP-1.4-HBR3", "source": "vesa-tokyo-2024", "confidence": "high"},
+       {"from": "hdmi", "to": "panel", "standard": "HDMI-2.0", "source": "hdmi-20-pr", "confidence": "high"},
+       {"from": "usbc", "to": "panel", "standard": "DP-Alt-4L-HBR3", "source": "vesa-altmode", "confidence": "high"}]},
+    {"id": "mon-1440p", "kind": "display", "class": "generic", "name": "1440p monitor with DP 1.2 and HDMI 1.4 inputs",
+     "modes": ["720p60", "1080p60", "1440p60"],
      "ports": [{"id": "dp", "connector": "DP", "gender": "receptacle"}, {"id": "hdmi", "connector": "HDMI", "gender": "receptacle"}],
-     "video": [{"from": "dp", "to": "panel", "standard": "DP-1.2-HBR2", "source": "class-assumption", "confidence": "high"}, {"from": "hdmi", "to": "panel", "standard": "HDMI-1.4", "source": "class-assumption", "confidence": "high"}]},
-    {"id": "mon-portable-1080p", "kind": "display", "class": "generic", "name": "Portable 1080p USB-C monitor (DP Alt Mode)", "modes": ["720p60", "1080p60"],
+     "video": [
+       {"from": "dp", "to": "panel", "standard": "DP-1.2-HBR2", "source": "vesa-tokyo-2024", "confidence": "high"},
+       {"from": "hdmi", "to": "panel", "standard": "HDMI-1.4", "source": "hdmi-14b", "confidence": "high"}]},
+    {"id": "mon-portable-1080p", "kind": "display", "class": "generic", "name": "Portable 1080p USB-C monitor (DP Alt Mode)",
+     "modes": ["720p60", "1080p60"],
      "ports": [{"id": "usbc", "connector": "USB-C", "gender": "receptacle"}],
-     "video": [{"from": "usbc", "to": "panel", "standard": "DP-Alt-2L-HBR3", "source": "class-assumption", "confidence": "low", "note": "The lane count is not usually published. Only 1080p matters here."}]}
+     "video": [
+       {"from": "usbc", "to": "panel", "standard": "DP-Alt-2L-HBR3", "source": "vesa-altmode", "confidence": "low", "note": "The lane count is not usually published. Only 1080p matters here."}]},
+    {"id": "mon-lenovo-t27h30", "kind": "display", "class": "product", "maker": "Lenovo", "name": "Lenovo ThinkVision T27h-30 (1440p, USB-C 90W)",
+     "modes": ["720p60", "1080p60", "1440p60"],
+     "ports": [{"id": "usbc", "connector": "USB-C", "gender": "receptacle", "note": "USB-C 3.2 Gen 1 upstream with DP 1.4 Alt Mode and 90W PD."}, {"id": "hdmi", "connector": "HDMI", "gender": "receptacle"}, {"id": "dp", "connector": "DP", "gender": "receptacle"}],
+     "video": [
+       {"from": "usbc", "to": "panel", "standard": "DP-Alt-2L-HBR3", "source": "lenovo-t27h30", "confidence": "medium", "note": "PSREF: DP 1.4 Alt Mode. Lane count not stated; even 2 lanes carry 1440p60."},
+       {"from": "hdmi", "to": "panel", "standard": "HDMI-2.0", "source": "lenovo-t27h30", "confidence": "high", "note": "PSREF: HDMI 2.1 TMDS, 2560x1440@60Hz."},
+       {"from": "dp", "to": "panel", "standard": "DP-1.4-HBR3", "source": "lenovo-t27h30", "confidence": "high", "note": "PSREF: DisplayPort 1.4."}],
+     "power": [
+       {"from": "psu", "to": "usbc", "watts": 90, "source": "lenovo-t27h30", "confidence": "high", "note": "PSREF: up to 90W power delivery over USB-C."}]},
+    {"id": "mon-lenovo-p27u20", "kind": "display", "class": "product", "maker": "Lenovo", "name": "Lenovo ThinkVision P27u-20 (4K, Thunderbolt 4)",
+     "modes": ["720p60", "1080p60", "1440p60", "4K30", "4K60"],
+     "ports": [{"id": "tb-in", "connector": "USB-C", "gender": "receptacle", "note": "Thunderbolt 4 In."}, {"id": "hdmi1", "connector": "HDMI", "gender": "receptacle"}, {"id": "hdmi2", "connector": "HDMI", "gender": "receptacle"}, {"id": "dp", "connector": "DP", "gender": "receptacle"}, {"id": "usbc-down", "connector": "USB-C", "gender": "receptacle", "note": "Downstream USB-C 3.2 Gen 1: data and up to 27W out, no video in."}],
+     "video": [
+       {"from": "tb-in", "to": "panel", "standard": "DP-Alt-4L-HBR3", "source": "lenovo-p27u20", "confidence": "high", "note": "PSREF: Thunderbolt 4 In."},
+       {"from": "hdmi1", "to": "panel", "standard": "HDMI-2.0", "source": "lenovo-p27u20", "confidence": "high", "note": "PSREF: HDMI 2.1 TMDS, 3840x2160@60Hz."},
+       {"from": "hdmi2", "to": "panel", "standard": "HDMI-2.0", "source": "lenovo-p27u20", "confidence": "high"},
+       {"from": "dp", "to": "panel", "standard": "DP-1.2-HBR2", "source": "lenovo-p27u20", "confidence": "high", "note": "PSREF: DisplayPort 1.2 (HBR2 still fits 4K60)."}],
+     "power": []},
+    {"id": "mon-lg-27up850", "kind": "display", "class": "product", "maker": "LG", "name": "LG 27UP850-W (4K, USB-C 96W)",
+     "modes": ["720p60", "1080p60", "1440p60", "4K30", "4K60"],
+     "ports": [{"id": "usbc", "connector": "USB-C", "gender": "receptacle"}, {"id": "hdmi1", "connector": "HDMI", "gender": "receptacle"}, {"id": "hdmi2", "connector": "HDMI", "gender": "receptacle"}, {"id": "dp", "connector": "DP", "gender": "receptacle"}],
+     "video": [
+       {"from": "usbc", "to": "panel", "standard": "DP-Alt-4L-HBR3", "source": "lg-27up850", "confidence": "medium", "note": "LG: USB-C DP Alternate Mode at 3840x2160@60Hz, which needs 4 lanes of HBR3 without DSC; lane count inferred."},
+       {"from": "hdmi1", "to": "panel", "standard": "HDMI-2.0", "source": "lg-27up850", "confidence": "high", "note": "LG: HDMI, 3840x2160 at 60Hz."},
+       {"from": "hdmi2", "to": "panel", "standard": "HDMI-2.0", "source": "lg-27up850", "confidence": "high"},
+       {"from": "dp", "to": "panel", "standard": "DP-1.4-HBR3", "source": "lg-27up850", "confidence": "high"}],
+     "power": [
+       {"from": "psu", "to": "usbc", "watts": 96, "source": "lg-27up850", "confidence": "high", "note": "LG: USB-C with 96W Power Delivery."}]},
+    {"id": "mon-dell-p2723qe", "kind": "display", "class": "product", "maker": "Dell", "name": "Dell P2723QE (4K, USB-C 90W)",
+     "modes": ["720p60", "1080p60", "1440p60", "4K30", "4K60"],
+     "ports": [{"id": "usbc", "connector": "USB-C", "gender": "receptacle"}, {"id": "hdmi", "connector": "HDMI", "gender": "receptacle"}, {"id": "dp", "connector": "DP", "gender": "receptacle"}],
+     "video": [
+       {"from": "usbc", "to": "panel", "standard": "DP-Alt-4L-HBR3", "source": "dell-p2723qe", "confidence": "medium", "note": "Dell: USB-C with DisplayPort Alt Mode at 4K60. dell.com blocks scripted fetches; checked via search results."},
+       {"from": "hdmi", "to": "panel", "standard": "HDMI-2.0", "source": "dell-p2723qe", "confidence": "medium", "note": "Dell: HDMI 2.0."},
+       {"from": "dp", "to": "panel", "standard": "DP-1.4-HBR3", "source": "dell-p2723qe", "confidence": "medium", "note": "Dell: DisplayPort 1.4."}],
+     "power": [
+       {"from": "psu", "to": "usbc", "watts": 90, "source": "dell-p2723qe", "confidence": "medium", "note": "Dell: up to 90W over USB-C."}]},
+    {"id": "proj-epson-2250u", "kind": "display", "class": "product", "maker": "Epson", "name": "Epson PowerLite 2250U (WUXGA meeting-room projector)",
+     "modes": ["720p60", "1080p60"],
+     "ports": [{"id": "hdmi1", "connector": "HDMI", "gender": "receptacle"}, {"id": "hdmi2", "connector": "HDMI", "gender": "receptacle"}, {"id": "vga", "connector": "VGA", "gender": "receptacle"}],
+     "video": [
+       {"from": "hdmi1", "to": "panel", "standard": "HDMI-1.4", "source": "epson-2250u", "confidence": "medium", "note": "Epson: Full HD 1080p support over 2x HDMI; the HDMI version is not stated, so modelled at the HDMI 1.4 rate, which covers 1080p60."},
+       {"from": "hdmi2", "to": "panel", "standard": "HDMI-1.4", "source": "epson-2250u", "confidence": "medium"},
+       {"from": "vga", "to": "panel", "standard": "VGA-1200p", "source": "epson-2250u", "confidence": "medium", "note": "Epson: Computer (D-sub 15) input."}]},
+    {"id": "proj-epson-118", "kind": "display", "class": "product", "maker": "Epson", "name": "Epson PowerLite 118 (XGA classroom projector)",
+     "modes": ["720p60", "1080p60"],
+     "ports": [{"id": "hdmi", "connector": "HDMI", "gender": "receptacle"}, {"id": "vga", "connector": "VGA", "gender": "receptacle"}],
+     "video": [
+       {"from": "hdmi", "to": "panel", "standard": "HDMI-1.4", "source": "epson-118", "confidence": "medium", "note": "Epson: 2x HDMI; 1024x768 native, so 1080p input is scaled down. HDMI version not stated."},
+       {"from": "vga", "to": "panel", "standard": "VGA-1200p", "source": "epson-118", "confidence": "medium", "note": "Epson: Computer (VGA) inputs, resized up to 1600x1200."}]},
+    {"id": "proj-benq-mh560", "kind": "display", "class": "product", "maker": "BenQ", "name": "BenQ MH560 (1080p business projector)",
+     "modes": ["720p60", "1080p60"],
+     "ports": [{"id": "hdmi1", "connector": "HDMI", "gender": "receptacle"}, {"id": "hdmi2", "connector": "HDMI", "gender": "receptacle"}, {"id": "vga", "connector": "VGA", "gender": "receptacle"}],
+     "video": [
+       {"from": "hdmi1", "to": "panel", "standard": "HDMI-1.4", "source": "benq-mh560", "confidence": "high", "note": "BenQ: HDMI 1.4a."},
+       {"from": "hdmi2", "to": "panel", "standard": "HDMI-1.4", "source": "benq-mh560", "confidence": "high"},
+       {"from": "vga", "to": "panel", "standard": "VGA-1200p", "source": "benq-mh560", "confidence": "high", "note": "BenQ: PC in (D-sub) up to WUXGA reduced blanking."}]}
   ]
 }

@@ -4,5 +4,8 @@
   {"id": "hotel-ballroom", "name": "Hotel ballroom", "description": "1080p projector with HDMI and VGA inputs; the AV desk supplies a long High Speed HDMI cable and a VGA cable.", "provides": ["proj-1080p", "cable-hdmi-high-speed", "cable-vga"]},
   {"id": "coworking-room", "name": "Co-working meeting room", "description": "4K wall display whose inputs are HDMI 1.4; a High Speed HDMI cable hangs off the table box.", "provides": ["disp-4k-hdmi14", "cable-hdmi-high-speed"]},
   {"id": "conference-booth", "name": "Conference demo booth", "description": "4K monitor with DP, HDMI and USB-C inputs. No cables provided: bring your own.", "provides": ["mon-4k-multi"]},
-  {"id": "studio-tv", "name": "Podcast studio", "description": "4K HDMI 2.1 TV, but the cable taped to the floor is an old Standard HDMI cable.", "provides": ["tv-4k-hdmi21", "cable-hdmi-standard"]}
+  {"id": "studio-tv", "name": "Podcast studio", "description": "4K HDMI 2.1 TV, but the cable taped to the floor is an old Standard HDMI cable.", "provides": ["tv-4k-hdmi21", "cable-hdmi-standard"]},
+  {"id": "meeting-room", "name": "Client meeting room", "description": "Ceiling Epson PowerLite 2250U projector with an HDMI wall plate (High Speed cable) and a VGA cable on the table.", "provides": ["proj-epson-2250u", "cable-hdmi-high-speed", "cable-vga"]},
+  {"id": "school-classroom", "name": "School classroom", "description": "Epson PowerLite 118 XGA projector on a trolley with a High Speed HDMI cable.", "provides": ["proj-epson-118", "cable-hdmi-high-speed"]},
+  {"id": "hot-desk", "name": "Office hot desk", "description": "Lenovo ThinkVision T27h-30 monitor. Bring your own USB-C or HDMI cable.", "provides": ["mon-lenovo-t27h30"]}
 ]

@@ -1,4 +1,4 @@
-from,to,item,from_item,to_item,source,source_url,confidence,note,standard,watts
+from,to,item,from_item,to_item,source,source_url,confidence,note,watts,standard
 mba-m2:tb1,mba-m2:battery,mba-m2,mba-m2,mba-m2,apple-mba-m2,https://support.apple.com/en-us/111867,high,,,
 mba-m2:tb2,mba-m2:battery,mba-m2,mba-m2,mba-m2,apple-mba-m2,https://support.apple.com/en-us/111867,high,,,
 mba-m2:magsafe,mba-m2:battery,mba-m2,mba-m2,mba-m2,apple-mba-m2,https://support.apple.com/en-us/111867,high,,,
@@ -7,22 +7,89 @@ mbp14-m3:tb2,mbp14-m3:battery,mbp14-m3,mbp14-m3,mbp14-m3,apple-mbp14-m3,https://
 mbp14-m3:magsafe,mbp14-m3:battery,mbp14-m3,mbp14-m3,mbp14-m3,apple-mbp14-m3,https://support.apple.com/en-us/117735,high,,,
 x1c-g11:tb1,x1c-g11:battery,x1c-g11,x1c-g11,x1c-g11,lenovo-x1c11,https://psref.lenovo.com/syspool/sys/pdf/thinkpad/thinkpad_x1_carbon_gen_11/thinkpad_x1_carbon_gen_11_spec.pdf,high,,,
 x1c-g11:tb2,x1c-g11:battery,x1c-g11,x1c-g11,x1c-g11,lenovo-x1c11,https://psref.lenovo.com/syspool/sys/pdf/thinkpad/thinkpad_x1_carbon_gen_11/thinkpad_x1_carbon_gen_11_spec.pdf,high,,,
-gen-laptop-usbc:usbc1,gen-laptop-usbc:battery,gen-laptop-usbc,gen-laptop-usbc,gen-laptop-usbc,class-assumption,https://github.com/suganthikannan093-hue/weakest-link/blob/main/docs/DATA.md,medium,,,
-gen-laptop-usbc:usbc2,gen-laptop-usbc:battery,gen-laptop-usbc,gen-laptop-usbc,gen-laptop-usbc,class-assumption,https://github.com/suganthikannan093-hue/weakest-link/blob/main/docs/DATA.md,medium,,,
-cable-usbc-usb2-60w:a,cable-usbc-usb2-60w:b,cable-usbc-usb2-60w,cable-usbc-usb2-60w,cable-usbc-usb2-60w,wiki-usbc,https://en.wikipedia.org/wiki/USB-C,high,"No SuperSpeed pairs, so no DisplayPort Alt Mode.",USB-PD-3A,60
-cable-usbc-usb2-60w:b,cable-usbc-usb2-60w:a,cable-usbc-usb2-60w,cable-usbc-usb2-60w,cable-usbc-usb2-60w,wiki-usbc,https://en.wikipedia.org/wiki/USB-C,high,"No SuperSpeed pairs, so no DisplayPort Alt Mode.",USB-PD-3A,60
-cable-usbc-usb2-240w:a,cable-usbc-usb2-240w:b,cable-usbc-usb2-240w,cable-usbc-usb2-240w,cable-usbc-usb2-240w,usbif-pd,https://usb.org/usb-charger-pd,high,240 W but USB 2.0 only: no video.,USB-PD-EPR,240
-cable-usbc-usb2-240w:b,cable-usbc-usb2-240w:a,cable-usbc-usb2-240w,cable-usbc-usb2-240w,cable-usbc-usb2-240w,usbif-pd,https://usb.org/usb-charger-pd,high,240 W but USB 2.0 only: no video.,USB-PD-EPR,240
-cable-usbc-10g-100w:a,cable-usbc-10g-100w:b,cable-usbc-10g-100w,cable-usbc-10g-100w,cable-usbc-10g-100w,wiki-usbc,https://en.wikipedia.org/wiki/USB-C,high,,USB-PD-5A,100
-cable-usbc-10g-100w:b,cable-usbc-10g-100w:a,cable-usbc-10g-100w,cable-usbc-10g-100w,cable-usbc-10g-100w,wiki-usbc,https://en.wikipedia.org/wiki/USB-C,high,,USB-PD-5A,100
-cable-tb4:a,cable-tb4:b,cable-tb4,cable-tb4,cable-tb4,wiki-thunderbolt,https://en.wikipedia.org/wiki/Thunderbolt_(interface),high,,USB-PD-5A,100
-cable-tb4:b,cable-tb4:a,cable-tb4,cable-tb4,cable-tb4,wiki-thunderbolt,https://en.wikipedia.org/wiki/Thunderbolt_(interface),high,,USB-PD-5A,100
-cable-usbc-magsafe3:c,cable-usbc-magsafe3:m,cable-usbc-magsafe3,cable-usbc-magsafe3,cable-usbc-magsafe3,apple-fastcharge,https://support.apple.com/en-us/102378,high,Apple pairs it with the 140 W adapter for 16-inch MacBook Pro fast charging.,,140
-chg-apple-30w:psu,chg-apple-30w:out,chg-apple-30w,chg-apple-30w,chg-apple-30w,apple-power,https://support.apple.com/en-us/109509,high,,,30
-chg-apple-35w-dual:psu,chg-apple-35w-dual:out,chg-apple-35w-dual,chg-apple-35w-dual,chg-apple-35w-dual,apple-power,https://support.apple.com/en-us/109509,high,35 W shared across both ports; modelled as one port in use.,,35
-chg-apple-70w:psu,chg-apple-70w:out,chg-apple-70w,chg-apple-70w,chg-apple-70w,apple-power,https://support.apple.com/en-us/109509,high,,,70
-chg-apple-96w:psu,chg-apple-96w:out,chg-apple-96w,chg-apple-96w,chg-apple-96w,apple-power,https://support.apple.com/en-us/109509,high,,,96
-chg-apple-140w:psu,chg-apple-140w:out,chg-apple-140w,chg-apple-140w,chg-apple-140w,apple-fastcharge,https://support.apple.com/en-us/102378,high,Above 100 W needs an EPR (240 W) cable or MagSafe 3.,,140
-chg-gen-20w:psu,chg-gen-20w:out,chg-gen-20w,chg-gen-20w,chg-gen-20w,class-assumption,https://github.com/suganthikannan093-hue/weakest-link/blob/main/docs/DATA.md,high,,,20
-chg-gen-65w:psu,chg-gen-65w:out,chg-gen-65w,chg-gen-65w,chg-gen-65w,class-assumption,https://github.com/suganthikannan093-hue/weakest-link/blob/main/docs/DATA.md,high,,,65
-chg-gen-100w:psu,chg-gen-100w:out,chg-gen-100w,chg-gen-100w,chg-gen-100w,class-assumption,https://github.com/suganthikannan093-hue/weakest-link/blob/main/docs/DATA.md,high,,,100
+gen-laptop-usbc:usbc1,gen-laptop-usbc:battery,gen-laptop-usbc,gen-laptop-usbc,gen-laptop-usbc,usbif-pd,https://usb.org/usb-charger-pd,medium,,,
+gen-laptop-usbc:usbc2,gen-laptop-usbc:battery,gen-laptop-usbc,gen-laptop-usbc,gen-laptop-usbc,usbif-pd,https://usb.org/usb-charger-pd,medium,,,
+mba-m1:tb1,mba-m1:battery,mba-m1,mba-m1,mba-m1,apple-mba-m1,https://support.apple.com/en-us/111883,high,,,
+mba-m1:tb2,mba-m1:battery,mba-m1,mba-m1,mba-m1,apple-mba-m1,https://support.apple.com/en-us/111883,high,,,
+mba-m3:tb1,mba-m3:battery,mba-m3,mba-m3,mba-m3,apple-mba-m3,https://support.apple.com/en-us/118551,high,,,
+mba-m3:tb2,mba-m3:battery,mba-m3,mba-m3,mba-m3,apple-mba-m3,https://support.apple.com/en-us/118551,high,,,
+mba-m3:magsafe,mba-m3:battery,mba-m3,mba-m3,mba-m3,apple-mba-m3,https://support.apple.com/en-us/118551,high,,,
+mba-m4:tb1,mba-m4:battery,mba-m4,mba-m4,mba-m4,apple-mba-m4,https://support.apple.com/en-us/122209,high,,,
+mba-m4:tb2,mba-m4:battery,mba-m4,mba-m4,mba-m4,apple-mba-m4,https://support.apple.com/en-us/122209,high,,,
+mba-m4:magsafe,mba-m4:battery,mba-m4,mba-m4,mba-m4,apple-mba-m4,https://support.apple.com/en-us/122209,high,,,
+mbp14-m4:tb1,mbp14-m4:battery,mbp14-m4,mbp14-m4,mbp14-m4,apple-mbp14-m4,https://support.apple.com/en-us/121552,high,,,
+mbp14-m4:tb2,mbp14-m4:battery,mbp14-m4,mbp14-m4,mbp14-m4,apple-mbp14-m4,https://support.apple.com/en-us/121552,high,,,
+mbp14-m4:tb3,mbp14-m4:battery,mbp14-m4,mbp14-m4,mbp14-m4,apple-mbp14-m4,https://support.apple.com/en-us/121552,high,,,
+mbp14-m4:magsafe,mbp14-m4:battery,mbp14-m4,mbp14-m4,mbp14-m4,apple-mbp14-m4,https://support.apple.com/en-us/121552,high,,,
+x1c-g12:tb1,x1c-g12:battery,x1c-g12,x1c-g12,x1c-g12,lenovo-x1c12,https://psref.lenovo.com/syspool/Sys/PDF/ThinkPad/ThinkPad_X1_Carbon_Gen_12/ThinkPad_X1_Carbon_Gen_12_Spec.pdf,high,,,
+x1c-g12:tb2,x1c-g12:battery,x1c-g12,x1c-g12,x1c-g12,lenovo-x1c12,https://psref.lenovo.com/syspool/Sys/PDF/ThinkPad/ThinkPad_X1_Carbon_Gen_12/ThinkPad_X1_Carbon_Gen_12_Spec.pdf,high,,,
+t14-g4:tb1,t14-g4:battery,t14-g4,t14-g4,t14-g4,lenovo-t14g4,https://psref.lenovo.com/syspool/Sys/PDF/ThinkPad/ThinkPad_T14_Gen_4_Intel/ThinkPad_T14_Gen_4_Intel_Spec.pdf,high,,,
+t14-g4:tb2,t14-g4:battery,t14-g4,t14-g4,t14-g4,lenovo-t14g4,https://psref.lenovo.com/syspool/Sys/PDF/ThinkPad/ThinkPad_T14_Gen_4_Intel/ThinkPad_T14_Gen_4_Intel_Spec.pdf,high,,,
+yoga-slim7-14:tb1,yoga-slim7-14:battery,yoga-slim7-14,yoga-slim7-14,yoga-slim7-14,lenovo-yoga-slim7-14imh9,https://psref.lenovo.com/syspool/Sys/PDF/Yoga/Yoga_Slim_7_14IMH9/Yoga_Slim_7_14IMH9_Spec.pdf,high,,,
+yoga-slim7-14:tb2,yoga-slim7-14:battery,yoga-slim7-14,yoga-slim7-14,yoga-slim7-14,lenovo-yoga-slim7-14imh9,https://psref.lenovo.com/syspool/Sys/PDF/Yoga/Yoga_Slim_7_14IMH9/Yoga_Slim_7_14IMH9_Spec.pdf,high,,,
+xps13-9340:tb1,xps13-9340:battery,xps13-9340,xps13-9340,xps13-9340,dell-xps13-9340,https://www.dell.com/support/manuals/en-us/xps-13-9340-laptop/xps-13-9340_owners_manual/external-ports-and-slots?guid=guid-b8f739cc-a41e-4ac9-b3f8-ff6d9c6d8c19&lang=en-us,high,,,
+xps13-9340:tb2,xps13-9340:battery,xps13-9340,xps13-9340,xps13-9340,dell-xps13-9340,https://www.dell.com/support/manuals/en-us/xps-13-9340-laptop/xps-13-9340_owners_manual/external-ports-and-slots?guid=guid-b8f739cc-a41e-4ac9-b3f8-ff6d9c6d8c19&lang=en-us,high,,,
+elitebook-840-g10:tb1,elitebook-840-g10:battery,elitebook-840-g10,elitebook-840-g10,elitebook-840-g10,hp-840g10,https://www8.hp.com/h20195/v2/GetDocument.aspx?docname=c08488438,high,,,
+elitebook-840-g10:tb2,elitebook-840-g10:battery,elitebook-840-g10,elitebook-840-g10,elitebook-840-g10,hp-840g10,https://www8.hp.com/h20195/v2/GetDocument.aspx?docname=c08488438,high,,,
+e14-g5:tb4,e14-g5:battery,e14-g5,e14-g5,e14-g5,lenovo-e14g5,https://psref.lenovo.com/syspool/Sys/PDF/ThinkPad/ThinkPad_E14_Gen_5_Intel/ThinkPad_E14_Gen_5_Intel_Spec.pdf,high,,,
+e14-g5:usbc,e14-g5:battery,e14-g5,e14-g5,e14-g5,lenovo-e14g5,https://psref.lenovo.com/syspool/Sys/PDF/ThinkPad/ThinkPad_E14_Gen_5_Intel/ThinkPad_E14_Gen_5_Intel_Spec.pdf,high,,,
+ideapad-slim3-15iru8:usbc,ideapad-slim3-15iru8:battery,ideapad-slim3-15iru8,ideapad-slim3-15iru8,ideapad-slim3-15iru8,lenovo-slim3-15iru8,https://psref.lenovo.com/syspool/Sys/PDF/IdeaPad/IdeaPad_Slim_3_15IRU8/IdeaPad_Slim_3_15IRU8_Spec.pdf,high,PSREF: USB PD 45-65W input. The bundled charger is a 65W round-tip one.,,
+chromebook-flex5-plus:usbc1,chromebook-flex5-plus:battery,chromebook-flex5-plus,chromebook-flex5-plus,chromebook-flex5-plus,lenovo-flex5-cbplus,https://psref.lenovo.com/syspool/Sys/PDF/IdeaPad/IP_Flex_5_Chrome_14IAU7_Plus/IP_Flex_5_Chrome_14IAU7_Plus_Spec.PDF,high,,,
+chromebook-flex5-plus:usbc2,chromebook-flex5-plus:battery,chromebook-flex5-plus,chromebook-flex5-plus,chromebook-flex5-plus,lenovo-flex5-cbplus,https://psref.lenovo.com/syspool/Sys/PDF/IdeaPad/IP_Flex_5_Chrome_14IAU7_Plus/IP_Flex_5_Chrome_14IAU7_Plus_Spec.PDF,high,,,
+ideapad-slim3-15iah8:usbc,ideapad-slim3-15iah8:battery,ideapad-slim3-15iah8,ideapad-slim3-15iah8,ideapad-slim3-15iah8,lenovo-slim3-15iah8,https://psref.lenovo.com/syspool/Sys/PDF/IdeaPad/IdeaPad_Slim_3_15IAH8/IdeaPad_Slim_3_15IAH8_Spec.pdf,high,PSREF lists Power Delivery on USB-C but no wattage.,,
+iphone-15:usbc,iphone-15:battery,iphone-15,iphone-15,iphone-15,apple-iphone15,https://support.apple.com/en-us/111831,high,,,
+iphone-15-pro:usbc,iphone-15-pro:battery,iphone-15-pro,iphone-15-pro,iphone-15-pro,apple-iphone15pro,https://support.apple.com/en-us/111829,high,,,
+iphone-16:usbc,iphone-16:battery,iphone-16,iphone-16,iphone-16,apple-iphone16,https://support.apple.com/en-us/121029,high,,,
+pixel-8:usbc,pixel-8:battery,pixel-8,pixel-8,pixel-8,google-pixel-display,https://support.google.com/pixelphone/answer/2865484?hl=en,medium,USB-C charging; Google's help page does not state wattage.,,
+pixel-7a:usbc,pixel-7a:battery,pixel-7a,pixel-7a,pixel-7a,google-pixel-display,https://support.google.com/pixelphone/answer/2865484?hl=en,medium,USB-C charging; wattage not on the cited page.,,
+galaxy-s24:usbc,galaxy-s24:battery,galaxy-s24,galaxy-s24,galaxy-s24,samsung-dex,https://www.samsung.com/us/support/answer/ANS10001955/,medium,USB-C charging; wattage not on the cited page.,,
+galaxy-z-flip6:usbc,galaxy-z-flip6:battery,galaxy-z-flip6,galaxy-z-flip6,galaxy-z-flip6,samsung-dex,https://www.samsung.com/us/support/answer/ANS10001955/,medium,USB-C charging; wattage not on the cited page.,,
+ipad-10:usbc,ipad-10:battery,ipad-10,ipad-10,ipad-10,apple-ipad10,https://support.apple.com/en-us/111840,high,,,
+ipad-air-m2:usbc,ipad-air-m2:battery,ipad-air-m2,ipad-air-m2,ipad-air-m2,apple-ipadair-m2,https://support.apple.com/en-us/119894,high,,,
+galaxy-tab-s9:usbc,galaxy-tab-s9:battery,galaxy-tab-s9,galaxy-tab-s9,galaxy-tab-s9,samsung-dex,https://www.samsung.com/us/support/answer/ANS10001955/,medium,USB-C charging; wattage not on the cited page.,,
+galaxy-tab-s9-fe:usbc,galaxy-tab-s9-fe:battery,galaxy-tab-s9-fe,galaxy-tab-s9-fe,galaxy-tab-s9-fe,samsung-dex,https://www.samsung.com/us/support/answer/ANS10001955/,medium,USB-C charging; wattage not on the cited page.,,
+adp-apple-vga:pd,adp-apple-vga:in,adp-apple-vga,adp-apple-vga,adp-apple-vga,apple-vga-adapter,https://support.apple.com/en-us/111815,high,Apple: this port delivers a maximum of 60W.,60,
+hub-anker-341:pd,hub-anker-341:in,hub-anker-341,hub-anker-341,hub-anker-341,anker-341,https://www.anker.com/products/a8346,high,Anker: up to 85W to the laptop (100W in minus 15W for the hub); needs a 100W charger and cable.,85,
+dock-caldigit-ts4:psu,dock-caldigit-ts4:host,dock-caldigit-ts4,dock-caldigit-ts4,dock-caldigit-ts4,caldigit-ts4,https://www.caldigit.com/thunderbolt-station-4/,high,CalDigit: 98W laptop charging from the dock's own power supply.,98,
+dock-lenovo-universal:psu,dock-lenovo-universal:host,dock-lenovo-universal,dock-lenovo-universal,dock-lenovo-universal,lenovo-univ-dock,https://techtoday.lenovo.com/sites/default/files/2025-08/thinkpad-universal-usb-c-dock-datasheet-ww-en.pdf,high,Lenovo: 65W to the notebook with the included 90W adapter (100W needs the optional 135W adapter).,65,
+dock-ms-usb4:psu,dock-ms-usb4:host,dock-ms-usb4,dock-ms-usb4,dock-ms-usb4,ms-usb4-dock,https://learn.microsoft.com/en-us/surface/surface-usb4-dock,high,Microsoft: 65W power delivery to the host from the 100W supply.,65,
+cable-usbc-usb2-60w:a,cable-usbc-usb2-60w:b,cable-usbc-usb2-60w,cable-usbc-usb2-60w,cable-usbc-usb2-60w,usbif-cable,https://usb.org/cable_connector,high,"No SuperSpeed pairs, so no DisplayPort Alt Mode.",60,USB-PD-3A
+cable-usbc-usb2-60w:b,cable-usbc-usb2-60w:a,cable-usbc-usb2-60w,cable-usbc-usb2-60w,cable-usbc-usb2-60w,usbif-cable,https://usb.org/cable_connector,high,"No SuperSpeed pairs, so no DisplayPort Alt Mode.",60,USB-PD-3A
+cable-usbc-usb2-240w:a,cable-usbc-usb2-240w:b,cable-usbc-usb2-240w,cable-usbc-usb2-240w,cable-usbc-usb2-240w,usbif-pd,https://usb.org/usb-charger-pd,high,240 W but USB 2.0 only: no video.,240,USB-PD-EPR
+cable-usbc-usb2-240w:b,cable-usbc-usb2-240w:a,cable-usbc-usb2-240w,cable-usbc-usb2-240w,cable-usbc-usb2-240w,usbif-pd,https://usb.org/usb-charger-pd,high,240 W but USB 2.0 only: no video.,240,USB-PD-EPR
+cable-usbc-10g-100w:a,cable-usbc-10g-100w:b,cable-usbc-10g-100w,cable-usbc-10g-100w,cable-usbc-10g-100w,usbif-pd,https://usb.org/usb-charger-pd,high,,100,USB-PD-5A
+cable-usbc-10g-100w:b,cable-usbc-10g-100w:a,cable-usbc-10g-100w,cable-usbc-10g-100w,cable-usbc-10g-100w,usbif-pd,https://usb.org/usb-charger-pd,high,,100,USB-PD-5A
+cable-tb4:a,cable-tb4:b,cable-tb4,cable-tb4,cable-tb4,apple-tb-cables,https://support.apple.com/en-us/118204,high,,100,USB-PD-5A
+cable-tb4:b,cable-tb4:a,cable-tb4,cable-tb4,cable-tb4,apple-tb-cables,https://support.apple.com/en-us/118204,high,,100,USB-PD-5A
+cable-usbc-magsafe3:c,cable-usbc-magsafe3:m,cable-usbc-magsafe3,cable-usbc-magsafe3,cable-usbc-magsafe3,apple-fastcharge,https://support.apple.com/en-us/102378,high,Apple pairs it with the 140 W adapter for 16-inch MacBook Pro fast charging.,140,
+cable-apple-tb4-pro:a,cable-apple-tb4-pro:b,cable-apple-tb4-pro,cable-apple-tb4-pro,cable-apple-tb4-pro,apple-tb-cables,https://support.apple.com/en-us/118204,high,Apple: up to 100W.,100,USB-PD-5A
+cable-apple-tb4-pro:b,cable-apple-tb4-pro:a,cable-apple-tb4-pro,cable-apple-tb4-pro,cable-apple-tb4-pro,apple-tb-cables,https://support.apple.com/en-us/118204,high,Apple: up to 100W.,100,USB-PD-5A
+cable-apple-tb5-pro:a,cable-apple-tb5-pro:b,cable-apple-tb5-pro,cable-apple-tb5-pro,cable-apple-tb5-pro,apple-tb-cables,https://support.apple.com/en-us/118204,high,Apple: up to 240W.,240,USB-PD-EPR
+cable-apple-tb5-pro:b,cable-apple-tb5-pro:a,cable-apple-tb5-pro,cable-apple-tb5-pro,cable-apple-tb5-pro,apple-tb-cables,https://support.apple.com/en-us/118204,high,Apple: up to 240W.,240,USB-PD-EPR
+cable-apple-240w:a,cable-apple-240w:b,cable-apple-240w,cable-apple-240w,cable-apple-240w,apple-240w-cable,https://www.apple.com/shop/product/myqt3am/a/240w-usb-c-charge-cable-2-m,high,"Apple: 240W, USB 2 data only, so no video.",240,USB-PD-EPR
+cable-apple-240w:b,cable-apple-240w:a,cable-apple-240w,cable-apple-240w,cable-apple-240w,apple-240w-cable,https://www.apple.com/shop/product/myqt3am/a/240w-usb-c-charge-cable-2-m,high,"Apple: 240W, USB 2 data only, so no video.",240,USB-PD-EPR
+cable-usb4-240w:a,cable-usb4-240w:b,cable-usb4-240w,cable-usb4-240w,cable-usb4-240w,usbif-cable,https://usb.org/cable_connector,high,USB-IF 240W logo cable.,240,USB-PD-EPR
+cable-usb4-240w:b,cable-usb4-240w:a,cable-usb4-240w,cable-usb4-240w,cable-usb4-240w,usbif-cable,https://usb.org/cable_connector,high,USB-IF 240W logo cable.,240,USB-PD-EPR
+cable-usbc-5g-60w:a,cable-usbc-5g-60w:b,cable-usbc-5g-60w,cable-usbc-5g-60w,cable-usbc-5g-60w,usbif-cable,https://usb.org/cable_connector,high,,60,USB-PD-3A
+cable-usbc-5g-60w:b,cable-usbc-5g-60w:a,cable-usbc-5g-60w,cable-usbc-5g-60w,cable-usbc-5g-60w,usbif-cable,https://usb.org/cable_connector,high,,60,USB-PD-3A
+cable-apple-60w:a,cable-apple-60w:b,cable-apple-60w,cable-apple-60w,cable-apple-60w,apple-tb-cables,https://support.apple.com/en-us/118204,high,Apple: the USB-C Charge Cable is USB 2 (480 Mbps) and does not support video.,60,USB-PD-3A
+cable-apple-60w:b,cable-apple-60w:a,cable-apple-60w,cable-apple-60w,cable-apple-60w,apple-tb-cables,https://support.apple.com/en-us/118204,high,Apple: the USB-C Charge Cable is USB 2 (480 Mbps) and does not support video.,60,USB-PD-3A
+chg-apple-30w:psu,chg-apple-30w:out,chg-apple-30w,chg-apple-30w,chg-apple-30w,apple-power,https://support.apple.com/en-us/109509,high,,30,
+chg-apple-35w-dual:psu,chg-apple-35w-dual:out,chg-apple-35w-dual,chg-apple-35w-dual,chg-apple-35w-dual,apple-power,https://support.apple.com/en-us/109509,high,35 W shared across both ports; modelled as one port in use.,35,
+chg-apple-70w:psu,chg-apple-70w:out,chg-apple-70w,chg-apple-70w,chg-apple-70w,apple-power,https://support.apple.com/en-us/109509,high,,70,
+chg-apple-96w:psu,chg-apple-96w:out,chg-apple-96w,chg-apple-96w,chg-apple-96w,apple-power,https://support.apple.com/en-us/109509,high,,96,
+chg-apple-140w:psu,chg-apple-140w:out,chg-apple-140w,chg-apple-140w,chg-apple-140w,apple-fastcharge,https://support.apple.com/en-us/102378,high,Above 100 W needs an EPR (240 W) cable or MagSafe 3.,140,
+chg-gen-20w:psu,chg-gen-20w:out,chg-gen-20w,chg-gen-20w,chg-gen-20w,usbif-pd,https://usb.org/usb-charger-pd,high,,20,
+chg-gen-65w:psu,chg-gen-65w:out,chg-gen-65w,chg-gen-65w,chg-gen-65w,usbif-pd,https://usb.org/usb-charger-pd,high,,65,
+chg-gen-100w:psu,chg-gen-100w:out,chg-gen-100w,chg-gen-100w,chg-gen-100w,usbif-pd,https://usb.org/usb-charger-pd,high,,100,
+chg-apple-20w:psu,chg-apple-20w:out,chg-apple-20w,chg-apple-20w,chg-apple-20w,apple-iphone15,https://support.apple.com/en-us/111831,high,The adapter Apple names for iPhone fast charging.,20,
+chg-apple-67w:psu,chg-apple-67w:out,chg-apple-67w,chg-apple-67w,chg-apple-67w,apple-power,https://support.apple.com/en-us/109509,high,,67,
+chg-lenovo-65w:psu,chg-lenovo-65w:out,chg-lenovo-65w,chg-lenovo-65w,chg-lenovo-65w,lenovo-t14g4,https://psref.lenovo.com/syspool/Sys/PDF/ThinkPad/ThinkPad_T14_Gen_4_Intel/ThinkPad_T14_Gen_4_Intel_Spec.pdf,high,Listed as a PD 3.0 adapter option in ThinkPad PSREF.,65,
+chg-lenovo-45w:psu,chg-lenovo-45w:out,chg-lenovo-45w,chg-lenovo-45w,chg-lenovo-45w,lenovo-t14g4,https://psref.lenovo.com/syspool/Sys/PDF/ThinkPad/ThinkPad_T14_Gen_4_Intel/ThinkPad_T14_Gen_4_Intel_Spec.pdf,high,,45,
+chg-hp-65w:psu,chg-hp-65w:out,chg-hp-65w,chg-hp-65w,chg-hp-65w,hp-840g10,https://www8.hp.com/h20195/v2/GetDocument.aspx?docname=c08488438,high,,65,
+chg-anker-735:psu,chg-anker-735:out,chg-anker-735,chg-anker-735,chg-anker-735,anker-735,https://www.anker.com/products/a2667,high,65W from one USB-C port; shared when several ports are used.,65,
+chg-anker-prime-100w:psu,chg-anker-prime-100w:out,chg-anker-prime-100w,chg-anker-prime-100w,chg-anker-prime-100w,anker-prime-100w,https://www.anker.com/products/a2688-anker-prime-charger-100w-3-ports-gan,high,100W from the top USB-C port alone.,100,
+chg-hp-45w:psu,chg-hp-45w:out,chg-hp-45w,chg-hp-45w,chg-hp-45w,hp-840g10,https://www8.hp.com/h20195/v2/GetDocument.aspx?docname=c08488438,high,,45,
+mon-lenovo-t27h30:psu,mon-lenovo-t27h30:usbc,mon-lenovo-t27h30,mon-lenovo-t27h30,mon-lenovo-t27h30,lenovo-t27h30,https://psref.lenovo.com/syspool/Sys/PDF/ThinkVision/ThinkVision_T27h_30/ThinkVision_T27h_30_Spec.pdf,high,PSREF: up to 90W power delivery over USB-C.,90,
+mon-lg-27up850:psu,mon-lg-27up850:usbc,mon-lg-27up850,mon-lg-27up850,mon-lg-27up850,lg-27up850,https://www.lg.com/uk/monitors/uhd-4k-5k/27up850-w/,high,LG: USB-C with 96W Power Delivery.,96,
+mon-dell-p2723qe:psu,mon-dell-p2723qe:usbc,mon-dell-p2723qe,mon-dell-p2723qe,mon-dell-p2723qe,dell-p2723qe,https://www.dell.com/en-us/shop/dell-27-4k-usb-c-hub-monitor-p2723qe/apd/210-bdlk/monitors-monitor-accessories,medium,Dell: up to 90W over USB-C.,90,

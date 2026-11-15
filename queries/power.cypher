@@ -1,10 +1,10 @@
-// Q4 USB-PD charging chain: for every charger in $bag, the best way to reach $laptop's battery
+// Q4 USB-PD charging chain: for every power source in $bag (a charger, or a dock or monitor with its own supply), the best way to reach $laptop's battery
 // using cables in $bag, the delivered wattage (min over the chain), the weakest link, and a verdict
 // against the laptop's documented recommended / fast-charge wattage. capacity_w is what the chain
 // can carry; the laptop itself draws only what it needs.
 // Params: $laptop, $bag
 MATCH (lap:Item {id: $laptop})-[:HAS_ENDPOINT]->(bat:Endpoint {role: 'power-sink'})
-MATCH (chg:Item {kind: 'charger'})-[:HAS_ENDPOINT]->(psu:Endpoint {role: 'power-source'})
+MATCH (chg:Item)-[:HAS_ENDPOINT]->(psu:Endpoint {role: 'power-source'})
 WHERE chg.id IN $bag
 WITH lap, bat, chg, psu, $bag + [$laptop] AS have
 MATCH p = (psu)-[:POWER]->()

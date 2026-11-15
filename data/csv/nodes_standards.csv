@@ -1,14 +1,17 @@
 id,family,raw_gbps,data_gbps,encoding,source,confidence,note,watts
 HDMI-Standard-cable,HDMI,2.2275,1.782,TMDS 8b/10b,hdmi-cables,medium,"Certified only for 720p/1080i (74.25 MHz). Many work beyond that, but it is not certified.",
-HDMI-1.4,HDMI,10.2,8.16,TMDS 8b/10b,wiki-hdmi,high,"340 MHz TMDS: 1080p60, 1440p60, 4K30.",
-HDMI-2.0,HDMI,18.0,14.4,TMDS 8b/10b,wiki-hdmi,high,600 MHz TMDS: 4K60 8-bit RGB.,
-HDMI-2.1-FRL,HDMI,48.0,42.67,FRL 16b/18b,hdmi-21,high,4 lanes x 12 Gbps.,
-DP-1.2-HBR2,DP,21.6,17.28,8b/10b,wiki-dp,high,4 lanes x 5.4 Gbps.,
-DP-1.4-HBR3,DP,32.4,25.92,8b/10b,wiki-dp,high,4 lanes x 8.1 Gbps.,
-DP-2.1-UHBR10,DP,40.0,38.69,128b/132b,wiki-dp,high,4 lanes x 10 Gbps; DP8K cable certification level.,
+HDMI-1.4,HDMI,10.2,8.16,TMDS 8b/10b,hdmi-14b,high,"340 MHz TMDS (10.2 Gbps raw, 8.16 data after 8b/10b): 1080p60, 1440p60, 4K30. Coding arithmetic per wiki-hdmi.",
+HDMI-2.0,HDMI,18.0,14.4,TMDS 8b/10b,hdmi-20-pr,high,"18 Gbps raw (600 MHz TMDS), 14.4 data: 4K60 8-bit RGB.",
+HDMI-2.1-FRL,HDMI,48.0,42.67,FRL 16b/18b,hdmi-uhs,high,"FRL 4 lanes x 12 Gbps = 48 Gbps raw, the Ultra High Speed cable level.",
+DP-1.2-HBR2,DP,21.6,17.28,8b/10b,vesa-tokyo-2024,high,4 lanes x 5.4 Gbps.,
+DP-1.4-HBR3,DP,32.4,25.92,8b/10b,vesa-tokyo-2024,high,4 lanes x 8.1 Gbps. Also the DP8K cable certification level (vesa-dp8k-pr).,
+DP-2.1-UHBR10,DP,40.0,38.69,128b/132b,vesa-tokyo-2024,high,"4 lanes x 10 Gbps, 128b/132b with FEC (data rate per wiki-dp).",
+DP-2.1-UHBR13.5,DP,54.0,52.22,128b/132b,vesa-tokyo-2024,high,4 lanes x 13.5 Gbps; DP54 cable certification level (data rate per wiki-dp).,
 DP-Alt-4L-HBR3,DP,32.4,25.92,8b/10b,vesa-altmode,high,DisplayPort Alt Mode over USB-C using all 4 high-speed lanes.,
 DP-Alt-2L-HBR3,DP,16.2,12.96,8b/10b,vesa-altmode,high,"2-lane Alt Mode (other 2 lanes kept for USB 3 data), typical of hubs.",
+DP-Alt-4L-HBR2,DP,21.6,17.28,8b/10b,vesa-altmode,high,"4-lane Alt Mode at HBR2 (a DisplayPort 1.2 source, or a 5 Gbps USB-C cable treated conservatively).",
+DP-Alt-2L-HBR2,DP,10.8,8.64,8b/10b,vesa-altmode,high,2-lane Alt Mode at HBR2: 4K30 or 1080p60 (VESA Alt Mode slide).,
 VGA-1200p,VGA,,3.7,analog,wiki-vga,medium,"Analog. Modelled as the digital rate of 1920x1200@60 CVT-RB (154 MHz x 24 bit), the usual limit of USB-C/HDMI-to-VGA converters.",
-USB-PD-3A,USB-PD,,,,wiki-usbc,high,Non-e-marked Type-C cable: 3 A x 20 V.,60
-USB-PD-5A,USB-PD,,,,wiki-usbc,high,"5 A e-marked cable, SPR 20 V.",100
+USB-PD-3A,USB-PD,,,,usbif-cable,high,Any Type-C cable carries 3 A; at 20 V that is the 60 W cable rating.,60
+USB-PD-5A,USB-PD,,,,usbif-pd,high,"5 A e-marked cable, SPR 20 V = 100 W.",100
 USB-PD-EPR,USB-PD,,,,usbif-pd,high,"PD 3.1 EPR, 48 V x 5 A, e-marked EPR cable.",240
