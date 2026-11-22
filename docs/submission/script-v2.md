@@ -1,6 +1,6 @@
-# Demo video script, v2 (DRAFT)
+# Demo video script, v2
 
-Draft for Suganthi's review only. It has not been uploaded anywhere.
+Approved by the owner on 23 Nov 2026. Not uploaded to a video host yet.
 
 - Video: [`weakest-link-demo-v2.mp4`](weakest-link-demo-v2.mp4), 98.3 s, 1920×1080, 30 fps. Captions are burned in and also in [`weakest-link-demo-v2.srt`](weakest-link-demo-v2.srt).
 - Narration: OpenAI TTS, `tts-1-hd`, voice `nova`, one mono voice track normalized to -16 LUFS.
