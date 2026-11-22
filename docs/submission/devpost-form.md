@@ -2,7 +2,7 @@
 
 Paste-ready text for the Relate by Neo4j Hackathon form (https://relate.devpost.com/).
 Deadline: Fri 11 Dec 2026, 6:00 PM PST (Sat 12 Dec 2026, 7:30 AM IST).
-Status: text ready; the video is not uploaded yet and nothing is submitted.
+Status: text ready; live demo hosted; the video is not uploaded yet and nothing is submitted.
 
 ## Project name
 
@@ -118,8 +118,8 @@ relate, relate-wasm, cypher, mcp, neo4j, python, javascript, vite, webassembly, 
 ## Try it out links
 
 - Repository: https://github.com/suganthikannan093-hue/weakest-link
-- Live demo: none hosted yet. The web UI runs locally with `npm install && npm run build && npm run preview`.
-  (If GitHub Pages is enabled later, add https://suganthikannan093-hue.github.io/weakest-link/ here.)
+- Live demo: https://weakest-link-nu.vercel.app (static build on Vercel; the graph and queries run in the
+  browser on Relate WASM, no login, no server). Locally: `npm install && npm run build && npm run preview`.
 
 ## Video demo link
 
@@ -163,8 +163,8 @@ no AI service: the agent uses whatever model your MCP host already has, or runs 
 | Criterion | Points | Estimate | Why | Risk |
 |---|---|---|---|---|
 | Creativity | 10 | 8–9 | Hardware compatibility as a bottleneck path query is not in the gallery, Relate's ideas list or GitHub (checked 15 Nov). | Judges may see it as a niche utility. |
-| Relate and connected context | 30 | 25–28 | The core answer is a graph traversal; one store runs in CLI, WASM and MCP with parity tests; recipes in the graph; read-only vs writable stores. | No live hosted demo: judges must clone and install the CLI, which costs points on "how easily judges can use it". |
-| Functionality and completeness | 25 | 21–23 | Connect, best purchase, charging, strict mode and agent all work; 80 + 19 tests; fresh-clone check passed 23 Nov. | 100 items cannot cover every adapter. |
+| Relate and connected context | 30 | 27–29 | The core answer is a graph traversal; one store runs in CLI, WASM and MCP with parity tests; recipes in the graph; read-only vs writable stores. | The hosted demo covers the web UI; the CLI and MCP agent still need a clone and the Relate CLI. |
+| Functionality and completeness | 25 | 21–23 | Connect, best purchase, charging, strict mode and agent all work; 80 + 19 tests; fresh-clone check and the full browser suite against the hosted demo passed 23 Nov. | 100 items cannot cover every adapter. |
 | Usefulness | 20 | 15–17 | A real, common problem for speakers and teachers, with a named item to buy. | The audience is narrower than general dev tools. |
 | Documentation and reproducibility | 15 | 13–14 | README follows the contest template, first result in four commands, offline agent demo. | Needs the Relate CLI installed. |
-| **Total** | **100** | **82–91** | | Biggest single gain: a hosted live demo (GitHub Pages). |
+| **Total** | **100** | **84–92** | | Live demo hosted 23 Nov; 38/38 browser tests pass against it. |

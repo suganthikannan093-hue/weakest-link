@@ -5,6 +5,7 @@ names the weakest link in your bag, with its source, and the one purchase that f
 
 > Built for the Relate by Neo4j Hackathon (started 15 Nov 2026). Graph, cited dataset, queries,
 > browser UI, "pack my bag" agent over Relate MCP, strict mode and charging advice are done.
+> **Live demo:** https://weakest-link-nu.vercel.app (the web UI, running entirely in your browser on Relate WASM).
 > Demo video (1:38): [docs/submission/weakest-link-demo-v2.mp4](docs/submission/weakest-link-demo-v2.mp4).
 > See [PLAN.md](PLAN.md).
 
@@ -161,7 +162,9 @@ npm run test:e2e
 |---|---|---|
 | ![Best purchase ranked by venues fixed](docs/screenshots/desktop-best-purchase.png) | ![Charging chain with the cable to buy](docs/screenshots/desktop-charging-fix.png) | ![Mobile verdict](docs/screenshots/mobile-connect.png) |
 
-To deploy to GitHub Pages, copy [`deploy/github-pages.yml`](deploy/github-pages.yml) to
+The hosted copy at https://weakest-link-nu.vercel.app is this static build (`dist/`) deployed to Vercel
+(`npm run build`, then `vercel deploy --prod` from a folder holding `dist/`); there are no server functions or
+environment variables. To deploy to GitHub Pages instead, copy [`deploy/github-pages.yml`](deploy/github-pages.yml) to
 `.github/workflows/pages.yml`, enable Pages with "Source: GitHub Actions" and run the workflow by
 hand (it is `workflow_dispatch` only). The Vite build uses relative paths (`base: './'`), so it works
 under `/weakest-link/`.
