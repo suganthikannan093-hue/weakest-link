@@ -3,8 +3,10 @@
 Will your laptop reach that projector at 4K60? A Relate graph of ports, adapters, cables and venues
 names the weakest link in your bag, with its source, and the one purchase that fixes the most venues.
 
-> Status: graph, cited dataset, queries, browser UI, "pack my bag" agent over Relate MCP, strict mode
-> and charging advice are done. The demo video is a draft under review. See [PLAN.md](PLAN.md).
+> Built for the Relate by Neo4j Hackathon (started 15 Nov 2026). Graph, cited dataset, queries,
+> browser UI, "pack my bag" agent over Relate MCP, strict mode and charging advice are done.
+> Demo video (1:38): [docs/submission/weakest-link-demo-v2.mp4](docs/submission/weakest-link-demo-v2.mp4).
+> See [PLAN.md](PLAN.md).
 
 ![The weakest link highlighted in a laptop-to-TV chain](docs/screenshots/desktop-connect-weakest-link.png)
 
@@ -83,7 +85,7 @@ python3 scripts/wl.py list   # every laptop, item and venue id
 npm install && npm run build && npm run preview   # http://localhost:4173
 python3 scripts/agent_demo.py                      # offline "pack my bag" agent over relate serve --mcp
 
-# tests: 79 Python tests (30 queries, 26 catalog traps and audit checks, 24 agent/MCP flow), then CLI vs WASM parity
+# tests: 80 Python tests (30 queries, 26 catalog traps and audit checks, 24 agent/MCP flow), then CLI vs WASM parity
 python3 -m unittest -v
 npm install && node tests/wasm_parity.mjs
 
@@ -209,3 +211,9 @@ Setup for each client, the safety model and the limits are in [agent/README.md](
 - AI-assisted development: an AI coding agent helped write the build script, queries, web UI,
   agent, tests and docs. The agent itself needs no AI service: it runs in your own MCP host, or offline
   in the demo. Every spec value was checked against the cited source pages.
+- Relate capabilities used: the `relate` CLI with a single-file store, `relate serve --mcp` (read-only
+  and writable stores), and the WebAssembly build in the browser.
+- Third-party tools: Vite (web build), Playwright and axe-core (browser and accessibility tests),
+  Python standard library only for the scripts. The demo video narration is OpenAI text-to-speech
+  (`tts-1-hd`), and its captions are timed with OpenAI Whisper word timestamps
+  (`scripts/video/`). No music or third-party footage is used in the video.
